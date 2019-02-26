@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="London Traffic Live JamCam Map - Cookie and Privacy Policy">
+		<meta name="keywords" content="tfljamcams, cookie, privacy, policy">
+
+        <title>TfLJamCams - Privacy and Cookies</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+		<script>
+function setCookie(c_name,value,exdays){var exdate=new Date();exdate.setDate(exdate.getDate() + exdays);var c_value=escape(value) + ((exdays==null) ? "" : ("; expires="+exdate.toUTCString()+"; path=/"));document.cookie=c_name + "=" + c_value;}
+var thisDomain = window.location.hostname;
+/*console.log (thisDomain);*/
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+function delete_cookie( name, path, domain ) {
+  if( getCookie( name ) ) {
+    document.cookie = name + "=" +
+      ((path) ? ";path="+path:"")+
+      ((domain)?";domain="+domain:"") +
+      ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+  }
+}
+var consent = getCookie("cookieconsent_status");
+if (consent==="allow"){
+console.log('Cookie Accept Status : ' + consent);
+var script = document.createElement('script');
+script.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=UA-111590963-1');
+document.head.appendChild(script);
+
+}else if (consent=="deny"){
+console.log('Cookie Accept Status : ' + consent);
+delete_cookie('_ga','/','.tfljamcams.net');
+delete_cookie('_gat_gtag_UA-111590963-1','/','.tfljamcams.net');
+delete_cookie('_gid','/','.tfljamcams.net');
+setCookie('tfljamcams',0,-1);
+}else{
+console.log('Cookie Accept Status : not set');
+}
+
+window.addEventListener("load", function(){
+	window.cookieconsent.initialise({
+	"palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+		"position": "top",
+		"showLink": true,
+		"theme": "classic",
+		"type": "opt-in",
+		"content": {
+		"message": "We use cookies to provide visit analytics and mobile responsive views on a variety of devices. You can choose to deny or allow use of Cookies during your visit..",
+			"dismiss": '<a aria-label="deny cookies" role="button" tabindex="0" class="cc-btn cc-deny" style="min-width: 140px;">Deny</a>',
+			"allow": "Allow",
+			"link": "Learn More",
+			"href": "/contact/privacypolicy.html",
+		},
+		"revokeBtn": "<div class='cc-revoke @{{classes}}' style='font-size:x-small;margin-top:0px;' title='Manage Cookie Preferences'>Cookies</div>",
+		onInitialise: function (status) {
+		var type = this.options.type;
+		var didConsent = this.hasConsented();
+		
+		if (type == 'opt-in' && didConsent && consent==='allow') {
+		setTimeout(function() {
+          document.getElementsByClassName("cc-revoke")[0].style.display = "block";
+        });
+			/* enable cookies*/
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-111590963-1');
+		
+		}else{
+		setTimeout(function() {
+          document.getElementsByClassName("cc-revoke")[0].style.display = "block";
+        });
+		}
+		},
+		
+		onStatusChange: function(status, chosenBefore) {
+		var type = this.options.type;
+		var didConsent = this.hasConsented();
+		if (type == 'opt-in' && didConsent && consent==='allow') {
+			
+			/* enable cookies*/
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-111590963-1');
+		}
+		},
+		
+		onRevokeChoice: function() {
+		var type = this.options.type;
+		if (type == 'opt-in' && consent!='allow') {
+		console.log('Clear Cookies ');
+			/* disable cookies*/
+				delete_cookie('_ga','/','.tfljamcams.net');
+				delete_cookie('_gat_gtag_UA-111590963-1','/','.tfljamcams.net');
+				delete_cookie('_gid','/','.tfljamcams.net');
+				setCookie('tfljamcams',0,-1);
+				
+				/* Get an array of cookies*/
+				var arrSplit = document.cookie.split(";");
+				for(var i = 0; i < arrSplit.length; i++)
+				{
+					var cookie = arrSplit[i].trim();
+					var cookieName = cookie.split("=")[0];
+					/* If the prefix of the cookie's name matches the one specified, remove it*/
+					if(cookieName.indexOf("sssUpp") ===0) {
+						/* Remove the cookie*/
+						document.cookie = cookieName + "=; Max-Age=-99999999;";
+						
+					}
+				}
+			}
+		},
+	})});
+</script>
+        <link rel="stylesheet" href="form.css" >
+		<style>
+#btnload
+{
+/*display:none;
+visibility:hidden;*/
+}
+.pac-container{
+margin-top: -210px;
+z-index:9999 !important;
+}
+.pac-icon{
+display:none;
+visibility:hidden;
+}
+.pac-item:hover{
+backgroundColor:#D3D3D3;
+}
+.cc-window {
+  font-size: 12px;
+}
+</style>
+        <script src="form.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            
+            <div class="form-container">
+                <h1>
+                    TfLJamCams
+                </h1>
+				<h3>
+				Privacy and Cookie Policy
+				</h3>
+                <p><strong>Cookies are used on this website/app to provide the following functionality:</strong></p>
+				<ul>
+				<li>Google Maps&reg; settings such as current view point and zoom setting.</li>
+				<li>Page Analytics data for browser usage and page count statistics.</li>
+				<li>Recall user choice for Video/Image feeds.</li>
+				<li>Recall user choice for Bus Route or TfL Line.</li>
+				</ul>
+				<p>We do not collect any personally identifiable information except for data submitted by you through our secured <a href="https://www.tfljamcams.net/contact/">Contact Form</a>. You do not need to supply your name or email address to contact us but if you do, this data is used solely to communicate with you and is not retained by us or passed to any third party.</p>
+				<hr>
+				<p><strong>Search API</strong></p>
+				<p>This website/application uses a customised API for searching the map and lists all London stations, Towns, Boroughs and JamCams.<br />
+				We do not accept any responsibility for any search data being out of date or incorrect but please <a href="https://www.tfljamcams.net/contact/">contact us</a> if any of our data is incorrect so we can rectify it..
+				</p>
+				<hr>
+				<p><strong>Google Maps - Current Location</strong></p>
+				<p>You can enable Location services to show your current location on the map.</p>
+				<p>If you have loaded the site through the secure protocol (https), a <span class="fa fa-crosshairs fa-2x"></span> <strong>location icon</strong> will be in the bottom right corner. Pressing this icon will prompt you for permission and allow this site to plot your location on the map. The icon showing your location will disappear after 5 seconds and the map will display TfL Bus Stops within 0.5km of your location. The icon will spin to show this is active and tapping the icon again will turn this off.<br />This data is not collected or stored.</p>
+				<p>If you have entered using a non-secure page (http), pressing the <span class="fa fa-lock fa-2x"></span> <strong>padlock icon</strong> in the bottom right corner will load the secure version.</p>
+				<hr>
+				<p><strong>Progressive Web App (PWA) Installation</strong><br/><a href="https://developers.google.com/web/progressive-web-apps/" target="_blank" title="View information on Progressive Web Apps">Learn more about PWA and Service Workers</a></p>
+				<p>With this website/application, you can choose to "Add to Home screen" either from the prompt or browser menu.
+				This will install a shortcut icon to your device to access this application directly rather than through a web browser and the following will apply:<br />
+				<ul>
+				<li>The application will use a service worker to provide increased load speed and offline access. A small number of files will be saved to your device for this purpose.</li>
+				<li>Off-line map data is not stored and will require an internet connection to refresh the map/camera data or use the Google Maps&reg; search.</li>
+				</p>
+				<hr>
+				<p><strong>Bus Route Information</strong></p>
+				<p>Bus route data is stored in our database and updated on an ad-hoc basis. The TfL live departure information is <a href="https://tfl.gov.uk/info-for/open-data-users/" target="_blank" title="TfL Open Data">powered by TfL&reg; Open Data</a> and National Rail live departures are <a href="https://www.nationalrail.co.uk/" target="_blank" title="National Rail Enquiries">powered by National Rail Enquiries</a>.<br />We do not accept any responsibility for Bus Stop/Route data being out of date or incorrect and for the most up to date Bus route/stop data, please check with <a href="https://tfl.gov.uk/modes/buses/" target="_blank">TfL buses</a>.<br />Please <a href="https://www.tfljamcams.net/contact/">contact us</a> if any of our data is incorrect so we can rectify it.</p>
+				<hr>
+				<p><strong>JamCam Images/Videos</strong></p>
+				<p>JamCam feeds are <a href="https://tfl.gov.uk/info-for/open-data-users/" target="_blank" title="TfL Open Data">powered by TfL&reg; Open Data</a> and usually updated every 5 minutes, although this is not always guaranteed.<br />JamCam images/videos will auto-refresh after 3 minutes when being viewed and will fetch the most recent file.<br />
+				Images/Videos are not stored or saved by us and to obtain any archive footage, please <a href="https://tfl.gov.uk/help-and-contact/" target="_blank">contact TfL direct</a>.</p>
+				<hr>
+				<h3>EU GDPR Law</h3>
+				<p>
+All UK websites need to comply with the General Data Protection Regulations (GDPR) that require a message or warning must be displayed and made clear to visitors to your site that cookies are being used.
+</p><p>
+On your first visit, we have displayed a message to warn you that our website makes use of cookies and offering the choice to deny their use. The message will be displayed until such time as you deny or allow our site to use cookies by clicking on the relevant button. We will store a cookie with your preference so on subsequent visits, a "Cookies" button will show in the top left corner for you to change your preference if required.<br />
+<img src="../img/ManageCookies.png" title="Manage Cookies Button" alt="Manage Cookies Button">
+</p>
+<h3>What is a cookie?</h3>
+<p>A cookie is a small amount of data, often including a unique identifier, sent to the browser of your computer or mobile phone (referred to here as a "device") from our webserver.
+It is stored on your device as a hidden text file and each website can send its own cookie to your browser if your browser's preferences allow it.
+</p><p>
+To protect your privacy, your browser only permits a website to access the cookies it has already sent to you, and not the cookies sent to you by other websites. Many websites do this whenever a user visits them to track online traffic flows and online shopping baskets.
+</p><p>
+On this website, our cookies record information about your visit so we can tailor the website to your device screen and register "hits" on pages you view. 
+You can set your device’s preferences to accept all cookies, notify you when a cookie is issued, or not receive cookies at all. Selecting the last option means you will not receive certain personalised features, which may result in you being unable to take full advantage of all the website's features. Each browser is different, so please check the "Help" menu of your browser to learn how to change your cookie preferences.
+</p><p>
+During the course of any visit to our website, every page you see, along with a cookie, is downloaded to your device. Many websites do this to do things like find out whether your device (and probably you) has visited the website before. On a repeat visit this is done by the webserver finding the cookie left there on the last visit.
+</p>
+<h3>How do we use cookies?</h3>
+<p>Information supplied by cookies can help us analyse the profile of our visitors, which helps us provide you with a better user experience. For example, if on a previous visit you decided to hide a certain feature, we might find this out from your cookie and restore your preferences on your next visit.
+</p>
+<h3>Third party cookies on our pages</h3>
+<p>During your visits to our website/app, you may notice some cookies which are unrelated to us. When you visit a page with content embedded from, for example, <a href="https://policies.google.com/privacy" title="View Google Privacy Policy">Google</a>, or <a href="https://tfl.gov.uk/corporate/privacy-and-cookies/" title="View TfL Privacy Policy">Transport for London</a>, you may be presented with cookies from these websites. We do not control the dissemination of these cookies and you should check the links for more information about these.
+</p>
+<h3>Cookies used on our site</h3>
+<p>Our main use of cookies is to help provide navigation and mobile responsive views on a variety of devices. We want you to enjoy your visit and cookies enable a pleasant, fluid browsing experience. Here is a list of cookies used on this website:
+<ul>
+<li>Google Analytics - we use cookies to compile visitor statistics such as how many people have visited our website, what type of technology they are using (e.g. Mac or Windows which helps to identify when our site isn’t working as it should for particular technologies), how long they spend on the site, what page they look at etc.
+</li>
+<li>Remember user preferences for Video/Image feeds</li>
+<li>Remember user preferences for selected Bus Stops</li>
+</ul>
+</p>
+<h3>How to delete cookies or control them</h3>
+<p>This site will not use cookies to collect personally identifiable information about you. You can choose to deny the use of Cookies by this website but it may reduce the functionality available. If you wish to restrict or block cookies set by any other website, you can do this through your browser settings. The Help function within your browser should tell you how.
+</p><p>
+Please be aware that restricting cookies may impact on the functionality and enjoyment of this website/app.
+</p>
+<hr>
+				<p style="font-size:x-small;">TfLJamCams.net - Privacy Policy May 2018<br />
+				<em>Updated February 2019</em>
+                
+                
+            </div>
+        </div>
+		
+    </body>
+</html>

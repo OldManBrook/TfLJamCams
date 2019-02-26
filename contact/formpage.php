@@ -1,0 +1,43 @@
+<?php
+var $pass = htmlspecialchars($_GET["pass"]);
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Report A Problem</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="form.css" >
+        <script src="form.js"></script>
+    </head>
+    <body >
+        <div class="container">
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="form-container">
+                <h1>
+                    Report a problem
+                </h1>
+                <form method="post" id="reused_form" >
+                    <label for="name">Your Name (Optional):</label>
+                    <input id="name" type="text" name="Name" maxlength="50">
+                    <label for="email">Your Email (Optional):</label>
+                    <input id="email" type="email" name="Email" maxlength="50">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="Message" rows="8" maxlength="1000" required><?= $pass;?></textarea>
+                    <div class="g-recaptcha" data-sitekey="<YOUR_KEY>"></div>
+                    <button class="button-primary" type="submit" >Send</button>
+                </form>
+                <div id="success_message" style="display:none">
+                    <h3>Message Submitted successfully!</h3> 
+                    <p>Thanks for taking the time to report a problem.<br />
+					You may now close this window.</p>
+                </div>
+                <div id="error_message" style="width:100%; height:100%; display:none; "> <h3>Error</h3> Sorry there was an error sending your message.<br />Please try again or close this window
+				</div>
+            </div>
+        </div>
+    </body>
+</html>
