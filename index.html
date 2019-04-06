@@ -1129,6 +1129,9 @@ var isRunning=false;var seconds=29;
 	
 		clearInterval(refreshInterval);
 		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
@@ -2047,6 +2050,9 @@ getStation();
 		   
 		   clearInterval(refreshInterval);
 		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
@@ -2382,6 +2388,9 @@ getTrainStation();
 		   
 		   clearInterval(refreshInterval);
 		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
@@ -2855,6 +2864,9 @@ if (currentInfoWindow != null) {
 		   
 		   clearInterval(refreshInterval);
 		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
@@ -2876,6 +2888,9 @@ getLocalStation();
 		   
 		   clearInterval(refreshInterval);
 		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
