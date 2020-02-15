@@ -244,11 +244,11 @@ var cams = 'cams';
 var incidents = 'incidents';
 </script>
 <title>London Traffic Cameras - Live TfL JamCam Feeds</title>
-<link href="util/style.css" rel="stylesheet" type="text/css" />
 <!-- Chrome, Firefox OS and Opera -->
 <meta name="theme-color" content=" #000000">
 <!-- Windows Phone -->
 <meta name="msapplication-navbutton-color" content=" #000000">
+<link href="util/style.css" rel="stylesheet" type="text/css" />
 <style>
 .cc-window {
   font-size: 12px;
@@ -346,7 +346,7 @@ var incidents = 'incidents';
     font-family: sans-serif;
 	padding: 4px;
 	line-height: 24px;
-	max-width: 70%;
+	max-width: 40%;
 	text-align:left;
 	margin-left:0; margin-right:auto;
 }
@@ -357,7 +357,7 @@ var incidents = 'incidents';
 	line-height: 24px;
 	outline: 0.2px solid gray ;
 	display:table;
-    width:100%;
+    width:85%;
 }
 .content>div{display:table-cell;}
 .due{
@@ -368,7 +368,7 @@ var incidents = 'incidents';
 	height:24px;
 	margin-left:auto; margin-right:0;
 	text-align:right;
-	min-width: 15%;
+	min-width: 20%;
 }
 .gm-style {
 font-family: sans-serif !important;
@@ -380,6 +380,7 @@ font-family: sans-serif !important;
     min-width: auto;
 }
 </style>
+
 </head>
 <body>
 <h1 style="display:none"><a href="https://www.twitter.com/tfljamcams" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false" class="fa fa-twitter" title="Twitter"></a>London Traffic Cameras - Live TfL JamCam Feeds</h1>
@@ -388,6 +389,7 @@ font-family: sans-serif !important;
 <em>TfL JamCam <span id="feedType"></span><span id="TypePlural"></span></em></span>
 <div id="iType" class="Type"><input class="indexbutton" id="btnload" type="button" value="Getting feeds.." />
 </div>
+<input onclick="window.location.href='https://www.tfljamcams.net/indexOSM.html';" class="OSMbutton" id="btnOSM" type="button" value="openStreetMap" />
 <div id="loadingmessage" class="loadmessage">
 </div>
 </div>
@@ -500,7 +502,7 @@ Bus Route
 <a href="" class="fa fa-info" style="margin-left:5px;margin-right:5px;" onclick="Info.Show();Share.Hide();return false" title="More Information"></a>
 </div>
 <div id="Acknowledgement_active">
-<span><img class="resize" src="img/cams.png" style="opacity: 1;" alt="JamCams">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Design by <a href="https://www.brooksy.net" target="_blank" title="Developer Website">Jason Brooks</a>, report a problem <a href="contact/" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=520');return false" title="Report a map problem">here</a>.<br />
+<span><img class="resize" src="img/cams.png" style="opacity: 1;" alt="JamCams">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Design by <a href="https://www.brooksy.net" target="_blank" title="Developer Website">Jason Brooks</a>, report a problem <a href="https://www.tfljamcams.net/contact/" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=520');return false" title="Report a map problem">here</a>.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 This site is not affiliated with Transport for London.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -510,7 +512,8 @@ Live TfL Feeds Powered by <a href="https://tfl.gov.uk/info-for/open-data-users/"
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 BR Station Feeds Powered by <a href="https://www.nationalrail.co.uk/" target="_blank" title="National Rail Enquiries">National Rail Enquiries</a>.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="util/listCams.php?jb=476" target="_blank" title="View Camera List">Complete JamCam List in tabular format</a><br />
+<a href="util/listCams.php?jb=476" target="_blank" title="View Camera List">JamCam List</a>&nbsp;|&nbsp;
+<a href="http://archive.tfljamcams.net" target="_blank">JamCams 30 Day Archive</a><br />
 <a href="" class="fa fa-info" style="margin-left:5px;" onclick="Info.Hide();return false" title="Hide Information Panel"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="contact/privacypolicy.html" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=520');return false" title="View Cookie and Privacy Policy">View Privacy and Cookie Policy</a></span>
@@ -524,12 +527,16 @@ BR Station Feeds Powered by <a href="https://www.nationalrail.co.uk/" target="_b
     <div class="btn btn-premium">Add</div>
   </div>
 <script type="text/javascript">
+var quota_exceeded = false;
 var refreshJBTimeout = 60000;
 $.ajaxSetup({
     timeout: 30000
 });
 window.recaptchaCallback = undefined;
 jQuery(document).ready(function($) {
+	setTimeout(check_quota, 1000);
+    setTimeout(check_quota, 3000);
+    setTimeout(check_quota, 10000);
 
   window.recaptchaCallback = function recaptchaCallback(response) {
     $.ajax({
@@ -555,7 +562,8 @@ jQuery(document).ready(function($) {
 		document.getElementById('searchInfo_active').style.display='inline';
 		document.getElementById('q').focus();
 		document.getElementById('camInfo_active').style.display='none';
-		document.getElementById('camInfo').style.width='210px';
+		document.getElementById('camInfo').style.width='260px';
+		document.getElementById('camInfo').style.display='block';
       })
       .fail(function(jqXHR, textStatus) {
         console.log(textStatus);
@@ -668,7 +676,22 @@ function setCookie(c_name,value,exdays){var exdate=new Date();exdate.setDate(exd
 			new google.maps.LatLng(51.317494419666964,-0.5597438123890015),
 			new google.maps.LatLng(51.7220524634896,0.3424890047660938)
 			);
-		if(localStorage.mapLat!=null&&localStorage.mapLng!=null&&localStorage.mapZoom!=null){
+		var newLat = getParameterByName('lat');
+		var newLng = getParameterByName('lng');
+		var newZoom = getParameterByName('zoom');
+		if(newZoom==null){newZoom=15;}
+		if(newLat!=null&&newLng!=null){
+		var mapOptions={disableDefaultUI: true,center:new google.maps.LatLng(newLat,newLng),zoom:parseInt(newZoom),minZoom:11,maxZoom:18,fullscreenControl:false,streetViewControl:false,rotateControl: false,
+		streetViewControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_TOP
+	    },rotateControl:true,gestureHandling:'greedy',mapTypeId:google.maps.MapTypeId.ROADMAP,scaleControl:false,zoomControl: false,mapTypeControl:true,mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        position: google.maps.ControlPosition.TOP_RIGHT,
+		zIndex:1,
+		mapTypeIds: ['roadmap', 'hybrid']
+    },styles:[{featureType:'all',stylers:[{saturation:-80}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{hue:'#00ffee'},{saturation:50}]},
+	{featureType:"poi",stylers:[{visibility: "off"}]},{featureType:'poi.business',elementType:'labels',stylers:[{visibility:'off'}]}]};
+		}else if(localStorage.mapLat!=null&&localStorage.mapLng!=null&&localStorage.mapZoom!=null){
 		var mapOptions={disableDefaultUI: true,center:new google.maps.LatLng(localStorage.mapLat,localStorage.mapLng),zoom:parseInt(localStorage.mapZoom),minZoom:11,maxZoom:18,fullscreenControl:false,streetViewControl:false,rotateControl: false,
 		streetViewControlOptions: {
               position: google.maps.ControlPosition.RIGHT_TOP
@@ -887,13 +910,13 @@ var isRunning=false;var seconds=29;
 		});
 		
 		$("#btnload").on("click",function(){
-		if($('#btnload').val()=='Load Cams'){
+		if($('#btnload').val()=='Re-Load JamCams'){
 		$('#feedType').text('video');
 		$('#TypePlural').text('s');
-		$('#route').val('');
+		/*$('#route').val('');
 		$('#line').val('');
 		busInfo.Hide();
-		tubeInfo.Hide();
+		tubeInfo.Hide();*/
 		CamHide=false;
 		IncHide=false;
 		setOpacity(cams, false);
@@ -934,6 +957,8 @@ var isRunning=false;var seconds=29;
 		},
 		maxNumberOfElements: 10,
 		onClickEvent: function() {
+			setOpacity(incidents, true);
+			setOpacity(cams, true);
 			var alat = $("#q").getSelectedItemData().lat;
 			var alng = $("#q").getSelectedItemData().lng;
 			var stnName = $("#q").getSelectedItemData().term;
@@ -988,9 +1013,9 @@ var isRunning=false;var seconds=29;
 		var newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);/* + ":" + ("0" + time.getSeconds()).slice(-2);*/
 		if(StopLetter===undefined){StopLetter="";}else{StopLetter=" ("+data.stopLetter+")";}	
 		var contentString3 = "<div id=\"marker-over\"><div><img align='left' src='"+roundel+"' alt='"+stnName+"'/><strong>"+newStation+StopLetter+"</strong><br /><em>"+title+"</em><br /></div><div><br />Click to load live departures</div></div>";
-		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+StopLetter+"</strong><br /><em>"+title+"<br /><small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span></small></em><br /><br /></div><div id='iframe'></div>"+
+		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+StopLetter+"</strong><br /><em>"+title+"<br /><small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span><br />Powered By TfL Open Data</small></em><br /></div><div id='iframe'></div>"+
 			"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
-			"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data. .</span></div></div>";
+			"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data</span></div></div>";
   			
 		var marker = new google.maps.Marker({
 			map: map,
@@ -1129,9 +1154,6 @@ var isRunning=false;var seconds=29;
 	
 		clearInterval(refreshInterval);
 		   countdown(2);
-		   time = new Date();
-		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
-		   retrievedTime.innerHTML = newTime;
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
@@ -1223,7 +1245,7 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 	   }, 5000);
 	   
 	   var busOptions = {
-		data: [{icon:"/img/buses.png", route:"1"}, {icon:"/img/buses.png", route:"2"}, {icon:"/img/buses.png", route:"3"}, {icon:"/img/buses.png", route:"4"}, {icon:"/img/buses.png", route:"5"}, {icon:"/img/buses.png", route:"6"}, {icon:"/img/buses.png", route:"7"}, {icon:"/img/buses.png", route:"8"}, {icon:"/img/buses.png", route:"9"}, {icon:"/img/buses.png", route:"11"}, {icon:"/img/buses.png", route:"12"}, {icon:"/img/buses.png", route:"13"}, {icon:"/img/buses.png", route:"14"}, {icon:"/img/buses.png", route:"15"}, {icon:"/img/buses.png", route:"16"}, {icon:"/img/buses.png", route:"17"}, {icon:"/img/buses.png", route:"18"}, {icon:"/img/buses.png", route:"19"}, {icon:"/img/buses.png", route:"20"}, {icon:"/img/buses.png", route:"21"}, {icon:"/img/buses.png", route:"22"}, {icon:"/img/buses.png", route:"23"}, {icon:"/img/buses.png", route:"24"}, {icon:"/img/buses.png", route:"25"}, {icon:"/img/buses.png", route:"26"}, {icon:"/img/buses.png", route:"27"}, {icon:"/img/buses.png", route:"28"}, {icon:"/img/buses.png", route:"29"}, {icon:"/img/buses.png", route:"30"}, {icon:"/img/buses.png", route:"31"}, {icon:"/img/buses.png", route:"32"}, {icon:"/img/buses.png", route:"33"}, {icon:"/img/buses.png", route:"34"}, {icon:"/img/buses.png", route:"35"}, {icon:"/img/buses.png", route:"36"}, {icon:"/img/buses.png", route:"37"}, {icon:"/img/buses.png", route:"38"}, {icon:"/img/buses.png", route:"39"}, {icon:"/img/buses.png", route:"40"}, {icon:"/img/buses.png", route:"41"}, {icon:"/img/buses.png", route:"42"}, {icon:"/img/buses.png", route:"43"}, {icon:"/img/buses.png", route:"44"}, {icon:"/img/buses.png", route:"45"}, {icon:"/img/buses.png", route:"46"}, {icon:"/img/buses.png", route:"47"}, {icon:"/img/buses.png", route:"48"}, {icon:"/img/buses.png", route:"49"}, {icon:"/img/buses.png", route:"50"}, {icon:"/img/buses.png", route:"51"}, {icon:"/img/buses.png", route:"52"}, {icon:"/img/buses.png", route:"53"}, {icon:"/img/buses.png", route:"54"}, {icon:"/img/buses.png", route:"55"}, {icon:"/img/buses.png", route:"56"}, {icon:"/img/buses.png", route:"57"}, {icon:"/img/buses.png", route:"58"}, {icon:"/img/buses.png", route:"59"}, {icon:"/img/buses.png", route:"60"}, {icon:"/img/buses.png", route:"61"}, {icon:"/img/buses.png", route:"62"}, {icon:"/img/buses.png", route:"63"}, {icon:"/img/buses.png", route:"64"}, {icon:"/img/buses.png", route:"65"}, {icon:"/img/buses.png", route:"66"}, {icon:"/img/buses.png", route:"67"}, {icon:"/img/buses.png", route:"68"}, {icon:"/img/buses.png", route:"69"}, {icon:"/img/buses.png", route:"70"}, {icon:"/img/buses.png", route:"71"}, {icon:"/img/buses.png", route:"72"}, {icon:"/img/buses.png", route:"73"}, {icon:"/img/buses.png", route:"74"}, {icon:"/img/buses.png", route:"75"}, {icon:"/img/buses.png", route:"76"}, {icon:"/img/buses.png", route:"77"}, {icon:"/img/buses.png", route:"78"}, {icon:"/img/buses.png", route:"79"}, {icon:"/img/buses.png", route:"80"}, {icon:"/img/buses.png", route:"81"}, {icon:"/img/buses.png", route:"83"}, {icon:"/img/buses.png", route:"85"}, {icon:"/img/buses.png", route:"86"}, {icon:"/img/buses.png", route:"87"}, {icon:"/img/buses.png", route:"88"}, {icon:"/img/buses.png", route:"89"}, {icon:"/img/buses.png", route:"90"}, {icon:"/img/buses.png", route:"91"}, {icon:"/img/buses.png", route:"92"}, {icon:"/img/buses.png", route:"93"}, {icon:"/img/buses.png", route:"94"}, {icon:"/img/buses.png", route:"95"}, {icon:"/img/buses.png", route:"96"}, {icon:"/img/buses.png", route:"97"}, {icon:"/img/buses.png", route:"98"}, {icon:"/img/buses.png", route:"99"}, {icon:"/img/buses.png", route:"100"}, {icon:"/img/buses.png", route:"101"}, {icon:"/img/buses.png", route:"102"}, {icon:"/img/buses.png", route:"103"}, {icon:"/img/buses.png", route:"104"}, {icon:"/img/buses.png", route:"105"}, {icon:"/img/buses.png", route:"106"}, {icon:"/img/buses.png", route:"107"}, {icon:"/img/buses.png", route:"108"}, {icon:"/img/buses.png", route:"109"}, {icon:"/img/buses.png", route:"110"}, {icon:"/img/buses.png", route:"111"}, {icon:"/img/buses.png", route:"112"}, {icon:"/img/buses.png", route:"113"}, {icon:"/img/buses.png", route:"114"}, {icon:"/img/buses.png", route:"115"}, {icon:"/img/buses.png", route:"116"}, {icon:"/img/buses.png", route:"117"}, {icon:"/img/buses.png", route:"118"}, {icon:"/img/buses.png", route:"119"}, {icon:"/img/buses.png", route:"120"}, {icon:"/img/buses.png", route:"121"}, {icon:"/img/buses.png", route:"122"}, {icon:"/img/buses.png", route:"123"}, {icon:"/img/buses.png", route:"124"}, {icon:"/img/buses.png", route:"125"}, {icon:"/img/buses.png", route:"126"}, {icon:"/img/buses.png", route:"127"}, {icon:"/img/buses.png", route:"128"}, {icon:"/img/buses.png", route:"129"}, {icon:"/img/buses.png", route:"130"}, {icon:"/img/buses.png", route:"131"}, {icon:"/img/buses.png", route:"132"}, {icon:"/img/buses.png", route:"133"}, {icon:"/img/buses.png", route:"134"}, {icon:"/img/buses.png", route:"135"}, {icon:"/img/buses.png", route:"136"}, {icon:"/img/buses.png", route:"137"}, {icon:"/img/buses.png", route:"138"}, {icon:"/img/buses.png", route:"139"}, {icon:"/img/buses.png", route:"140"}, {icon:"/img/buses.png", route:"141"}, {icon:"/img/buses.png", route:"142"}, {icon:"/img/buses.png", route:"143"}, {icon:"/img/buses.png", route:"144"}, {icon:"/img/buses.png", route:"145"}, {icon:"/img/buses.png", route:"146"}, {icon:"/img/buses.png", route:"147"}, {icon:"/img/buses.png", route:"148"}, {icon:"/img/buses.png", route:"149"}, {icon:"/img/buses.png", route:"150"}, {icon:"/img/buses.png", route:"151"}, {icon:"/img/buses.png", route:"152"}, {icon:"/img/buses.png", route:"153"}, {icon:"/img/buses.png", route:"154"}, {icon:"/img/buses.png", route:"155"}, {icon:"/img/buses.png", route:"156"}, {icon:"/img/buses.png", route:"157"}, {icon:"/img/buses.png", route:"158"}, {icon:"/img/buses.png", route:"159"}, {icon:"/img/buses.png", route:"160"}, {icon:"/img/buses.png", route:"161"}, {icon:"/img/buses.png", route:"162"}, {icon:"/img/buses.png", route:"163"}, {icon:"/img/buses.png", route:"164"}, {icon:"/img/buses.png", route:"165"}, {icon:"/img/buses.png", route:"166"}, {icon:"/img/buses.png", route:"167"}, {icon:"/img/buses.png", route:"168"}, {icon:"/img/buses.png", route:"169"}, {icon:"/img/buses.png", route:"170"}, {icon:"/img/buses.png", route:"171"}, {icon:"/img/buses.png", route:"172"}, {icon:"/img/buses.png", route:"173"}, {icon:"/img/buses.png", route:"174"}, {icon:"/img/buses.png", route:"175"}, {icon:"/img/buses.png", route:"176"}, {icon:"/img/buses.png", route:"177"}, {icon:"/img/buses.png", route:"178"}, {icon:"/img/buses.png", route:"179"}, {icon:"/img/buses.png", route:"180"}, {icon:"/img/buses.png", route:"181"}, {icon:"/img/buses.png", route:"182"}, {icon:"/img/buses.png", route:"183"}, {icon:"/img/buses.png", route:"184"}, {icon:"/img/buses.png", route:"185"}, {icon:"/img/buses.png", route:"186"}, {icon:"/img/buses.png", route:"187"}, {icon:"/img/buses.png", route:"188"}, {icon:"/img/buses.png", route:"189"}, {icon:"/img/buses.png", route:"190"}, {icon:"/img/buses.png", route:"191"}, {icon:"/img/buses.png", route:"192"}, {icon:"/img/buses.png", route:"193"}, {icon:"/img/buses.png", route:"194"}, {icon:"/img/buses.png", route:"195"}, {icon:"/img/buses.png", route:"196"}, {icon:"/img/buses.png", route:"197"}, {icon:"/img/buses.png", route:"198"}, {icon:"/img/buses.png", route:"199"}, {icon:"/img/buses.png", route:"200"}, {icon:"/img/buses.png", route:"201"}, {icon:"/img/buses.png", route:"202"}, {icon:"/img/buses.png", route:"203"}, {icon:"/img/buses.png", route:"204"}, {icon:"/img/buses.png", route:"205"}, {icon:"/img/buses.png", route:"206"}, {icon:"/img/buses.png", route:"207"}, {icon:"/img/buses.png", route:"208"}, {icon:"/img/buses.png", route:"209"}, {icon:"/img/buses.png", route:"210"}, {icon:"/img/buses.png", route:"211"}, {icon:"/img/buses.png", route:"212"}, {icon:"/img/buses.png", route:"213"}, {icon:"/img/buses.png", route:"214"}, {icon:"/img/buses.png", route:"215"}, {icon:"/img/buses.png", route:"216"}, {icon:"/img/buses.png", route:"217"}, {icon:"/img/buses.png", route:"219"}, {icon:"/img/buses.png", route:"220"}, {icon:"/img/buses.png", route:"221"}, {icon:"/img/buses.png", route:"222"}, {icon:"/img/buses.png", route:"223"}, {icon:"/img/buses.png", route:"224"}, {icon:"/img/buses.png", route:"225"}, {icon:"/img/buses.png", route:"226"}, {icon:"/img/buses.png", route:"227"}, {icon:"/img/buses.png", route:"228"}, {icon:"/img/buses.png", route:"229"}, {icon:"/img/buses.png", route:"230"}, {icon:"/img/buses.png", route:"231"}, {icon:"/img/buses.png", route:"232"}, {icon:"/img/buses.png", route:"233"}, {icon:"/img/buses.png", route:"234"}, {icon:"/img/buses.png", route:"235"}, {icon:"/img/buses.png", route:"236"}, {icon:"/img/buses.png", route:"237"}, {icon:"/img/buses.png", route:"238"}, {icon:"/img/buses.png", route:"240"}, {icon:"/img/buses.png", route:"241"}, {icon:"/img/buses.png", route:"242"}, {icon:"/img/buses.png", route:"243"}, {icon:"/img/buses.png", route:"244"}, {icon:"/img/buses.png", route:"245"}, {icon:"/img/buses.png", route:"246"}, {icon:"/img/buses.png", route:"247"}, {icon:"/img/buses.png", route:"248"}, {icon:"/img/buses.png", route:"249"}, {icon:"/img/buses.png", route:"250"}, {icon:"/img/buses.png", route:"251"}, {icon:"/img/buses.png", route:"252"}, {icon:"/img/buses.png", route:"253"}, {icon:"/img/buses.png", route:"254"}, {icon:"/img/buses.png", route:"255"}, {icon:"/img/buses.png", route:"256"}, {icon:"/img/buses.png", route:"257"}, {icon:"/img/buses.png", route:"258"}, {icon:"/img/buses.png", route:"259"}, {icon:"/img/buses.png", route:"260"}, {icon:"/img/buses.png", route:"261"}, {icon:"/img/buses.png", route:"262"}, {icon:"/img/buses.png", route:"263"}, {icon:"/img/buses.png", route:"264"}, {icon:"/img/buses.png", route:"265"}, {icon:"/img/buses.png", route:"266"}, {icon:"/img/buses.png", route:"267"}, {icon:"/img/buses.png", route:"268"}, {icon:"/img/buses.png", route:"269"}, {icon:"/img/buses.png", route:"270"}, {icon:"/img/buses.png", route:"271"}, {icon:"/img/buses.png", route:"272"}, {icon:"/img/buses.png", route:"273"}, {icon:"/img/buses.png", route:"274"}, {icon:"/img/buses.png", route:"275"}, {icon:"/img/buses.png", route:"276"}, {icon:"/img/buses.png", route:"277"}, {icon:"/img/buses.png", route:"279"}, {icon:"/img/buses.png", route:"280"}, {icon:"/img/buses.png", route:"281"}, {icon:"/img/buses.png", route:"282"}, {icon:"/img/buses.png", route:"283"}, {icon:"/img/buses.png", route:"284"}, {icon:"/img/buses.png", route:"285"}, {icon:"/img/buses.png", route:"286"}, {icon:"/img/buses.png", route:"287"}, {icon:"/img/buses.png", route:"288"}, {icon:"/img/buses.png", route:"289"}, {icon:"/img/buses.png", route:"290"}, {icon:"/img/buses.png", route:"291"}, {icon:"/img/buses.png", route:"292"}, {icon:"/img/buses.png", route:"293"}, {icon:"/img/buses.png", route:"294"}, {icon:"/img/buses.png", route:"295"}, {icon:"/img/buses.png", route:"296"}, {icon:"/img/buses.png", route:"297"}, {icon:"/img/buses.png", route:"298"}, {icon:"/img/buses.png", route:"299"}, {icon:"/img/buses.png", route:"300"}, {icon:"/img/buses.png", route:"302"}, {icon:"/img/buses.png", route:"303"}, {icon:"/img/buses.png", route:"305"}, {icon:"/img/buses.png", route:"307"}, {icon:"/img/buses.png", route:"308"}, {icon:"/img/buses.png", route:"309"}, {icon:"/img/buses.png", route:"312"}, {icon:"/img/buses.png", route:"313"}, {icon:"/img/buses.png", route:"314"}, {icon:"/img/buses.png", route:"315"}, {icon:"/img/buses.png", route:"316"}, {icon:"/img/buses.png", route:"317"}, {icon:"/img/buses.png", route:"318"}, {icon:"/img/buses.png", route:"319"}, {icon:"/img/buses.png", route:"320"}, {icon:"/img/buses.png", route:"321"}, {icon:"/img/buses.png", route:"322"}, {icon:"/img/buses.png", route:"323"}, {icon:"/img/buses.png", route:"324"}, {icon:"/img/buses.png", route:"325"}, {icon:"/img/buses.png", route:"326"}, {icon:"/img/buses.png", route:"327"}, {icon:"/img/buses.png", route:"328"}, {icon:"/img/buses.png", route:"329"}, {icon:"/img/buses.png", route:"330"}, {icon:"/img/buses.png", route:"331"}, {icon:"/img/buses.png", route:"332"}, {icon:"/img/buses.png", route:"333"}, {icon:"/img/buses.png", route:"336"}, {icon:"/img/buses.png", route:"337"}, {icon:"/img/buses.png", route:"339"}, {icon:"/img/buses.png", route:"340"}, {icon:"/img/buses.png", route:"341"}, {icon:"/img/buses.png", route:"343"}, {icon:"/img/buses.png", route:"344"}, {icon:"/img/buses.png", route:"345"}, {icon:"/img/buses.png", route:"346"}, {icon:"/img/buses.png", route:"347"}, {icon:"/img/buses.png", route:"349"}, {icon:"/img/buses.png", route:"350"}, {icon:"/img/buses.png", route:"352"}, {icon:"/img/buses.png", route:"353"}, {icon:"/img/buses.png", route:"354"}, {icon:"/img/buses.png", route:"355"}, {icon:"/img/buses.png", route:"356"}, {icon:"/img/buses.png", route:"357"}, {icon:"/img/buses.png", route:"358"}, {icon:"/img/buses.png", route:"359"}, {icon:"/img/buses.png", route:"360"}, {icon:"/img/buses.png", route:"362"}, {icon:"/img/buses.png", route:"363"}, {icon:"/img/buses.png", route:"364"}, {icon:"/img/buses.png", route:"365"}, {icon:"/img/buses.png", route:"366"}, {icon:"/img/buses.png", route:"367"}, {icon:"/img/buses.png", route:"368"}, {icon:"/img/buses.png", route:"370"}, {icon:"/img/buses.png", route:"371"}, {icon:"/img/buses.png", route:"372"}, {icon:"/img/buses.png", route:"375"}, {icon:"/img/buses.png", route:"376"}, {icon:"/img/buses.png", route:"377"}, {icon:"/img/buses.png", route:"379"}, {icon:"/img/buses.png", route:"380"}, {icon:"/img/buses.png", route:"381"}, {icon:"/img/buses.png", route:"382"}, {icon:"/img/buses.png", route:"383"}, {icon:"/img/buses.png", route:"384"}, {icon:"/img/buses.png", route:"385"}, {icon:"/img/buses.png", route:"386"}, {icon:"/img/buses.png", route:"388"}, {icon:"/img/buses.png", route:"389"}, {icon:"/img/buses.png", route:"390"}, {icon:"/img/buses.png", route:"391"}, {icon:"/img/buses.png", route:"393"}, {icon:"/img/buses.png", route:"394"}, {icon:"/img/buses.png", route:"395"}, {icon:"/img/buses.png", route:"396"}, {icon:"/img/buses.png", route:"397"}, {icon:"/img/buses.png", route:"398"}, {icon:"/img/buses.png", route:"399"}, {icon:"/img/buses.png", route:"401"}, {icon:"/img/buses.png", route:"403"}, {icon:"/img/buses.png", route:"404"}, {icon:"/img/buses.png", route:"405"}, {icon:"/img/buses.png", route:"406"}, {icon:"/img/buses.png", route:"407"}, {icon:"/img/buses.png", route:"410"}, {icon:"/img/buses.png", route:"411"}, {icon:"/img/buses.png", route:"412"}, {icon:"/img/buses.png", route:"413"}, {icon:"/img/buses.png", route:"414"}, {icon:"/img/buses.png", route:"415"}, {icon:"/img/buses.png", route:"417"}, {icon:"/img/buses.png", route:"418"}, {icon:"/img/buses.png", route:"419"}, {icon:"/img/buses.png", route:"422"}, {icon:"/img/buses.png", route:"423"}, {icon:"/img/buses.png", route:"424"}, {icon:"/img/buses.png", route:"425"}, {icon:"/img/buses.png", route:"427"}, {icon:"/img/buses.png", route:"428"}, {icon:"/img/buses.png", route:"430"}, {icon:"/img/buses.png", route:"432"}, {icon:"/img/buses.png", route:"433"}, {icon:"/img/buses.png", route:"434"}, {icon:"/img/buses.png", route:"436"}, {icon:"/img/buses.png", route:"440"}, {icon:"/img/buses.png", route:"444"}, {icon:"/img/buses.png", route:"450"}, {icon:"/img/buses.png", route:"452"}, {icon:"/img/buses.png", route:"453"}, {icon:"/img/buses.png", route:"455"}, {icon:"/img/buses.png", route:"460"}, {icon:"/img/buses.png", route:"462"}, {icon:"/img/buses.png", route:"463"}, {icon:"/img/buses.png", route:"464"}, {icon:"/img/buses.png", route:"465"}, {icon:"/img/buses.png", route:"466"}, {icon:"/img/buses.png", route:"467"}, {icon:"/img/buses.png", route:"468"}, {icon:"/img/buses.png", route:"469"}, {icon:"/img/buses.png", route:"470"}, {icon:"/img/buses.png", route:"472"}, {icon:"/img/buses.png", route:"473"}, {icon:"/img/buses.png", route:"474"}, {icon:"/img/buses.png", route:"476"}, {icon:"/img/buses.png", route:"481"}, {icon:"/img/buses.png", route:"482"}, {icon:"/img/buses.png", route:"483"}, {icon:"/img/buses.png", route:"484"}, {icon:"/img/buses.png", route:"485"}, {icon:"/img/buses.png", route:"486"}, {icon:"/img/buses.png", route:"487"}, {icon:"/img/buses.png", route:"488"}, {icon:"/img/buses.png", route:"490"}, {icon:"/img/buses.png", route:"491"}, {icon:"/img/buses.png", route:"492"}, {icon:"/img/buses.png", route:"493"}, {icon:"/img/buses.png", route:"496"}, {icon:"/img/buses.png", route:"498"}, {icon:"/img/buses.png", route:"499"}, {icon:"/img/buses.png", route:"507"}, {icon:"/img/buses.png", route:"508"}, {icon:"/img/buses.png", route:"521"}, {icon:"/img/buses.png", route:"530"}, {icon:"/img/buses.png", route:"549"}, {icon:"/img/buses.png", route:"559"}, {icon:"/img/buses.png", route:"570"}, {icon:"/img/buses.png", route:"601"}, {icon:"/img/buses.png", route:"602"}, {icon:"/img/buses.png", route:"603"}, {icon:"/img/buses.png", route:"605"}, {icon:"/img/buses.png", route:"606"}, {icon:"/img/buses.png", route:"607"}, {icon:"/img/buses.png", route:"608"}, {icon:"/img/buses.png", route:"609"}, {icon:"/img/buses.png", route:"611"}, {icon:"/img/buses.png", route:"612"}, {icon:"/img/buses.png", route:"613"}, {icon:"/img/buses.png", route:"616"}, {icon:"/img/buses.png", route:"617"}, {icon:"/img/buses.png", route:"621"}, {icon:"/img/buses.png", route:"624"}, {icon:"/img/buses.png", route:"625"}, {icon:"/img/buses.png", route:"626"}, {icon:"/img/buses.png", route:"627"}, {icon:"/img/buses.png", route:"628"}, {icon:"/img/buses.png", route:"629"}, {icon:"/img/buses.png", route:"631"}, {icon:"/img/buses.png", route:"632"}, {icon:"/img/buses.png", route:"633"}, {icon:"/img/buses.png", route:"634"}, {icon:"/img/buses.png", route:"635"}, {icon:"/img/buses.png", route:"638"}, {icon:"/img/buses.png", route:"639"}, {icon:"/img/buses.png", route:"640"}, {icon:"/img/buses.png", route:"642"}, {icon:"/img/buses.png", route:"643"}, {icon:"/img/buses.png", route:"646"}, {icon:"/img/buses.png", route:"648"}, {icon:"/img/buses.png", route:"649"}, {icon:"/img/buses.png", route:"650"}, {icon:"/img/buses.png", route:"651"}, {icon:"/img/buses.png", route:"652"}, {icon:"/img/buses.png", route:"653"}, {icon:"/img/buses.png", route:"654"}, {icon:"/img/buses.png", route:"655"}, {icon:"/img/buses.png", route:"656"}, {icon:"/img/buses.png", route:"657"}, {icon:"/img/buses.png", route:"658"}, {icon:"/img/buses.png", route:"660"}, {icon:"/img/buses.png", route:"661"}, {icon:"/img/buses.png", route:"662"}, {icon:"/img/buses.png", route:"663"}, {icon:"/img/buses.png", route:"664"}, {icon:"/img/buses.png", route:"665"}, {icon:"/img/buses.png", route:"667"}, {icon:"/img/buses.png", route:"669"}, {icon:"/img/buses.png", route:"670"}, {icon:"/img/buses.png", route:"671"}, {icon:"/img/buses.png", route:"672"}, {icon:"/img/buses.png", route:"673"}, {icon:"/img/buses.png", route:"674"}, {icon:"/img/buses.png", route:"675"}, {icon:"/img/buses.png", route:"677"}, {icon:"/img/buses.png", route:"678"}, {icon:"/img/buses.png", route:"679"}, {icon:"/img/buses.png", route:"681"}, {icon:"/img/buses.png", route:"683"}, {icon:"/img/buses.png", route:"684"}, {icon:"/img/buses.png", route:"685"}, {icon:"/img/buses.png", route:"686"}, {icon:"/img/buses.png", route:"687"}, {icon:"/img/buses.png", route:"688"}, {icon:"/img/buses.png", route:"689"}, {icon:"/img/buses.png", route:"690"}, {icon:"/img/buses.png", route:"692"}, {icon:"/img/buses.png", route:"696"}, {icon:"/img/buses.png", route:"697"}, {icon:"/img/buses.png", route:"698"}, {icon:"/img/buses.png", route:"699"}, {icon:"/img/buses.png", route:"965"}, {icon:"/img/buses.png", route:"969"}, {icon:"/img/buses.png", route:"23A"}, {icon:"/img/buses.png", route:"256D"}, {icon:"/img/buses.png", route:"2X"}, {icon:"/img/buses.png", route:"36X"}, {icon:"/img/buses.png", route:"A10"}, {icon:"/img/buses.png", route:"B11"}, {icon:"/img/buses.png", route:"B12"}, {icon:"/img/buses.png", route:"B13"}, {icon:"/img/buses.png", route:"B14"}, {icon:"/img/buses.png", route:"B15"}, {icon:"/img/buses.png", route:"B16"}, {icon:"/img/buses.png", route:"C1"}, {icon:"/img/buses.png", route:"C2"}, {icon:"/img/buses.png", route:"C3"}, {icon:"/img/buses.png", route:"C10"}, {icon:"/img/buses.png", route:"C11"}, {icon:"/img/buses.png", route:"D3"}, {icon:"/img/buses.png", route:"D6"}, {icon:"/img/buses.png", route:"D7"}, {icon:"/img/buses.png", route:"D8"}, {icon:"/img/buses.png", route:"E1"}, {icon:"/img/buses.png", route:"E2"}, {icon:"/img/buses.png", route:"E3"}, {icon:"/img/buses.png", route:"E5"}, {icon:"/img/buses.png", route:"E6"}, {icon:"/img/buses.png", route:"E7"}, {icon:"/img/buses.png", route:"E8"}, {icon:"/img/buses.png", route:"E9"}, {icon:"/img/buses.png", route:"E10"}, {icon:"/img/buses.png", route:"E11"}, {icon:"/img/buses.png", route:"EL1"}, {icon:"/img/buses.png", route:"EL2"}, {icon:"/img/buses.png", route:"EL3"}, {icon:"/img/buses.png", route:"G1"}, {icon:"/img/buses.png", route:"H2"}, {icon:"/img/buses.png", route:"H3"}, {icon:"/img/buses.png", route:"H9"}, {icon:"/img/buses.png", route:"H10"}, {icon:"/img/buses.png", route:"H11"}, {icon:"/img/buses.png", route:"H12"}, {icon:"/img/buses.png", route:"H13"}, {icon:"/img/buses.png", route:"H14"}, {icon:"/img/buses.png", route:"H17"}, {icon:"/img/buses.png", route:"H18"}, {icon:"/img/buses.png", route:"H19"}, {icon:"/img/buses.png", route:"H20"}, {icon:"/img/buses.png", route:"H22"}, {icon:"/img/buses.png", route:"H25"}, {icon:"/img/buses.png", route:"H26"}, {icon:"/img/buses.png", route:"H28"}, {icon:"/img/buses.png", route:"H32"}, {icon:"/img/buses.png", route:"H37"}, {icon:"/img/buses.png", route:"H91"}, {icon:"/img/buses.png", route:"H98"}, {icon:"/img/buses.png", route:"K1"}, {icon:"/img/buses.png", route:"K2"}, {icon:"/img/buses.png", route:"K3"}, {icon:"/img/buses.png", route:"K4"}, {icon:"/img/buses.png", route:"K5"}, {icon:"/img/buses.png", route:"N1"}, {icon:"/img/buses.png", route:"N2"}, {icon:"/img/buses.png", route:"N3"}, {icon:"/img/buses.png", route:"N5"}, {icon:"/img/buses.png", route:"N7"}, {icon:"/img/buses.png", route:"N8"}, {icon:"/img/buses.png", route:"N9"}, {icon:"/img/buses.png", route:"N11"}, {icon:"/img/buses.png", route:"N15"}, {icon:"/img/buses.png", route:"N16"}, {icon:"/img/buses.png", route:"N18"}, {icon:"/img/buses.png", route:"N19"}, {icon:"/img/buses.png", route:"N20"}, {icon:"/img/buses.png", route:"N21"}, {icon:"/img/buses.png", route:"N22"}, {icon:"/img/buses.png", route:"N26"}, {icon:"/img/buses.png", route:"N28"}, {icon:"/img/buses.png", route:"N29"}, {icon:"/img/buses.png", route:"N31"}, {icon:"/img/buses.png", route:"N38"}, {icon:"/img/buses.png", route:"N41"}, {icon:"/img/buses.png", route:"N44"}, {icon:"/img/buses.png", route:"N55"}, {icon:"/img/buses.png", route:"N63"}, {icon:"/img/buses.png", route:"N68"}, {icon:"/img/buses.png", route:"N73"}, {icon:"/img/buses.png", route:"N74"}, {icon:"/img/buses.png", route:"N83"}, {icon:"/img/buses.png", route:"N86"}, {icon:"/img/buses.png", route:"N87"}, {icon:"/img/buses.png", route:"N89"}, {icon:"/img/buses.png", route:"N91"}, {icon:"/img/buses.png", route:"N97"}, {icon:"/img/buses.png", route:"N98"}, {icon:"/img/buses.png", route:"N109"}, {icon:"/img/buses.png", route:"N113"}, {icon:"/img/buses.png", route:"N133"}, {icon:"/img/buses.png", route:"N136"}, {icon:"/img/buses.png", route:"N137"}, {icon:"/img/buses.png", route:"N155"}, {icon:"/img/buses.png", route:"N171"}, {icon:"/img/buses.png", route:"N199"}, {icon:"/img/buses.png", route:"N205"}, {icon:"/img/buses.png", route:"N207"}, {icon:"/img/buses.png", route:"N253"}, {icon:"/img/buses.png", route:"N277"}, {icon:"/img/buses.png", route:"N279"}, {icon:"/img/buses.png", route:"N343"}, {icon:"/img/buses.png", route:"N381"}, {icon:"/img/buses.png", route:"N550"}, {icon:"/img/buses.png", route:"N551"}, {icon:"/img/buses.png", route:"P4"}, {icon:"/img/buses.png", route:"P5"}, {icon:"/img/buses.png", route:"P12"}, {icon:"/img/buses.png", route:"P13"}, {icon:"/img/buses.png", route:"R1"}, {icon:"/img/buses.png", route:"R2"}, {icon:"/img/buses.png", route:"R3"}, {icon:"/img/buses.png", route:"R4"}, {icon:"/img/buses.png", route:"R5"}, {icon:"/img/buses.png", route:"R6"}, {icon:"/img/buses.png", route:"R7"}, {icon:"/img/buses.png", route:"R8"}, {icon:"/img/buses.png", route:"R9"}, {icon:"/img/buses.png", route:"R10"}, {icon:"/img/buses.png", route:"R11"}, {icon:"/img/buses.png", route:"R68"}, {icon:"/img/buses.png", route:"R70"}, {icon:"/img/buses.png", route:"RB1"}, {icon:"/img/buses.png", route:"RB1X"}, {icon:"/img/buses.png", route:"RB2"}, {icon:"/img/buses.png", route:"RB3"}, {icon:"/img/buses.png", route:"RB4"}, {icon:"/img/buses.png", route:"RB5"}, {icon:"/img/buses.png", route:"RB6"}, {icon:"/img/buses.png", route:"RB6A"}, {icon:"/img/buses.png", route:"RBX"}, {icon:"/img/buses.png", route:"RT1"}, {icon:"/img/buses.png", route:"RT3"}, {icon:"/img/buses.png", route:"RT5"}, {icon:"/img/buses.png", route:"RT7"}, {icon:"/img/buses.png", route:"RT8"}, {icon:"/img/buses.png", route:"RT10"}, {icon:"/img/buses.png", route:"RT11"}, {icon:"/img/buses.png", route:"RT12"}, {icon:"/img/buses.png", route:"RV1"}, {icon:"/img/buses.png", route:"S1"}, {icon:"/img/buses.png", route:"S3"}, {icon:"/img/buses.png", route:"S4"}, {icon:"/img/buses.png", route:"T1"}, {icon:"/img/buses.png", route:"T2"}, {icon:"/img/buses.png", route:"T3"}, {icon:"/img/buses.png", route:"T4"}, {icon:"/img/buses.png", route:"U1"}, {icon:"/img/buses.png", route:"U2"}, {icon:"/img/buses.png", route:"U3"}, {icon:"/img/buses.png", route:"U4"}, {icon:"/img/buses.png", route:"U5"}, {icon:"/img/buses.png", route:"U7"}, {icon:"/img/buses.png", route:"U9"}, {icon:"/img/buses.png", route:"U10"}, {icon:"/img/buses.png", route:"UL1"}, {icon:"/img/buses.png", route:"UL2"}, {icon:"/img/buses.png", route:"UL3"}, {icon:"/img/buses.png", route:"UL4"}, {icon:"/img/buses.png", route:"UL5"}, {icon:"/img/buses.png", route:"UL6"}, {icon:"/img/buses.png", route:"UL7"}, {icon:"/img/buses.png", route:"UL8"}, {icon:"/img/buses.png", route:"UL9"}, {icon:"/img/buses.png", route:"UL10"}, {icon:"/img/buses.png", route:"UL11"}, {icon:"/img/buses.png", route:"UL12"}, {icon:"/img/buses.png", route:"UL13"}, {icon:"/img/buses.png", route:"UL14"}, {icon:"/img/buses.png", route:"UL15"}, {icon:"/img/buses.png", route:"UL16"}, {icon:"/img/buses.png", route:"UL17"}, {icon:"/img/buses.png", route:"UL18"}, {icon:"/img/buses.png", route:"UL19"}, {icon:"/img/buses.png", route:"UL20"}, {icon:"/img/buses.png", route:"UL21"}, {icon:"/img/buses.png", route:"UL22"}, {icon:"/img/buses.png", route:"UL23"}, {icon:"/img/buses.png", route:"UL24"}, {icon:"/img/buses.png", route:"UL25"}, {icon:"/img/buses.png", route:"UL26"}, {icon:"/img/buses.png", route:"UL27"}, {icon:"/img/buses.png", route:"UL28"}, {icon:"/img/buses.png", route:"UL29"}, {icon:"/img/buses.png", route:"UL30"}, {icon:"/img/buses.png", route:"UL31"}, {icon:"/img/buses.png", route:"UL32"}, {icon:"/img/buses.png", route:"UL33"}, {icon:"/img/buses.png", route:"UL34"}, {icon:"/img/buses.png", route:"UL35"}, {icon:"/img/buses.png", route:"UL37"}, {icon:"/img/buses.png", route:"UL39"}, {icon:"/img/buses.png", route:"UL40"}, {icon:"/img/buses.png", route:"UL41"}, {icon:"/img/buses.png", route:"UL42"}, {icon:"/img/buses.png", route:"UL43"}, {icon:"/img/buses.png", route:"UL44"}, {icon:"/img/buses.png", route:"UL46"}, {icon:"/img/buses.png", route:"UL47"}, {icon:"/img/buses.png", route:"UL48"}, {icon:"/img/buses.png", route:"UL49"}, {icon:"/img/buses.png", route:"UL50"}, {icon:"/img/buses.png", route:"UL51"}, {icon:"/img/buses.png", route:"UL52"}, {icon:"/img/buses.png", route:"UL53"}, {icon:"/img/buses.png", route:"UL55"}, {icon:"/img/buses.png", route:"UL56"}, {icon:"/img/buses.png", route:"UL57"}, {icon:"/img/buses.png", route:"UL58"}, {icon:"/img/buses.png", route:"UL61"}, {icon:"/img/buses.png", route:"UL62"}, {icon:"/img/buses.png", route:"W3"}, {icon:"/img/buses.png", route:"W4"}, {icon:"/img/buses.png", route:"W5"}, {icon:"/img/buses.png", route:"W6"}, {icon:"/img/buses.png", route:"W7"}, {icon:"/img/buses.png", route:"W8"}, {icon:"/img/buses.png", route:"W9"}, {icon:"/img/buses.png", route:"W10"}, {icon:"/img/buses.png", route:"W11"}, {icon:"/img/buses.png", route:"W12"}, {icon:"/img/buses.png", route:"W13"}, {icon:"/img/buses.png", route:"W14"}, {icon:"/img/buses.png", route:"W15"}, {icon:"/img/buses.png", route:"W16"}, {icon:"/img/buses.png", route:"W19"}, {icon:"/img/buses.png", route:"X26"}, {icon:"/img/buses.png", route:"X68"}, {icon:"/img/buses.png", route:"Y7"}, {icon:"/img/buses.png", route:"Y18"}, {icon:"/img/buses.png", route:"Y23"}, {icon:"/img/buses.png", route:"Y27"}, {icon:"/img/buses.png", route:"Y28"}, {icon:"/img/buses.png", route:"Y31"}, {icon:"/img/buses.png", route:"Y36"}, {icon:"/img/buses.png", route:"Y52"}, {icon:"/img/buses.png", route:"Y70"}, {icon:"/img/buses.png", route:"Y94"}, {icon:"/img/buses.png", route:"Y148"}, {icon:"/img/buses.png", route:"Y228"}, {icon:"/img/buses.png", route:"Y295"}, {icon:"/img/buses.png", route:"Y316"}, {icon:"/img/buses.png", route:"Y328"}, {icon:"/img/buses.png", route:"Y452"}, {icon:"/img/buses.png", route:"Y18N"}],
+		data: [{icon:"/img/buses.png", route:"1"}, {icon:"/img/buses.png", route:"2"}, {icon:"/img/buses.png", route:"3"}, {icon:"/img/buses.png", route:"4"}, {icon:"/img/buses.png", route:"5"}, {icon:"/img/buses.png", route:"6"}, {icon:"/img/buses.png", route:"7"}, {icon:"/img/buses.png", route:"8"}, {icon:"/img/buses.png", route:"9"}, {icon:"/img/buses.png", route:"11"}, {icon:"/img/buses.png", route:"12"}, {icon:"/img/buses.png", route:"13"}, {icon:"/img/buses.png", route:"14"}, {icon:"/img/buses.png", route:"15"}, {icon:"/img/buses.png", route:"16"}, {icon:"/img/buses.png", route:"17"}, {icon:"/img/buses.png", route:"18"}, {icon:"/img/buses.png", route:"19"}, {icon:"/img/buses.png", route:"20"}, {icon:"/img/buses.png", route:"21"}, {icon:"/img/buses.png", route:"22"}, {icon:"/img/buses.png", route:"23"}, {icon:"/img/buses.png", route:"24"}, {icon:"/img/buses.png", route:"25"}, {icon:"/img/buses.png", route:"26"}, {icon:"/img/buses.png", route:"27"}, {icon:"/img/buses.png", route:"28"}, {icon:"/img/buses.png", route:"29"}, {icon:"/img/buses.png", route:"30"}, {icon:"/img/buses.png", route:"31"}, {icon:"/img/buses.png", route:"32"}, {icon:"/img/buses.png", route:"33"}, {icon:"/img/buses.png", route:"34"}, {icon:"/img/buses.png", route:"35"}, {icon:"/img/buses.png", route:"36"}, {icon:"/img/buses.png", route:"37"}, {icon:"/img/buses.png", route:"38"}, {icon:"/img/buses.png", route:"39"}, {icon:"/img/buses.png", route:"40"}, {icon:"/img/buses.png", route:"41"}, {icon:"/img/buses.png", route:"42"}, {icon:"/img/buses.png", route:"43"}, {icon:"/img/buses.png", route:"44"}, {icon:"/img/buses.png", route:"45"}, {icon:"/img/buses.png", route:"46"}, {icon:"/img/buses.png", route:"47"}, {icon:"/img/buses.png", route:"48"}, {icon:"/img/buses.png", route:"49"}, {icon:"/img/buses.png", route:"50"}, {icon:"/img/buses.png", route:"51"}, {icon:"/img/buses.png", route:"52"}, {icon:"/img/buses.png", route:"53"}, {icon:"/img/buses.png", route:"54"}, {icon:"/img/buses.png", route:"55"}, {icon:"/img/buses.png", route:"56"}, {icon:"/img/buses.png", route:"57"}, {icon:"/img/buses.png", route:"58"}, {icon:"/img/buses.png", route:"59"}, {icon:"/img/buses.png", route:"60"}, {icon:"/img/buses.png", route:"61"}, {icon:"/img/buses.png", route:"62"}, {icon:"/img/buses.png", route:"63"}, {icon:"/img/buses.png", route:"64"}, {icon:"/img/buses.png", route:"65"}, {icon:"/img/buses.png", route:"66"}, {icon:"/img/buses.png", route:"67"}, {icon:"/img/buses.png", route:"68"}, {icon:"/img/buses.png", route:"69"}, {icon:"/img/buses.png", route:"70"}, {icon:"/img/buses.png", route:"71"}, {icon:"/img/buses.png", route:"72"}, {icon:"/img/buses.png", route:"73"}, {icon:"/img/buses.png", route:"74"}, {icon:"/img/buses.png", route:"75"}, {icon:"/img/buses.png", route:"76"}, {icon:"/img/buses.png", route:"77"}, {icon:"/img/buses.png", route:"78"}, {icon:"/img/buses.png", route:"79"}, {icon:"/img/buses.png", route:"80"}, {icon:"/img/buses.png", route:"81"}, {icon:"/img/buses.png", route:"83"}, {icon:"/img/buses.png", route:"85"}, {icon:"/img/buses.png", route:"86"}, {icon:"/img/buses.png", route:"87"}, {icon:"/img/buses.png", route:"88"}, {icon:"/img/buses.png", route:"89"}, {icon:"/img/buses.png", route:"90"}, {icon:"/img/buses.png", route:"91"}, {icon:"/img/buses.png", route:"92"}, {icon:"/img/buses.png", route:"93"}, {icon:"/img/buses.png", route:"94"}, {icon:"/img/buses.png", route:"95"}, {icon:"/img/buses.png", route:"96"}, {icon:"/img/buses.png", route:"97"}, {icon:"/img/buses.png", route:"98"}, {icon:"/img/buses.png", route:"99"}, {icon:"/img/buses.png", route:"100"}, {icon:"/img/buses.png", route:"101"}, {icon:"/img/buses.png", route:"102"}, {icon:"/img/buses.png", route:"103"}, {icon:"/img/buses.png", route:"104"}, {icon:"/img/buses.png", route:"105"}, {icon:"/img/buses.png", route:"106"}, {icon:"/img/buses.png", route:"107"}, {icon:"/img/buses.png", route:"108"}, {icon:"/img/buses.png", route:"109"}, {icon:"/img/buses.png", route:"110"}, {icon:"/img/buses.png", route:"111"}, {icon:"/img/buses.png", route:"112"}, {icon:"/img/buses.png", route:"113"}, {icon:"/img/buses.png", route:"114"}, {icon:"/img/buses.png", route:"115"}, {icon:"/img/buses.png", route:"116"}, {icon:"/img/buses.png", route:"117"}, {icon:"/img/buses.png", route:"118"}, {icon:"/img/buses.png", route:"119"}, {icon:"/img/buses.png", route:"120"}, {icon:"/img/buses.png", route:"121"}, {icon:"/img/buses.png", route:"122"}, {icon:"/img/buses.png", route:"123"}, {icon:"/img/buses.png", route:"124"}, {icon:"/img/buses.png", route:"125"}, {icon:"/img/buses.png", route:"126"}, {icon:"/img/buses.png", route:"127"}, {icon:"/img/buses.png", route:"128"}, {icon:"/img/buses.png", route:"129"}, {icon:"/img/buses.png", route:"130"}, {icon:"/img/buses.png", route:"131"}, {icon:"/img/buses.png", route:"132"}, {icon:"/img/buses.png", route:"133"}, {icon:"/img/buses.png", route:"134"}, {icon:"/img/buses.png", route:"135"}, {icon:"/img/buses.png", route:"136"}, {icon:"/img/buses.png", route:"137"}, {icon:"/img/buses.png", route:"138"}, {icon:"/img/buses.png", route:"139"}, {icon:"/img/buses.png", route:"140"}, {icon:"/img/buses.png", route:"141"}, {icon:"/img/buses.png", route:"142"}, {icon:"/img/buses.png", route:"143"}, {icon:"/img/buses.png", route:"144"}, {icon:"/img/buses.png", route:"145"}, {icon:"/img/buses.png", route:"146"}, {icon:"/img/buses.png", route:"147"}, {icon:"/img/buses.png", route:"148"}, {icon:"/img/buses.png", route:"149"}, {icon:"/img/buses.png", route:"150"}, {icon:"/img/buses.png", route:"151"}, {icon:"/img/buses.png", route:"152"}, {icon:"/img/buses.png", route:"153"}, {icon:"/img/buses.png", route:"154"}, {icon:"/img/buses.png", route:"155"}, {icon:"/img/buses.png", route:"156"}, {icon:"/img/buses.png", route:"157"}, {icon:"/img/buses.png", route:"158"}, {icon:"/img/buses.png", route:"159"}, {icon:"/img/buses.png", route:"160"}, {icon:"/img/buses.png", route:"161"}, {icon:"/img/buses.png", route:"162"}, {icon:"/img/buses.png", route:"163"}, {icon:"/img/buses.png", route:"164"}, {icon:"/img/buses.png", route:"165"}, {icon:"/img/buses.png", route:"166"}, {icon:"/img/buses.png", route:"167"}, {icon:"/img/buses.png", route:"168"}, {icon:"/img/buses.png", route:"169"}, {icon:"/img/buses.png", route:"170"}, {icon:"/img/buses.png", route:"171"}, {icon:"/img/buses.png", route:"172"}, {icon:"/img/buses.png", route:"173"}, {icon:"/img/buses.png", route:"174"}, {icon:"/img/buses.png", route:"175"}, {icon:"/img/buses.png", route:"176"}, {icon:"/img/buses.png", route:"177"}, {icon:"/img/buses.png", route:"178"}, {icon:"/img/buses.png", route:"179"}, {icon:"/img/buses.png", route:"180"}, {icon:"/img/buses.png", route:"181"}, {icon:"/img/buses.png", route:"182"}, {icon:"/img/buses.png", route:"183"}, {icon:"/img/buses.png", route:"184"}, {icon:"/img/buses.png", route:"185"}, {icon:"/img/buses.png", route:"186"}, {icon:"/img/buses.png", route:"187"}, {icon:"/img/buses.png", route:"188"}, {icon:"/img/buses.png", route:"189"}, {icon:"/img/buses.png", route:"190"}, {icon:"/img/buses.png", route:"191"}, {icon:"/img/buses.png", route:"192"}, {icon:"/img/buses.png", route:"193"}, {icon:"/img/buses.png", route:"194"}, {icon:"/img/buses.png", route:"195"}, {icon:"/img/buses.png", route:"196"}, {icon:"/img/buses.png", route:"197"}, {icon:"/img/buses.png", route:"198"}, {icon:"/img/buses.png", route:"199"}, {icon:"/img/buses.png", route:"200"}, {icon:"/img/buses.png", route:"201"}, {icon:"/img/buses.png", route:"202"}, {icon:"/img/buses.png", route:"203"}, {icon:"/img/buses.png", route:"204"}, {icon:"/img/buses.png", route:"205"}, {icon:"/img/buses.png", route:"206"}, {icon:"/img/buses.png", route:"207"}, {icon:"/img/buses.png", route:"208"}, {icon:"/img/buses.png", route:"209"}, {icon:"/img/buses.png", route:"210"}, {icon:"/img/buses.png", route:"211"}, {icon:"/img/buses.png", route:"212"}, {icon:"/img/buses.png", route:"213"}, {icon:"/img/buses.png", route:"214"}, {icon:"/img/buses.png", route:"215"}, {icon:"/img/buses.png", route:"216"}, {icon:"/img/buses.png", route:"217"}, {icon:"/img/buses.png", route:"218"}, {icon:"/img/buses.png", route:"219"}, {icon:"/img/buses.png", route:"220"}, {icon:"/img/buses.png", route:"221"}, {icon:"/img/buses.png", route:"222"}, {icon:"/img/buses.png", route:"223"}, {icon:"/img/buses.png", route:"224"}, {icon:"/img/buses.png", route:"225"}, {icon:"/img/buses.png", route:"226"}, {icon:"/img/buses.png", route:"227"}, {icon:"/img/buses.png", route:"228"}, {icon:"/img/buses.png", route:"229"}, {icon:"/img/buses.png", route:"230"}, {icon:"/img/buses.png", route:"231"}, {icon:"/img/buses.png", route:"232"}, {icon:"/img/buses.png", route:"233"}, {icon:"/img/buses.png", route:"234"}, {icon:"/img/buses.png", route:"235"}, {icon:"/img/buses.png", route:"236"}, {icon:"/img/buses.png", route:"237"}, {icon:"/img/buses.png", route:"238"}, {icon:"/img/buses.png", route:"240"}, {icon:"/img/buses.png", route:"241"}, {icon:"/img/buses.png", route:"242"}, {icon:"/img/buses.png", route:"243"}, {icon:"/img/buses.png", route:"244"}, {icon:"/img/buses.png", route:"245"}, {icon:"/img/buses.png", route:"246"}, {icon:"/img/buses.png", route:"247"}, {icon:"/img/buses.png", route:"248"}, {icon:"/img/buses.png", route:"249"}, {icon:"/img/buses.png", route:"250"}, {icon:"/img/buses.png", route:"251"}, {icon:"/img/buses.png", route:"252"}, {icon:"/img/buses.png", route:"253"}, {icon:"/img/buses.png", route:"254"}, {icon:"/img/buses.png", route:"255"}, {icon:"/img/buses.png", route:"256"}, {icon:"/img/buses.png", route:"257"}, {icon:"/img/buses.png", route:"258"}, {icon:"/img/buses.png", route:"259"}, {icon:"/img/buses.png", route:"260"}, {icon:"/img/buses.png", route:"261"}, {icon:"/img/buses.png", route:"262"}, {icon:"/img/buses.png", route:"263"}, {icon:"/img/buses.png", route:"264"}, {icon:"/img/buses.png", route:"265"}, {icon:"/img/buses.png", route:"266"}, {icon:"/img/buses.png", route:"267"}, {icon:"/img/buses.png", route:"268"}, {icon:"/img/buses.png", route:"269"}, {icon:"/img/buses.png", route:"270"}, {icon:"/img/buses.png", route:"271"}, {icon:"/img/buses.png", route:"272"}, {icon:"/img/buses.png", route:"273"}, {icon:"/img/buses.png", route:"274"}, {icon:"/img/buses.png", route:"275"}, {icon:"/img/buses.png", route:"276"}, {icon:"/img/buses.png", route:"277"}, {icon:"/img/buses.png", route:"279"}, {icon:"/img/buses.png", route:"280"}, {icon:"/img/buses.png", route:"281"}, {icon:"/img/buses.png", route:"282"}, {icon:"/img/buses.png", route:"283"}, {icon:"/img/buses.png", route:"284"}, {icon:"/img/buses.png", route:"285"}, {icon:"/img/buses.png", route:"286"}, {icon:"/img/buses.png", route:"287"}, {icon:"/img/buses.png", route:"288"}, {icon:"/img/buses.png", route:"289"}, {icon:"/img/buses.png", route:"290"}, {icon:"/img/buses.png", route:"291"}, {icon:"/img/buses.png", route:"292"}, {icon:"/img/buses.png", route:"293"}, {icon:"/img/buses.png", route:"294"}, {icon:"/img/buses.png", route:"295"}, {icon:"/img/buses.png", route:"296"}, {icon:"/img/buses.png", route:"297"}, {icon:"/img/buses.png", route:"298"}, {icon:"/img/buses.png", route:"299"}, {icon:"/img/buses.png", route:"300"}, {icon:"/img/buses.png", route:"302"}, {icon:"/img/buses.png", route:"303"}, {icon:"/img/buses.png", route:"305"}, {icon:"/img/buses.png", route:"307"}, {icon:"/img/buses.png", route:"308"}, {icon:"/img/buses.png", route:"309"}, {icon:"/img/buses.png", route:"312"}, {icon:"/img/buses.png", route:"313"}, {icon:"/img/buses.png", route:"314"}, {icon:"/img/buses.png", route:"315"}, {icon:"/img/buses.png", route:"316"}, {icon:"/img/buses.png", route:"317"}, {icon:"/img/buses.png", route:"318"}, {icon:"/img/buses.png", route:"319"}, {icon:"/img/buses.png", route:"320"}, {icon:"/img/buses.png", route:"321"}, {icon:"/img/buses.png", route:"322"}, {icon:"/img/buses.png", route:"323"}, {icon:"/img/buses.png", route:"324"}, {icon:"/img/buses.png", route:"325"}, {icon:"/img/buses.png", route:"326"}, {icon:"/img/buses.png", route:"327"}, {icon:"/img/buses.png", route:"328"}, {icon:"/img/buses.png", route:"329"}, {icon:"/img/buses.png", route:"330"}, {icon:"/img/buses.png", route:"331"}, {icon:"/img/buses.png", route:"332"}, {icon:"/img/buses.png", route:"333"}, {icon:"/img/buses.png", route:"336"}, {icon:"/img/buses.png", route:"337"}, {icon:"/img/buses.png", route:"339"}, {icon:"/img/buses.png", route:"340"}, {icon:"/img/buses.png", route:"341"}, {icon:"/img/buses.png", route:"343"}, {icon:"/img/buses.png", route:"344"}, {icon:"/img/buses.png", route:"345"}, {icon:"/img/buses.png", route:"346"}, {icon:"/img/buses.png", route:"347"}, {icon:"/img/buses.png", route:"349"}, {icon:"/img/buses.png", route:"350"}, {icon:"/img/buses.png", route:"352"}, {icon:"/img/buses.png", route:"353"}, {icon:"/img/buses.png", route:"354"}, {icon:"/img/buses.png", route:"355"}, {icon:"/img/buses.png", route:"356"}, {icon:"/img/buses.png", route:"357"}, {icon:"/img/buses.png", route:"358"}, {icon:"/img/buses.png", route:"359"}, {icon:"/img/buses.png", route:"360"}, {icon:"/img/buses.png", route:"362"}, {icon:"/img/buses.png", route:"363"}, {icon:"/img/buses.png", route:"364"}, {icon:"/img/buses.png", route:"365"}, {icon:"/img/buses.png", route:"366"}, {icon:"/img/buses.png", route:"367"}, {icon:"/img/buses.png", route:"368"}, {icon:"/img/buses.png", route:"370"}, {icon:"/img/buses.png", route:"371"}, {icon:"/img/buses.png", route:"372"}, {icon:"/img/buses.png", route:"375"}, {icon:"/img/buses.png", route:"376"}, {icon:"/img/buses.png", route:"377"}, {icon:"/img/buses.png", route:"379"}, {icon:"/img/buses.png", route:"380"}, {icon:"/img/buses.png", route:"381"}, {icon:"/img/buses.png", route:"382"}, {icon:"/img/buses.png", route:"383"}, {icon:"/img/buses.png", route:"384"}, {icon:"/img/buses.png", route:"385"}, {icon:"/img/buses.png", route:"386"}, {icon:"/img/buses.png", route:"388"}, {icon:"/img/buses.png", route:"389"}, {icon:"/img/buses.png", route:"390"}, {icon:"/img/buses.png", route:"391"}, {icon:"/img/buses.png", route:"393"}, {icon:"/img/buses.png", route:"394"}, {icon:"/img/buses.png", route:"395"}, {icon:"/img/buses.png", route:"396"}, {icon:"/img/buses.png", route:"397"}, {icon:"/img/buses.png", route:"398"}, {icon:"/img/buses.png", route:"399"}, {icon:"/img/buses.png", route:"401"}, {icon:"/img/buses.png", route:"403"}, {icon:"/img/buses.png", route:"404"}, {icon:"/img/buses.png", route:"405"}, {icon:"/img/buses.png", route:"406"}, {icon:"/img/buses.png", route:"407"}, {icon:"/img/buses.png", route:"410"}, {icon:"/img/buses.png", route:"411"}, {icon:"/img/buses.png", route:"412"}, {icon:"/img/buses.png", route:"413"}, {icon:"/img/buses.png", route:"414"}, {icon:"/img/buses.png", route:"415"}, {icon:"/img/buses.png", route:"417"}, {icon:"/img/buses.png", route:"418"}, {icon:"/img/buses.png", route:"419"}, {icon:"/img/buses.png", route:"422"}, {icon:"/img/buses.png", route:"423"}, {icon:"/img/buses.png", route:"424"}, {icon:"/img/buses.png", route:"425"}, {icon:"/img/buses.png", route:"427"}, {icon:"/img/buses.png", route:"428"}, {icon:"/img/buses.png", route:"430"}, {icon:"/img/buses.png", route:"432"}, {icon:"/img/buses.png", route:"433"}, {icon:"/img/buses.png", route:"434"}, {icon:"/img/buses.png", route:"436"}, {icon:"/img/buses.png", route:"440"}, {icon:"/img/buses.png", route:"444"}, {icon:"/img/buses.png", route:"450"}, {icon:"/img/buses.png", route:"452"}, {icon:"/img/buses.png", route:"453"}, {icon:"/img/buses.png", route:"455"}, {icon:"/img/buses.png", route:"460"}, {icon:"/img/buses.png", route:"462"}, {icon:"/img/buses.png", route:"463"}, {icon:"/img/buses.png", route:"464"}, {icon:"/img/buses.png", route:"465"}, {icon:"/img/buses.png", route:"466"}, {icon:"/img/buses.png", route:"467"}, {icon:"/img/buses.png", route:"468"}, {icon:"/img/buses.png", route:"469"}, {icon:"/img/buses.png", route:"470"}, {icon:"/img/buses.png", route:"472"}, {icon:"/img/buses.png", route:"473"}, {icon:"/img/buses.png", route:"474"}, {icon:"/img/buses.png", route:"476"}, {icon:"/img/buses.png", route:"481"}, {icon:"/img/buses.png", route:"482"}, {icon:"/img/buses.png", route:"483"}, {icon:"/img/buses.png", route:"484"}, {icon:"/img/buses.png", route:"485"}, {icon:"/img/buses.png", route:"486"}, {icon:"/img/buses.png", route:"487"}, {icon:"/img/buses.png", route:"488"}, {icon:"/img/buses.png", route:"490"}, {icon:"/img/buses.png", route:"491"}, {icon:"/img/buses.png", route:"492"}, {icon:"/img/buses.png", route:"493"}, {icon:"/img/buses.png", route:"496"}, {icon:"/img/buses.png", route:"498"}, {icon:"/img/buses.png", route:"499"}, {icon:"/img/buses.png", route:"507"}, {icon:"/img/buses.png", route:"508"}, {icon:"/img/buses.png", route:"521"}, {icon:"/img/buses.png", route:"530"}, {icon:"/img/buses.png", route:"549"}, {icon:"/img/buses.png", route:"559"}, {icon:"/img/buses.png", route:"570"}, {icon:"/img/buses.png", route:"601"}, {icon:"/img/buses.png", route:"602"}, {icon:"/img/buses.png", route:"603"}, {icon:"/img/buses.png", route:"605"}, {icon:"/img/buses.png", route:"606"}, {icon:"/img/buses.png", route:"607"}, {icon:"/img/buses.png", route:"608"}, {icon:"/img/buses.png", route:"609"}, {icon:"/img/buses.png", route:"611"}, {icon:"/img/buses.png", route:"612"}, {icon:"/img/buses.png", route:"613"}, {icon:"/img/buses.png", route:"616"}, {icon:"/img/buses.png", route:"617"}, {icon:"/img/buses.png", route:"621"}, {icon:"/img/buses.png", route:"624"}, {icon:"/img/buses.png", route:"625"}, {icon:"/img/buses.png", route:"626"}, {icon:"/img/buses.png", route:"627"}, {icon:"/img/buses.png", route:"628"}, {icon:"/img/buses.png", route:"629"}, {icon:"/img/buses.png", route:"631"}, {icon:"/img/buses.png", route:"632"}, {icon:"/img/buses.png", route:"633"}, {icon:"/img/buses.png", route:"634"}, {icon:"/img/buses.png", route:"635"}, {icon:"/img/buses.png", route:"638"}, {icon:"/img/buses.png", route:"639"}, {icon:"/img/buses.png", route:"640"}, {icon:"/img/buses.png", route:"642"}, {icon:"/img/buses.png", route:"643"}, {icon:"/img/buses.png", route:"646"}, {icon:"/img/buses.png", route:"648"}, {icon:"/img/buses.png", route:"649"}, {icon:"/img/buses.png", route:"650"}, {icon:"/img/buses.png", route:"651"}, {icon:"/img/buses.png", route:"652"}, {icon:"/img/buses.png", route:"653"}, {icon:"/img/buses.png", route:"654"}, {icon:"/img/buses.png", route:"655"}, {icon:"/img/buses.png", route:"656"}, {icon:"/img/buses.png", route:"657"}, {icon:"/img/buses.png", route:"658"}, {icon:"/img/buses.png", route:"660"}, {icon:"/img/buses.png", route:"661"}, {icon:"/img/buses.png", route:"662"}, {icon:"/img/buses.png", route:"663"}, {icon:"/img/buses.png", route:"664"}, {icon:"/img/buses.png", route:"665"}, {icon:"/img/buses.png", route:"667"}, {icon:"/img/buses.png", route:"669"}, {icon:"/img/buses.png", route:"670"}, {icon:"/img/buses.png", route:"671"}, {icon:"/img/buses.png", route:"672"}, {icon:"/img/buses.png", route:"673"}, {icon:"/img/buses.png", route:"674"}, {icon:"/img/buses.png", route:"675"}, {icon:"/img/buses.png", route:"677"}, {icon:"/img/buses.png", route:"678"}, {icon:"/img/buses.png", route:"679"}, {icon:"/img/buses.png", route:"681"}, {icon:"/img/buses.png", route:"683"}, {icon:"/img/buses.png", route:"684"}, {icon:"/img/buses.png", route:"685"}, {icon:"/img/buses.png", route:"686"}, {icon:"/img/buses.png", route:"687"}, {icon:"/img/buses.png", route:"688"}, {icon:"/img/buses.png", route:"689"}, {icon:"/img/buses.png", route:"690"}, {icon:"/img/buses.png", route:"692"}, {icon:"/img/buses.png", route:"696"}, {icon:"/img/buses.png", route:"697"}, {icon:"/img/buses.png", route:"698"}, {icon:"/img/buses.png", route:"699"}, {icon:"/img/buses.png", route:"965"}, {icon:"/img/buses.png", route:"969"}, {icon:"/img/buses.png", route:"23A"}, {icon:"/img/buses.png", route:"256D"}, {icon:"/img/buses.png", route:"2X"}, {icon:"/img/buses.png", route:"36X"}, {icon:"/img/buses.png", route:"A10"}, {icon:"/img/buses.png", route:"B11"}, {icon:"/img/buses.png", route:"B12"}, {icon:"/img/buses.png", route:"B13"}, {icon:"/img/buses.png", route:"B14"}, {icon:"/img/buses.png", route:"B15"}, {icon:"/img/buses.png", route:"B16"}, {icon:"/img/buses.png", route:"C1"}, {icon:"/img/buses.png", route:"C2"}, {icon:"/img/buses.png", route:"C3"}, {icon:"/img/buses.png", route:"C10"}, {icon:"/img/buses.png", route:"C11"}, {icon:"/img/buses.png", route:"D3"}, {icon:"/img/buses.png", route:"D6"}, {icon:"/img/buses.png", route:"D7"}, {icon:"/img/buses.png", route:"D8"}, {icon:"/img/buses.png", route:"E1"}, {icon:"/img/buses.png", route:"E2"}, {icon:"/img/buses.png", route:"E3"}, {icon:"/img/buses.png", route:"E5"}, {icon:"/img/buses.png", route:"E6"}, {icon:"/img/buses.png", route:"E7"}, {icon:"/img/buses.png", route:"E8"}, {icon:"/img/buses.png", route:"E9"}, {icon:"/img/buses.png", route:"E10"}, {icon:"/img/buses.png", route:"E11"}, {icon:"/img/buses.png", route:"EL1"}, {icon:"/img/buses.png", route:"EL2"}, {icon:"/img/buses.png", route:"EL3"}, {icon:"/img/buses.png", route:"G1"}, {icon:"/img/buses.png", route:"H2"}, {icon:"/img/buses.png", route:"H3"}, {icon:"/img/buses.png", route:"H9"}, {icon:"/img/buses.png", route:"H10"}, {icon:"/img/buses.png", route:"H11"}, {icon:"/img/buses.png", route:"H12"}, {icon:"/img/buses.png", route:"H13"}, {icon:"/img/buses.png", route:"H14"}, {icon:"/img/buses.png", route:"H17"}, {icon:"/img/buses.png", route:"H18"}, {icon:"/img/buses.png", route:"H19"}, {icon:"/img/buses.png", route:"H20"}, {icon:"/img/buses.png", route:"H22"}, {icon:"/img/buses.png", route:"H25"}, {icon:"/img/buses.png", route:"H26"}, {icon:"/img/buses.png", route:"H28"}, {icon:"/img/buses.png", route:"H32"}, {icon:"/img/buses.png", route:"H37"}, {icon:"/img/buses.png", route:"H91"}, {icon:"/img/buses.png", route:"H98"}, {icon:"/img/buses.png", route:"K1"}, {icon:"/img/buses.png", route:"K2"}, {icon:"/img/buses.png", route:"K3"}, {icon:"/img/buses.png", route:"K4"}, {icon:"/img/buses.png", route:"K5"}, {icon:"/img/buses.png", route:"N1"}, {icon:"/img/buses.png", route:"N2"}, {icon:"/img/buses.png", route:"N3"}, {icon:"/img/buses.png", route:"N5"}, {icon:"/img/buses.png", route:"N7"}, {icon:"/img/buses.png", route:"N8"}, {icon:"/img/buses.png", route:"N9"}, {icon:"/img/buses.png", route:"N11"}, {icon:"/img/buses.png", route:"N15"}, {icon:"/img/buses.png", route:"N16"}, {icon:"/img/buses.png", route:"N18"}, {icon:"/img/buses.png", route:"N19"}, {icon:"/img/buses.png", route:"N20"}, {icon:"/img/buses.png", route:"N21"}, {icon:"/img/buses.png", route:"N22"}, {icon:"/img/buses.png", route:"N26"}, {icon:"/img/buses.png", route:"N28"}, {icon:"/img/buses.png", route:"N29"}, {icon:"/img/buses.png", route:"N31"}, {icon:"/img/buses.png", route:"N38"}, {icon:"/img/buses.png", route:"N41"}, {icon:"/img/buses.png", route:"N44"}, {icon:"/img/buses.png", route:"N55"}, {icon:"/img/buses.png", route:"N63"}, {icon:"/img/buses.png", route:"N68"}, {icon:"/img/buses.png", route:"N73"}, {icon:"/img/buses.png", route:"N74"}, {icon:"/img/buses.png", route:"N83"}, {icon:"/img/buses.png", route:"N86"}, {icon:"/img/buses.png", route:"N87"}, {icon:"/img/buses.png", route:"N89"}, {icon:"/img/buses.png", route:"N91"}, {icon:"/img/buses.png", route:"N97"}, {icon:"/img/buses.png", route:"N98"}, {icon:"/img/buses.png", route:"N109"}, {icon:"/img/buses.png", route:"N113"}, {icon:"/img/buses.png", route:"N133"}, {icon:"/img/buses.png", route:"N136"}, {icon:"/img/buses.png", route:"N137"}, {icon:"/img/buses.png", route:"N155"}, {icon:"/img/buses.png", route:"N171"}, {icon:"/img/buses.png", route:"N199"}, {icon:"/img/buses.png", route:"N205"}, {icon:"/img/buses.png", route:"N207"}, {icon:"/img/buses.png", route:"N253"}, {icon:"/img/buses.png", route:"N277"}, {icon:"/img/buses.png", route:"N279"}, {icon:"/img/buses.png", route:"N343"}, {icon:"/img/buses.png", route:"N381"}, {icon:"/img/buses.png", route:"N550"}, {icon:"/img/buses.png", route:"N551"}, {icon:"/img/buses.png", route:"P4"}, {icon:"/img/buses.png", route:"P5"}, {icon:"/img/buses.png", route:"P12"}, {icon:"/img/buses.png", route:"P13"}, {icon:"/img/buses.png", route:"R1"}, {icon:"/img/buses.png", route:"R2"}, {icon:"/img/buses.png", route:"R3"}, {icon:"/img/buses.png", route:"R4"}, {icon:"/img/buses.png", route:"R5"}, {icon:"/img/buses.png", route:"R6"}, {icon:"/img/buses.png", route:"R7"}, {icon:"/img/buses.png", route:"R8"}, {icon:"/img/buses.png", route:"R9"}, {icon:"/img/buses.png", route:"R10"}, {icon:"/img/buses.png", route:"R11"}, {icon:"/img/buses.png", route:"R68"}, {icon:"/img/buses.png", route:"R70"}, {icon:"/img/buses.png", route:"RB1"}, {icon:"/img/buses.png", route:"RB1X"}, {icon:"/img/buses.png", route:"RB2"}, {icon:"/img/buses.png", route:"RB3"}, {icon:"/img/buses.png", route:"RB4"}, {icon:"/img/buses.png", route:"RB5"}, {icon:"/img/buses.png", route:"RB6"}, {icon:"/img/buses.png", route:"RB6A"}, {icon:"/img/buses.png", route:"RBX"}, {icon:"/img/buses.png", route:"RT1"}, {icon:"/img/buses.png", route:"RT3"}, {icon:"/img/buses.png", route:"RT5"}, {icon:"/img/buses.png", route:"RT7"}, {icon:"/img/buses.png", route:"RT8"}, {icon:"/img/buses.png", route:"RT10"}, {icon:"/img/buses.png", route:"RT11"}, {icon:"/img/buses.png", route:"RT12"}, {icon:"/img/buses.png", route:"RV1"}, {icon:"/img/buses.png", route:"S1"}, {icon:"/img/buses.png", route:"S3"}, {icon:"/img/buses.png", route:"S4"}, {icon:"/img/buses.png", route:"T1"}, {icon:"/img/buses.png", route:"T2"}, {icon:"/img/buses.png", route:"T3"}, {icon:"/img/buses.png", route:"T4"}, {icon:"/img/buses.png", route:"U1"}, {icon:"/img/buses.png", route:"U2"}, {icon:"/img/buses.png", route:"U3"}, {icon:"/img/buses.png", route:"U4"}, {icon:"/img/buses.png", route:"U5"}, {icon:"/img/buses.png", route:"U7"}, {icon:"/img/buses.png", route:"U9"}, {icon:"/img/buses.png", route:"U10"}, {icon:"/img/buses.png", route:"UL1"}, {icon:"/img/buses.png", route:"UL2"}, {icon:"/img/buses.png", route:"UL3"}, {icon:"/img/buses.png", route:"UL4"}, {icon:"/img/buses.png", route:"UL5"}, {icon:"/img/buses.png", route:"UL6"}, {icon:"/img/buses.png", route:"UL7"}, {icon:"/img/buses.png", route:"UL8"}, {icon:"/img/buses.png", route:"UL9"}, {icon:"/img/buses.png", route:"UL10"}, {icon:"/img/buses.png", route:"UL11"}, {icon:"/img/buses.png", route:"UL12"}, {icon:"/img/buses.png", route:"UL13"}, {icon:"/img/buses.png", route:"UL14"}, {icon:"/img/buses.png", route:"UL15"}, {icon:"/img/buses.png", route:"UL16"}, {icon:"/img/buses.png", route:"UL17"}, {icon:"/img/buses.png", route:"UL18"}, {icon:"/img/buses.png", route:"UL19"}, {icon:"/img/buses.png", route:"UL20"}, {icon:"/img/buses.png", route:"UL21"}, {icon:"/img/buses.png", route:"UL22"}, {icon:"/img/buses.png", route:"UL23"}, {icon:"/img/buses.png", route:"UL24"}, {icon:"/img/buses.png", route:"UL25"}, {icon:"/img/buses.png", route:"UL26"}, {icon:"/img/buses.png", route:"UL27"}, {icon:"/img/buses.png", route:"UL28"}, {icon:"/img/buses.png", route:"UL29"}, {icon:"/img/buses.png", route:"UL30"}, {icon:"/img/buses.png", route:"UL31"}, {icon:"/img/buses.png", route:"UL32"}, {icon:"/img/buses.png", route:"UL33"}, {icon:"/img/buses.png", route:"UL34"}, {icon:"/img/buses.png", route:"UL35"}, {icon:"/img/buses.png", route:"UL37"}, {icon:"/img/buses.png", route:"UL39"}, {icon:"/img/buses.png", route:"UL40"}, {icon:"/img/buses.png", route:"UL41"}, {icon:"/img/buses.png", route:"UL42"}, {icon:"/img/buses.png", route:"UL43"}, {icon:"/img/buses.png", route:"UL44"}, {icon:"/img/buses.png", route:"UL46"}, {icon:"/img/buses.png", route:"UL47"}, {icon:"/img/buses.png", route:"UL48"}, {icon:"/img/buses.png", route:"UL49"}, {icon:"/img/buses.png", route:"UL50"}, {icon:"/img/buses.png", route:"UL51"}, {icon:"/img/buses.png", route:"UL52"}, {icon:"/img/buses.png", route:"UL53"}, {icon:"/img/buses.png", route:"UL55"}, {icon:"/img/buses.png", route:"UL56"}, {icon:"/img/buses.png", route:"UL57"}, {icon:"/img/buses.png", route:"UL58"}, {icon:"/img/buses.png", route:"UL61"}, {icon:"/img/buses.png", route:"UL62"}, {icon:"/img/buses.png", route:"W3"}, {icon:"/img/buses.png", route:"W4"}, {icon:"/img/buses.png", route:"W5"}, {icon:"/img/buses.png", route:"W6"}, {icon:"/img/buses.png", route:"W7"}, {icon:"/img/buses.png", route:"W8"}, {icon:"/img/buses.png", route:"W9"}, {icon:"/img/buses.png", route:"W10"}, {icon:"/img/buses.png", route:"W11"}, {icon:"/img/buses.png", route:"W12"}, {icon:"/img/buses.png", route:"W13"}, {icon:"/img/buses.png", route:"W14"}, {icon:"/img/buses.png", route:"W15"}, {icon:"/img/buses.png", route:"W16"}, {icon:"/img/buses.png", route:"W19"}, {icon:"/img/buses.png", route:"X26"}, {icon:"/img/buses.png", route:"X68"}, {icon:"/img/buses.png", route:"Y7"}, {icon:"/img/buses.png", route:"Y18"}, {icon:"/img/buses.png", route:"Y23"}, {icon:"/img/buses.png", route:"Y27"}, {icon:"/img/buses.png", route:"Y28"}, {icon:"/img/buses.png", route:"Y31"}, {icon:"/img/buses.png", route:"Y36"}, {icon:"/img/buses.png", route:"Y52"}, {icon:"/img/buses.png", route:"Y70"}, {icon:"/img/buses.png", route:"Y94"}, {icon:"/img/buses.png", route:"Y148"}, {icon:"/img/buses.png", route:"Y228"}, {icon:"/img/buses.png", route:"Y295"}, {icon:"/img/buses.png", route:"Y316"}, {icon:"/img/buses.png", route:"Y328"}, {icon:"/img/buses.png", route:"Y452"}, {icon:"/img/buses.png", route:"Y18N"}],
 		getValue: "route",
 		requestDelay: 500,
 		template: {
@@ -1268,16 +1290,20 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 	    var curShowCam=$('#cams').css('opacity');
 		var curColor=$('#btnload').css('background-color');
 		if(curColor=='rgb(128, 128, 128)'||curShowCam===0.2){
-		var modal=document.getElementById('myModal');var span=document.getElementsByClassName("close")[0];modal.style.display="block";span.onclick=function(){modal.style.display="none";}
+		var modal=document.getElementById('myModal');var span=document.getElementsByClassName("close")[0];modal.style.display="block";
+		span.onclick=function(){modal.style.display="none";}
         window.onclick=function(event){
 		if(event.target==modal){
 		modal.style.display="none";}
 		}
 		}else{
-		seconds=29;var el=$('#feedType');if(el.text()=="image"){
+		seconds=29;var el=$('#feedType');
+		if(el.text()=="image"){
 		el.text("video");
-		}else{
+		}else if(el.text()=="video"){
 		el.text("image");
+		}else{
+		el.text("video");
 		}
 		$('#TypePlural').text('s');
 		type=$('#feedType').text()
@@ -1357,6 +1383,65 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 	  /*console.log(arrName+' : '+arr.length);*/
 	  }
 	  
+	  function isGMTinEffect()
+		{
+		var d = new Date();
+
+		// Loop over the 31 days of March for the current year
+		for(var i=31; i>0; i--)
+		{
+		var tmp = new Date(d.getFullYear(), 2, i);
+
+		// If it's Sunday
+		if(tmp.getDay() == 0)
+		{
+		// last Sunday of March
+		lSoM = tmp;
+
+		// And stop the loop
+		break;
+		}
+		}
+
+		// Loop over the 31 days of October for the current year
+		for(var i=31; i>0; i--)
+		{
+		var tmp = new Date(d.getFullYear(), 9, i);
+
+		// If it's Sunday
+		if(tmp.getDay() == 0)
+		{
+		// last Sunday of October
+		lSoO = tmp;
+
+		// And stop the loop
+		break;
+		}
+		}
+
+		// 0 = DST off (GMT)
+		// 1 = DST on  (BST)
+		if(d < lSoM || d > lSoO) return 0;
+		else return 1;
+		}
+	  
+	  function check_quota() {
+		if (quota_exceeded) return;
+		if (typeof($("button.dismissButton")[0]) === "undefined") return;
+		quota_exceeded = true;
+		//alert('Quota has been exceeded!');
+		// you can even hijack the box and add to Google's message
+		$("button.dismissButton").parents("td").html(
+			"<small>We have had to implement a quota to keep this service FREE and unfortunately, this has now been exceeded!<p><p id='resetQuota'></p>" +
+			"Our quota resets at " +((isGMTinEffect) ? "08:00 GMT" : "07:00 BST") + " but <a href='indexOSM.html' target='_self'>click here for our OpenStreetMap alternative.</a></small>" +
+			"<p><button class='dismissButton'>OK</button>");
+		console.log("Google Maps Daily Quota has been exceeded. Display message for OpenStreetMap alternative!");
+		refreshQuota();
+		$("button.dismissButton").click( function() {
+			$("button.dismissButton").parentsUntil("div").parent().hide();
+		});
+	  }
+	  
 	  function hideload() {
 		document.getElementById("loadmessage").style.visibility='hidden';
 		document.getElementById("loadmessage").style.display='none';
@@ -1372,6 +1457,46 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 
 			/*console.log('Hide loading');*/
 	  }
+	  
+	  function refreshQuota(){
+var countDownDate = new Date(); //"Jan 5, 2021 15:37:25").getTime();
+var d = countDownDate.getHours();
+if(isGMTinEffect){
+if(d >= 8){
+countDownDate.setHours(8,0);
+countDownDate.setDate(countDownDate.getDate() + 1);
+}else{
+countDownDate.setHours(8,0);
+}	
+}else{
+	if(d >= 7){
+countDownDate.setHours(7,0);
+countDownDate.setDate(countDownDate.getDate() + 1);
+}else{
+countDownDate.setHours(7,0);
+}
+}
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("resetQuota").innerHTML = "Reset in " + hours + "h "
+  + ("00" + minutes).slice (-2) + "m " + ("00" + seconds).slice (-2) + "s ";
+    
+}, 1000);
+}
 	  
 	  function playPause(video){
 		if(video.paused)
@@ -1420,7 +1545,7 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 	  var infoWindow=new google.maps.InfoWindow({disableAutoPan: false});
 	  }
 	  var offline;
-	  var jamCamString = "https://api.tfl.gov.uk/Place/Type/JamCam/?app_id=<YOUR_APPID>&app_key=<YOUR_KEY>";
+	  var jamCamString = "https://api.tfl.gov.uk/Place/Type/JamCam/?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 	  var totCount=0;
 	  var trueCount=0;
 	  refreshJBTimeout = (refreshJBTimeout * 2);
@@ -1456,20 +1581,20 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 	if(type=='video'){
 	var imgLink=data.additionalProperties[2].value;
 	var poster=data.additionalProperties[1].value;
-	var contentString="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><small><em>Camera "+trueCount+" Refresh in <span id=\"timer\">3:00</span></em></small><br /><strong>"+urldecode(loc)+"</strong><small>"+offline+"</small></div>"+
+	var contentString="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><small><em>Camera "+trueCount+" Refresh in <span id=\"timer\">3:00</span></em></small><br /><strong><a href=\"http://archive.tfljamcams.net/archive/"+urldecode(loc).replace(/\s+/g, "_").replace(/\//g, "_")+"\" title=\"Click here for Camera archives\">"+urldecode(loc)+"</a>&nbsp;<em><small></small></em></strong><small>"+offline+"</small></div>"+
 	"<div><small>View: "+urldecode(camView)+"<br /><em>Powered by TfL Open Data.<br /></em></small></div><div id='iframe'>"+
 	"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
-	"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading "+type+". .</span></div>"+
+	"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading "+type+"</span></div>"+
 	"<video loop autoplay muted poster='"+poster+"' onclick='playPause(this);' onloadeddata='hideload()'>"+
 	"<source id='myImg' src='"+imgLink;
 	var contentString2="'></video></div></div>";
 	var overContentString="<div id='marker-over'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><strong>"+urldecode(loc)+"</strong><small>"+offline+"</small><br /><small><em>Camera "+trueCount+"</em></small></div></div>";
 	}else{
 	var imgLink=data.additionalProperties[1].value;
-	var contentString="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><small><em>Camera "+trueCount+" Refresh in <span id=\"timer\">3:00</span></em></small><br /><strong>"+urldecode(loc)+"</strong><small>"+offline+"</small></div>"+
+	var contentString="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><small><em>Camera "+trueCount+" Refresh in <span id=\"timer\">3:00</span></em></small><br /><strong><a href=\"http://archive.tfljamcams.net/archive/"+urldecode(loc).replace(/\s+/g, "_").replace(/\//g, "_")+"\" title=\"Click here for Camera archives\">"+urldecode(loc)+"</a>&nbsp;<em><small></small></em></strong><small>"+offline+"</small></div>"+
 	"<div><small>View: "+urldecode(camView)+"<br /><em>Powered by TfL Open Data.<br /></em></small></div><div id='iframe'>"+
 	"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
-	"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading "+type+". .</span></div>"+
+	"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading "+type+"</span></div>"+
 	"<img id='myImg' src='"+imgLink;
 	var contentString2="' onload='imageLoaded();' /></div></div>";
 	var overContentString="<div id='marker-over'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><strong>"+urldecode(loc)+"</strong><small>"+offline+"</small><br /><small><em>Camera "+trueCount+"</em></small></div></div>";
@@ -1554,7 +1679,7 @@ if(on==1){var trafficLayer2=new google.maps.TrafficLayer();trafficLayer2.setMap(
 	today = formatDate(newtoday);
 	tomorrow = formatDate(newtomorrow);
 	}
-    var TfLdisruptionString="https://api.tfl.gov.uk/Road/All/Disruption?startDate="+today+"&endDate="+tomorrow+"&app_id=<YOUR_APPID>&app_key=<YOUR_KEY>";
+    var TfLdisruptionString="https://api.tfl.gov.uk/Road/All/Disruption?startDate="+today+"&endDate="+tomorrow+"&app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 	console.log('Load Incidents for '+TfLdisruptionString.substring(43, 82));
 	refreshJBTimeout = (refreshJBTimeout * 2);
     var event_totCount=0;var event_trueCount=0;
@@ -1785,10 +1910,11 @@ setOpacity(incidents, true);
 setOpacity(cams, true);
 $('#btnload').val('Load Cams');
 $('#feedType').text('Bus Stop');
+$('#btnload').val('Re-Load JamCams');
 $('#TypePlural').text('s');
 var bounds = new google.maps.LatLngBounds();
 console.log("Load route "+route+" bus stop markers");
-var TfLBusesString="https://api.tfl.gov.uk/line/"+route+"/stoppoints?app_id=<YOUR_APPID>&app_key=<YOUR_KEY>";
+var TfLBusesString="https://api.tfl.gov.uk/line/"+route+"/stoppoints?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 var stopCount=0;
 $.ajax({
 	url:TfLBusesString,dataType:"json",
@@ -1853,9 +1979,9 @@ $.ajax({
 		var time = new Date();
 		var newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);/* + ":" + ("0" + time.getSeconds()).slice(-2);*/
 		var contentString3 = "<div id=\"marker-over\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"</em><br />"+stopTowards+"</div><div><br />Click to load live departures</div></div>";
-		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br />"+stopTowards+"<small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span></small></em><br /><br /></div><div id='iframe'></div>"+
+		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br />"+stopTowards+"<small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span><br />Powered By TfL Open Data</small></em><br /></div><div id='iframe'></div>"+
 		"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
-		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data. .</span></div></div>";
+		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data</span></div></div>";
  					
 		var marker = new google.maps.Marker({
 		position: latlng, 
@@ -1924,7 +2050,7 @@ $.ajax({
 	stopsArray = [];
 	var naptanId = marker.title;
 	
-	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=<YOUR_APPID>&app_key=<YOUR_KEY>"
+	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 	/*console.log(stationString);*/
 	$.ajax({
 	url:stationString,dataType:"json",
@@ -1970,7 +2096,7 @@ $.ajax({
 			var towards;
 			if(newline=="dlr"){
 				towards = data[i].destinationName.replace(" DLR Station","");
-			}else if(newline=="tfl-rail"||newline=="overground"){
+			}else if(newline=="tfl-rail"||newline=="london-overground"||newline=="overground"){
 			towards = data[i].destinationName.replace(" Rail Station","");
 			}else if(data[i].destinationName=="tram"){
 			towards = data[i].destinationName.replace(" Tram Stop","");
@@ -2137,10 +2263,11 @@ setOpacity(incidents, true);
 setOpacity(cams, true);
 $('#btnload').val('Load Cams');
 $('#feedType').text('Station');
+$('#btnload').val('Re-Load JamCams');
 $('#TypePlural').text('s');
 var bounds = new google.maps.LatLngBounds();
 console.log("Load "+line+" stop markers");
-var TfLBusesString="https://api.tfl.gov.uk/line/"+line+"/stoppoints?app_id=<YOUR_APPID>&app_key=<YOUR_KEY>";
+var TfLBusesString="https://api.tfl.gov.uk/line/"+line+"/stoppoints?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 /*console.log(TfLBusesString);*/
 var stopCount=0;
 $.ajax({
@@ -2212,9 +2339,9 @@ $.ajax({
 		var time = new Date();
 		var newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);/* + ":" + ("0" + time.getSeconds()).slice(-2);*/
 		var contentString3 = "<div id=\"marker-over\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"</em><br /></div><div><br />Click to load live departures</div></div>";
-		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br /><small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span></small></em><br /><br /></div><div id='iframe'></div>"+
+		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br /><small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span><br />Powered By TfL Open Data</small></em><br /></div><div id='iframe'></div>"+
 		"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
-		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data. .</span></div></div>";
+		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data</span></div></div>";
   							
 		var marker = new google.maps.Marker({
 		position: latlng, 
@@ -2277,7 +2404,7 @@ $.ajax({
 	stopsArray = [];
 	var naptanId = marker.title;
 	/*console.log(marker.title);*/
-	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=<YOUR_APPID>&app_key=<YOUR_KEY>"
+	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 	$.ajax({
 	url:stationString,dataType:"json",
 	error: function(){
@@ -2466,6 +2593,7 @@ if(myLocation!=null){
 route = $('#route').val();
 line = $('#line').val();
 $('#feedType').text('location');
+$('#btnload').val('Re-Load JamCams');
 $('#TypePlural').text('');
 if (route == null || route == ''||line == null || line == ''){
 disableBusZoom=true;
@@ -2478,7 +2606,7 @@ var TfLLocation = newLocation.split(',');
 var consent = getCookie("cookieconsent_status");
 	   var bounds = new google.maps.LatLngBounds();
 /*console.log("Load local bus/train stop markers");*/
-var TfLLocationString="https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanPublicBusCoachTram,NaptanMetroStation,NaptanRailStation,NaptanFerryPort&radius=500&modes=bus,dlr,tube&lat="+TfLLocation[0]+"&lon="+TfLLocation[1]+"&app_id=<YOUR_APPID>&app_key=<YOUR_KEY>";
+var TfLLocationString="https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanPublicBusCoachTram,NaptanMetroStation,NaptanRailStation,NaptanFerryPort&radius=500&modes=bus,dlr,tube&lat="+TfLLocation[0]+"&lon="+TfLLocation[1]+"&app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 /*console.log(TfLLocationString);*/
 var stopCount=0;
 $.ajax({
@@ -2576,9 +2704,9 @@ $.ajax({
 		var time = new Date();
 		var newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);/* + ":" + ("0" + time.getSeconds()).slice(-2);*/
 		var contentString3 = "<div id=\"marker-over\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"</em><br />"+stopTowards+"</div><div><br />Click to load live departures</div></div>";
-		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br />"+stopTowards+"<small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span></small></em><br /><br /></div><div id='iframe'></div>"+
+		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br />"+stopTowards+"<small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span><br />Powered By TfL Open Data</small></em><br /></div><div id='iframe'></div>"+
 		"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
-		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data. .</span></div></div>";
+		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data</span></div></div>";
 
 		var displayTfLMarker;
 		
@@ -2750,7 +2878,7 @@ $.ajax({
 	stopsArray = [];
 	var naptanId = marker.title;
 	
-	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=<YOUR_APPID>&app_key=<YOUR_KEY>";
+	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
 	/*console.log(stationString);*/
 	$.ajax({
 	url:stationString,dataType:"json",
@@ -2885,12 +3013,11 @@ getLocalStation();
            infoWindow.setContent(contentString4);
            infoWindow.open(map,marker);
 		   currentInfoWindow = infoWindow; 
-		   
-		   clearInterval(refreshInterval);
-		   countdown(2);
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
 		   retrievedTime.innerHTML = newTime;
+		   clearInterval(refreshInterval);
+		   countdown(2);
 	       refreshInterval=self.setInterval(function(){
 		   time = new Date();
 		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
