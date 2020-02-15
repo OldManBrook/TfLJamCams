@@ -1,0 +1,2285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta Http-Equiv="Cache-Control" Content="no-cache">
+<meta Http-Equiv="Pragma" Content="no-cache">
+<meta Http-Equiv="Expires" Content="0">
+<meta Http-Equiv="Pragma-directive: no-cache">
+<meta Http-Equiv="Cache-directive: no-cache">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script src="util/jquery.easy-autocomplete.min.js"></script>
+<script> 
+function setCookie(c_name,value,exdays){var exdate=new Date();exdate.setDate(exdate.getDate() + exdays);var c_value=escape(value) + ((exdays==null) ? "" : ("; expires="+exdate.toUTCString()+"; path=/"));document.cookie=c_name + "=" + c_value;}
+var thisDomain = window.location.hostname;
+/*console.log (thisDomain);*/
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+function delete_cookie( name, path, domain ) {
+  if( getCookie( name ) ) {
+    document.cookie = name + "=" +
+      ((path) ? ";path="+path:"")+
+      ((domain)?";domain="+domain:"") +
+      ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+  }
+}
+var consent = getCookie("cookieconsent_status");
+if (consent==="allow"){
+console.log('Cookie Accept Status : ' + consent);
+var script = document.createElement('script');
+script.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=UA-111590963-1');
+document.head.appendChild(script);
+
+}else if (consent=="deny"){
+console.log('Cookie Accept Status : ' + consent);
+delete_cookie('_ga','/','.tfljamcams.net');
+delete_cookie('_gat_gtag_UA-111590963-1','/','.tfljamcams.net');
+delete_cookie('_gid','/','.tfljamcams.net');
+setCookie('tfljamcams',0,-1);
+}else{
+console.log('Cookie Accept Status : not set');
+}
+
+window.addEventListener("load", function(){
+	window.cookieconsent.initialise({
+	"palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+		"position": "top",
+		"showLink": true,
+		"theme": "classic",
+		"type": "opt-in",
+		"content": {
+		"message": "We use cookies to provide visit analytics and mobile responsive views on a variety of devices. You can choose to deny or allow use of Cookies during your visit.",
+			"dismiss": '<a aria-label="deny cookies" role="button" tabindex="0" class="cc-btn cc-deny" style="min-width: 50px;">Deny</a>',
+			"allow": "Allow",
+			"link": "Learn More",
+			"href": "https://www.tfljamcams.net/contact/privacypolicy.html",
+		},
+		"revokeBtn": "<div class='cc-revoke @{{classes}}' style='font-size:x-small;margin-top:15px;' title='Manage Cookie Preferences'>Cookies</div>",
+		onInitialise: function (status) {
+		var type = this.options.type;
+		var didConsent = this.hasConsented();
+		
+		if (type == 'opt-in' && didConsent && consent==='allow') {
+		setTimeout(function() {
+          document.getElementsByClassName("cc-revoke")[0].style.display = "block";
+        });
+			/* enable cookies*/
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-111590963-1');
+		
+		}else{
+		setTimeout(function() {
+          document.getElementsByClassName("cc-revoke")[0].style.display = "block";
+        });
+		}
+		},
+		
+		onStatusChange: function(status, chosenBefore) {
+		var type = this.options.type;
+		var didConsent = this.hasConsented();
+		if (type == 'opt-in' && didConsent && consent==='allow') {
+			
+			/* enable cookies*/
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-111590963-1');
+		}
+		},
+		
+		onRevokeChoice: function() {
+		var type = this.options.type;
+		if (type == 'opt-in' && consent!='allow') {
+		console.log('Clear Cookies ');
+			/* disable cookies*/
+				delete_cookie('_ga','/','.tfljamcams.net');
+				delete_cookie('_gat_gtag_UA-111590963-1','/','.tfljamcams.net');
+				delete_cookie('_gid','/','.tfljamcams.net');
+				setCookie('tfljamcams',0,-1);
+				
+				/* Get an array of cookies*/
+				var arrSplit = document.cookie.split(";");
+				for(var i = 0; i < arrSplit.length; i++)
+				{
+					var cookie = arrSplit[i].trim();
+					var cookieName = cookie.split("=")[0];
+					/* If the prefix of the cookie's name matches the one specified, remove it*/
+					if(cookieName.indexOf("sssUpp") ===0) {
+						/* Remove the cookie*/
+						document.cookie = cookieName + "=; Max-Age=-99999999;";
+						
+					}
+				}
+			}
+		},
+	})});
+</script>
+<base target="_blank">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="content-language" content="en">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="description" content="London Traffic Live JamCam Map - 900+ TfL Traffic CCTV Cameras, Incidents, Road closures and Bus Stops.">
+<meta name="keywords" content="london traffic,camera, cctv, map, london, traffic, tfl, jamcam, cams, live, feed, cctv, real-time, closures, incident, road closure, roadwork, cameras, delays, alerts, bus stops, arrivals">
+<!--link rel="canonical" href="https://www.tfljamcams.net"-->
+<meta name="nosnippets">
+<meta Http-Equiv="Cache-Control" Content="no-cache">
+<meta Http-Equiv="Pragma" Content="no-cache">
+<meta Http-Equiv="Expires" Content="0">
+<meta Http-Equiv="Pragma-directive: no-cache">
+<meta Http-Equiv="Cache-directive: no-cache">
+<meta property="og:title" content="London Traffic Cameras - Live TfL JamCam Feeds" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="London Traffic JamCam Map - 900+ Real-Time TfL image/video feeds with Traffic Layer and Bus Stops. Ad-free and fast!" />
+<meta property="og:url" content="https://www.tfljamcams.net/" />
+<meta property="og:image" content="https://www.tfljamcams.net/img/tfljamcams.jpg" />
+<meta itemprop="name" content="London Traffic Cameras - Live TfL JamCam Feeds">
+<meta itemprop="description" content="London Traffic JamCam Map - 900+ Real-Time TfL image/video feeds with Traffic Layer and Bus Stops. Ad-free and fast!">
+<meta itemprop="image" content="https://www.tfljamcams.net/img/tfljamcams.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="util/icon57.png" sizes="57x57">
+<link rel="apple-touch-icon" href="util/icon72.png" sizes="72x72">
+<link rel="apple-touch-icon" href="util/icon76.png" sizes="76x76">
+<link rel="apple-touch-icon" href="util/icon114.png" sizes="114x114">
+<link rel="apple-touch-icon" href="util/icon120.png" sizes="120x120">
+<link rel="apple-touch-icon" href="util/icon144.png" sizes="144x144">
+<link rel="apple-touch-icon" href="util/icon152.png" sizes="152x152">
+<link rel="icon" href="util/icon192.png" sizes="192x192">
+<meta name="msapplication-TileImage" content="util/favicon-144.png">
+<meta name="msapplication-TileColor" content="#B20099">
+<meta name="application-name" content="TfL JamCams">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.json">
+<script type="text/javascript">
+/*var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);if (isMobileDevice){camInfo.Hide();}*/
+Share={
+Show:function(){var i=document.getElementById('Share');i.style.width='auto';document.getElementById('Share_inactive').style.display='none';document.getElementById('Share_active').style.display='block';},
+Hide:function(){var i=document.getElementById('Share');i.style.width='auto';document.getElementById('Share_inactive').style.display='block';document.getElementById('Share_active').style.display='none';}
+};
+
+Info={
+Hide:function(){var i=document.getElementById('disclaimer-panel');i.style.width='auto';document.getElementById('Acknowledgement_inactive').style.display='block';document.getElementById('Acknowledgement_active').style.display='none';},
+Show:function(){var i=document.getElementById('disclaimer-panel');i.style.width='auto';document.getElementById('Acknowledgement_inactive').style.display='none';document.getElementById('Acknowledgement_active').style.display='block';}
+};
+
+camInfo={
+Hide:function(){var i=document.getElementById('camInfo');i.style.width='auto';document.getElementById('camInfo_inactive').style.display='block';document.getElementById('camInfo_active').style.display='none';},
+Show:function(){
+	
+	var i=document.getElementById('camInfo');i.style.width='auto';document.getElementById('camInfo_inactive').style.display='none';document.getElementById('camInfo_active').style.display='block';
+	
+	}
+
+};
+/*
+searchInfo={
+Hide:function(){var i=document.getElementById('searchInfo');i.style.width='auto';document.getElementById('searchInfo_inactive').style.display='inline';document.getElementById('searchInfo_active').style.display='none';document.getElementById('camInfo_active').style.display='inline';document.getElementById('q').value = '';
+document.getElementById('busInfo').style.display='inline';
+document.getElementById('tubeInfo').style.display='inline';
+document.getElementById('searchInfo').style.display='inline';
+resetMarkers(busMarkersArray);
+},
+Show:function(){document.getElementById('searchInfo').style.width='auto';
+if(document.getElementById('captcha').style.display=='none'){document.getElementById('captcha').style.display='block';grecaptcha.reset();}else{document.getElementById('captcha').style.display='none';}
+*/
+/*
+document.getElementById('searchInfo_inactive').style.display='none';
+document.getElementById('searchInfo').style.display='none';
+document.getElementById('busInfo').style.display='none';
+document.getElementById('tubeInfo').style.display='none';
+document.getElementById('searchInfo_active').style.display='inline';
+document.getElementById('q').focus();
+document.getElementById('camInfo_active').style.display='none';
+
+}
+};*/
+/*
+busInfo={
+Hide:function(){var i=document.getElementById('busInfo');i.style.width='auto';document.getElementById('busInfo_inactive').style.display='inline';document.getElementById('busInfo_active').style.display='none';$('#route').val('');$('#route').change();},
+Show:function(){var i=document.getElementById('busInfo');i.style.width='auto';document.getElementById('busInfo_inactive').style.display='none';document.getElementById('busInfo_active').style.display='inline';document.getElementById('route').focus();}
+};
+
+tubeInfo={
+Hide:function(){document.getElementById('tubeInfo').style.width='auto';document.getElementById('camInfo_active').style.display='inline';document.getElementById('tubeInfo_inactive').style.display='inline';document.getElementById('tubeInfo_active').style.display='none';$('#line').val('');$('#line').change();},
+Show:function(){document.getElementById('tubeInfo').style.width='auto';document.getElementById('tubeInfo_inactive').style.display='none';document.getElementById('tubeInfo_active').style.display='inline';}
+};
+*/
+var cams = 'cams';
+var incidents = 'incidents';
+</script>
+<title>London Traffic Cameras - Live TfL JamCam Feeds</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link href="util/styleOSM.css" rel="stylesheet" type="text/css" />
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+<!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
+  integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
+  crossorigin=""></script>
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; z-index:100}
+.cc-window {
+  font-size: 12px;
+}
+.cc-message {
+  width: auto;
+}
+#update {
+	  font-family:arial;
+	  text-align: center;
+      visibility: hidden;
+      min-width: 260px;
+	  min-height: 60px;
+      margin-left: -125px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 99999;
+      left: 50%;
+      bottom: 80px;
+    }
+    #update.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s;
+      animation: fadein 0.5s;
+    }
+	#update.hide {
+      visibility: hidden;
+      -webkit-animation: fadeout 0.5s;
+      animation: fadeout 0.5s;
+    }
+    @-webkit-keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+      to {
+        bottom: 80px;
+        opacity: 1;
+      }
+    }
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+      to {
+        bottom: 80px;
+        opacity: 1;
+      }
+    }
+#getnew {
+	color:#85C1E9;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+#dismiss_update {
+	text-align: right !important;
+	color:#FFA500; /*#85C1E9;*/
+	font-size: 1.1em;
+	font-weight: bold;
+}
+.pointer { 
+	cursor: pointer; 
+}
+.time{
+		font-size: 10px;
+		font-family: sans-serif;
+		line-height: 1px;
+}
+.route{
+	box-sizing:border-box;
+	font-size: 16px;
+    font-family: sans-serif;
+	font-weight:bold;
+	/*background-color:red;
+	color:white;*/
+	display: inline-block;
+	padding: 4px;
+	line-height: 24px;
+	width: 15%;
+	height:24px;
+	text-align:center;
+}
+.title{
+	font-size: 15px;
+    font-family: sans-serif;
+    line-height: 24px;
+}
+.towards{
+	display: inline;
+	font-size: 16px;
+    font-family: sans-serif;
+	padding: 4px;
+	line-height: 24px;
+	max-width: 40%;
+	text-align:left;
+	margin-left:0; margin-right:auto;
+}
+.content{
+	font-size: 16px;
+    font-family: sans-serif;
+	display: block;
+	line-height: 24px;
+	outline: 0.2px solid gray ;
+	display:table;
+    width:85%;
+}
+.content>div{display:table-cell;}
+.due{
+	display: inline-block;
+	font-size: 16px;
+    font-family: sans-serif;
+	line-height: 24px;
+	height:24px;
+	margin-left:auto; margin-right:0;
+	text-align:right;
+	min-width: 20%;
+}
+.gm-style {
+font-family: sans-serif !important;
+}
+.easy-autocomplete {
+    position: relative;
+    margin-right:5px;
+    display: inline-block !important;
+    min-width: auto;
+}
+/*
+.leaflet-popup-content-wrapper{
+	width:392px;
+}
+*/
+.ui-button {
+  background:#ffffff;
+  color:#000000;
+  display:block;
+  position:absolute;
+  right:20px;bottom:90px;
+  width:20px;
+  z-index:500;
+  padding: 5px;
+  padding-left:5px;
+  text-align:left;
+  line-height: 12px;
+  font-family: Calibri;
+  font-size: 10px;
+  }
+  .ui-button:hover {
+    /*background:#3074a4;
+    color:#fff;*/
+    }
+    
+element.style {
+    display: block;
+    z-index: 500;
+}
+</style>  
+</head>
+
+<body>
+<div id="floating-panel" style="display:block;z-index:500;">
+<span><a href="https://www.twitter.com/tfljamcams" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false" class="fa fa-twitter" title="Twitter"></a>&nbsp;
+<em>TfL JamCam <span id="feedType"></span><span id="TypePlural"></span></em></span>
+<div id="iType" class="Type"><input class="indexbutton" id="btnload" type="button" value="Getting feeds.." />
+</div>
+<input onclick="window.location.href='https://www.tfljamcams.net/';" class="OSMbutton" id="btnOSM" type="button" value="Google Map" />
+<div id="loadingmessage" class="loadmessage">
+</div>
+</div>
+<div id="captcha" class="captchamodal" style="display:none;">
+<div class="captchamodal-content">
+<div class="captchamodal-footer">
+<div id="recaptcha-service" class="g-recaptcha"
+ data-callback="recaptchaCallback"
+ data-sitekey="6LfcxT4UAAAAABnT2kWaGpP2HAQlb_DEnYIx-Sbq"></div>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+</div>
+</div>
+</div>
+<div id="camInfo" style="display:block;z-index:500;">
+	<!--style="display:block;z-index:500;"-->
+<div id="camInfo_inactive">
+<a href="" class="fa fa-ellipsis-v" style="margin-left:5px;margin-right:5px;" onclick="camInfo.Show();Info.Hide();Share.Hide();return false;" title="In Development Nov 2019"></a><!--title="Show Marker Viewport Info"-->
+</div>
+<div id="camInfo_active">
+<div id="searchInfo" >
+<div id="searchInfo_inactive" style="display:inline;display:none;">
+<a href="" class="fa fa-search" onclick="searchInfo.Show();busInfo.Hide();tubeInfo.Hide();Info.Hide();Share.Hide();return false;" title="Search Map"></a>
+</div>
+</div>
+<div id="tubeInfo" style="display:none;">
+<div id="tubeInfo_active" style="font-family: sans-serif;display:none;">
+Line
+<select id="line" style="width: 50px;"><option selected>
+<option>Bakerloo
+<option>Central
+<option>Circle
+<option>District
+<option>DLR
+<option>Emirates-Air-Line
+<option>Hammersmith-City
+<option>Jubilee
+<option>London-Overground
+<option>Metropolitan
+<option>Northern
+<option>Piccadilly
+<option>Thames-River-Services
+<option>Tram
+<option>TfL-Rail
+<option>Victoria
+<option>Waterloo-City
+<option>Woolwich-Ferry
+</select>
+<a href="" onclick="tubeInfo.Hide();return false;" title="Hide Tube Info"><img src="img/underground_20.png" alt="Underground"></a>
+</div>
+<div id="tubeInfo_inactive" style="display:inline;">
+<a href="" onclick="tubeInfo.Show();searchInfo.Hide();busInfo.Hide();Info.Hide();Share.Hide();return false;" title="Show Tube Info"><img src="img/underground_20.png" alt="Tube"></a>
+</div>
+</div>
+
+<div id="busInfo">
+<div id="busInfo_inactive" style="width: auto;display:none;">
+<a href="" onclick="tubeInfo.Hide();busInfo.Show();searchInfo.Hide();Info.Hide();Share.Hide();return false;" title="Show Buses Info"><img src="img/buses.png" alt="Buses"></a>
+</div>
+<div id="busInfo_active" style="width: 40px;display:inline;font-family: sans-serif;display:none;">
+Bus Route
+<input id="route" name="route" style="display:inline;text-transform:uppercase;width:40px;display:none;" onfocus="this.value='';this.style.backgroundColor = 'white';">
+<a href="" onclick="busInfo.Hide();return false;" title="Hide Buses Info"><img src="img/buses.png" alt="Buses"></a>
+</div>
+</div>
+
+<div id="ShowingCam" style="display:inline;font-family:'Roboto','sans-serif';padding-left:5px;display:none;">
+<a href="#" id="sCam" title="Hide JamCams" onclick="setOpacity(cams, true);return false;"><img id="cameras" class="resize" src="img/cams.png" style="opacity: 1;" alt="JamCams"></a><span style="font-size:16px;"><strong><div style="display:inline;font-family:arial;font-size:16px;" id="camCount">0</div></strong></span>
+</div>
+<div id="ShowingInc" style="display:inline;font-family:'Roboto','sans-serif';padding-left:5px;display:none;">
+<a href="#" id="sInc" title="Hide Incidents" onclick="setOpacity(incidents, true);return false;"><img id="incidents" class="resize" src="img/incidents.png" style="opacity: 1;" alt="Incidents"></a><span style="font-size:16px;"><strong><div style="display:inline;font-family:arial;font-size:16px;" id="incCount">0</div></strong></span>
+</div>
+<div id="ShowingTraffic" style="display:inline;font-family:'Roboto','sans-serif';padding-left:5px;display:none;">
+<a href="#" id="sTraffic" title="Hide Traffic" onclick="setOpacity(traffic, true);return false"><img id="traffic" class="resize" src="img/traffic.png" style="opacity: 1;" alt="Traffic"></a><span style="font-size:16px;"><strong><div style="display:inline;font-family:arial;font-size:16px;" id="trafficStatus"></div></strong></span>
+</div>
+&nbsp;&nbsp;
+<a href="" class="fa fa-ellipsis-h" onclick="camInfo.Hide();return false" title="Hide Marker Viewport Info"></a>
+</div>
+</div>
+<div id="Share" style="display:block;z-index:500;">
+<!--style="display:block;z-index:500;"-->
+<div id="Share_inactive">
+<a href="" class="fa fa-share-alt" onclick="Share.Show();Info.Hide();return false" title="Share"></a>
+</div>
+<div id="Share_active">
+<a href="" class="fa fa-share-alt" onclick="Share.Hide();return false" title="Hide Share Panel"></a>
+&nbsp;&nbsp;
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.tfljamcams.net/" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false" class="fa fa-facebook" title="Share on Facebook"></a>
+&nbsp;&nbsp;
+<a href="https://twitter.com/home?status=Check%20https://twitter.com/tfljamcams%20for%20up-to-date%20traffic%20jamcam%20image/video%20feeds%20and%20Live%20traffic%20incidents.%20Fast%20and%20ad-free,%20no%20app%20required!" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false" class="fa fa-twitter" title="Share on Twitter"></a>
+&nbsp;&nbsp;
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//www.tfljamcams.net/&title=London%20Traffic%20Cameras%20-%20Live%20TfL%20JamCam%20Feeds&summary=Live%20London%20Traffic%20JamCam%20Map%20with%20Live%20traffic%20incidents%20-%20900%2B%20TfL%20image/video%20feeds%20with%20Traffic%20Layer.%20HTML5,%20ad-free%20and%20fast!&source=TfLJamCams.net" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false" class="fa fa-linkedin-square" title="Share on LinkedIn"></a>
+&nbsp;&nbsp;
+<a class="fa fa-tumblr" href="https://tumblr.com/widgets/share/tool?canonicalUrl=https://www.tfljamcams.net" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false" title="Share on Tumblr"></a>
+&nbsp;&nbsp;
+<a class="fa fa-reddit" href="https://www.reddit.com/submit?url=https%3A//www.tfljamcams.net/" title="Share on Reddit">
+</a>
+</div>
+</div>
+<div id="disclaimer-panel" style="display:block;z-index:500;">
+<div id="Acknowledgement_inactive">
+<a href="" class="fa fa-info" style="margin-left:5px;margin-right:5px;" onclick="Info.Show();Share.Hide();return false" title="More Information"></a>
+</div>
+<div id="Acknowledgement_active">
+<span><img class="resize" src="img/cams.png" style="opacity: 1;" alt="JamCams">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Design by <a href="https://www.brooksy.net" target="_blank" title="Developer Website">Jason Brooks</a>, report a problem <a href="https://www.tfljamcams.net/contact/" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=520');return false" title="Report a map problem">here</a>.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+This site is not affiliated with Transport for London.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Map Data <a href="https://policies.google.com/privacy" target="_blank" title="View Google Privacy Policy">©Google</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Live TfL Feeds Powered by <a href="https://tfl.gov.uk/info-for/open-data-users/" target="_blank" title="TfL Open Data">©TfL Open Data</a>.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+BR Station Feeds Powered by <a href="https://www.nationalrail.co.uk/" target="_blank" title="National Rail Enquiries">National Rail Enquiries</a>.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="util/listCams.php?jb=476" target="_blank" title="View Camera List">JamCam List</a>&nbsp;|&nbsp;
+<a href="http://archive.tfljamcams.net" target="_blank">JamCams 30 Day Archive</a><br />
+<a href="" class="fa fa-info" style="margin-left:5px;" onclick="Info.Hide();return false" title="Hide Information Panel"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="contact/privacypolicy.html" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=520');return false" title="View Cookie and Privacy Policy">View Privacy and Cookie Policy</a></span>
+</div>
+</div>
+<div id="map"></div>
+<!--<div id="GEO" class='ui-button'>
+<a href='#' title="Center map on your location" id='geolocate' class="fa fa-crosshairs" style="color:#000000;"></a>
+</div>-->
+	<script>
+		if(window.location.protocol=='https:'){
+			var div = document.createElement('div');
+			div.innerHTML = "<a href='#' title=\"Center map on your location\" id='geolocate' class=\"fa fa-crosshairs\" style=\"color:#000000;\"></a>";
+			// set style
+			// better to use CSS though - just set class
+			div.setAttribute('class', 'ui-button'); // and make sure myclass has some styles in css
+			document.body.appendChild(div);
+		}else{
+			var div = document.createElement('div');
+			div.innerHTML = "<a href='#' title=\"Load secure page\" id='gosecure' class=\"fa fa-lock\" style=\"color:#000000;\"></a>";
+			// set style
+			// better to use CSS though - just set class
+			div.setAttribute('class', 'ui-button'); // and make sure myclass has some styles in css
+			document.body.appendChild(div);
+		}
+		 var map= null;
+		 var markers = new Array();
+		 var type;
+		 var refreshInterval;
+		 var local_location;
+		 var myLocation;
+		 var camsArray = [],incidentArray=[],busMarkersArray = [], loc_markers = [];
+//$(document).ready(function () {
+window.recaptchaCallback = undefined;
+jQuery(document).ready(function($) {
+
+  window.recaptchaCallback = function recaptchaCallback(response) {
+    $.ajax({
+      method: "POST",
+      url: "https://www.tfljamcams.net/util/captcha.php",
+      data: { 'g-recaptcha-response': response },
+    })
+      .done(function(msg) {
+        /*console.log(msg);*/
+		console.log('Search captcha confirmed!');
+		/*document.getElementById('captcha').style.display='none';
+		var i=document.getElementById('searchInfo');i.style.width='auto';
+		document.getElementById('searchInfo_inactive').style.display='none';
+		document.getElementById('searchInfo_active').style.display='inline';
+		document.getElementById('q').focus();
+		document.getElementById('camInfo_active').style.display='none';*/
+		
+		document.getElementById('captcha').style.display='none';
+		document.getElementById('searchInfo_inactive').style.display='none';
+		document.getElementById('searchInfo').style.display='none';
+		document.getElementById('busInfo').style.display='none';
+		document.getElementById('tubeInfo').style.display='none';
+		document.getElementById('searchInfo_active').style.display='inline';
+		document.getElementById('q').focus();
+		document.getElementById('camInfo_active').style.display='none';
+		document.getElementById('camInfo').style.width='260px';
+		document.getElementById('camInfo').style.display='block';
+      })
+      .fail(function(jqXHR, textStatus) {
+        console.log(textStatus);
+      });
+  }
+
+});
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+var trainStations = [{commonName:"Abbey Wood",modes: ["RailStation"],lat:51.4907841,lon:0.12027197,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"ABW"},{commonName:"Acton Central",modes: ["RailStation"],lat:51.50875778,lon:-0.263430199,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"ACC"},{commonName:"Acton Main Line",modes: ["RailStation"],lat:51.51688693,lon:-0.267689952,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"AML"},{commonName:"Albany Park",modes: ["RailStation"],lat:51.43581561,lon:0.126444638,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"AYP"},{commonName:"Alexandra Palace",modes: ["RailStation"],lat:51.59826282,lon:-0.120148972,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"AAP"},{commonName:"Amersham",modes: ["RailStation"],lat:51.67412932,lon:-0.606513789,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"AMR"},{commonName:"Anerley",modes: ["RailStation"],lat:51.41251672,lon:-0.0651371,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"ANZ"},{commonName:"Angel Road",modes: ["RailStation"],lat:51.61242032,lon:-0.048732919,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"AGR"},{commonName:"Balham",modes: ["RailStation"],lat:51.44318256,lon:-0.152685163,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"BAL"},{commonName:"Banstead",modes: ["RailStation"],lat:51.32929312,lon:-0.213132336,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"BAD"},{commonName:"Barking",modes: ["RailStation"],lat:51.53952111,lon:0.08083161,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"BKG"},{commonName:"Barnehurst",modes: ["RailStation"],lat:51.46478029,lon:0.160948022,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BNH"},{commonName:"Barnes",modes: ["RailStation"],lat:51.46712777,lon:-0.242033062,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"BNS"},{commonName:"Barnes Bridge",modes: ["RailStation"],lat:51.47222805,lon:-0.252362617,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"BNI"},{commonName:"Battersea Park",modes: ["RailStation"],lat:51.47731832,lon:-0.148123762,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"BAK"},{commonName:"Beckenham Hill",modes: ["RailStation"],lat:51.42462606,lon:-0.016495762,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"BEC"},{commonName:"Beckenham Junction",modes: ["RailStation"],lat:51.41094164,lon:-0.025701739,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BKJ"},{commonName:"Bellingham",modes: ["RailStation"],lat:51.43386489,lon:-0.02041177,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BGM"},{commonName:"Belmont",modes: ["RailStation"],lat:51.34411992,lon:-0.199489253,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"BLM"},{commonName:"Belvedere",modes: ["RailStation"],lat:51.491959,lon:0.152033792,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BVD"},{commonName:"Berrylands",modes: ["RailStation"],lat:51.39876841,lon:-0.280321477,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"BRS"},{commonName:"Bethnal Green",modes: ["RailStation"],lat:51.52719174,lon:-0.055392112,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"BET"},{commonName:"Bethnal Green",modes: ["RailStation"],lat:51.52428274,lon:-0.060013743,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BET"},{commonName:"Bexley",modes: ["RailStation"],lat:51.44081453,lon:0.148203913,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BXY"},{commonName:"Bexleyheath",modes: ["RailStation"],lat:51.46354996,lon:0.133362965,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BXH"},{commonName:"Bickley",modes: ["RailStation"],lat:51.40037957,lon:0.044304032,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BKL"},{commonName:"Birkbeck",modes: ["RailStation"],lat:51.40386309,lon:-0.056286236,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"BIK"},{commonName:"Blackfriars",modes: ["RailStation"],lat:51.51158693,lon:-0.102995385,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"BFR"},{commonName:"Blackheath",modes: ["RailStation"],lat:51.46540801,lon:0.008336595,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BKH"},{commonName:"Blackhorse Road",modes: ["RailStation"],lat:51.58577663,lon:-0.039625712,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"BHO"},{commonName:"Bowes Park",modes: ["RailStation"],lat:51.60724951,lon:-0.119792219,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"BOP"},{commonName:"Brentford",modes: ["RailStation"],lat:51.48753631,lon:-0.309622537,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"BFD"},{commonName:"Brentwood",modes: ["RailStation"],lat:51.61361034,lon:0.299672816,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"BRE"},{commonName:"Brimsdown",modes: ["RailStation"],lat:51.65524461,lon:-0.031092277,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"BMD"},{commonName:"Brixton",modes: ["RailStation"],lat:51.4627368,lon:-0.114552098,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"BRX"},{commonName:"Brockley",modes: ["RailStation"],lat:51.46474966,lon:-0.037748251,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BCY"},{commonName:"Bromley North",modes: ["RailStation"],lat:51.40894231,lon:0.017235452,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BMN"},{commonName:"Bromley South",modes: ["RailStation"],lat:51.40000129,lon:0.01735958,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"BMS"},{commonName:"Brondesbury",modes: ["RailStation"],lat:51.54526236,lon:-0.202838486,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BSY"},{commonName:"Brondesbury Park",modes: ["RailStation"],lat:51.54032537,lon:-0.210473947,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BSP"},{commonName:"Broxbourne",modes: ["RailStation"],lat:51.74701557,lon:-0.011024084,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"BXB"},{commonName:"Bruce Grove",modes: ["RailStation"],lat:51.59401125,lon:-0.07039899,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BCV"},{commonName:"Bush Hill Park",modes: ["RailStation"],lat:51.64148196,lon:-0.069280413,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BHK"},{commonName:"Bushey",modes: ["RailStation"],lat:51.64554416,lon:-0.384721541,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"BSH"},{commonName:"Caledonian Road & Barnsbury",modes: ["RailStation"],lat:51.54328458,lon:-0.115204857,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CIR"},{commonName:"Cambridge Heath",modes: ["RailStation"],lat:51.53205976,lon:-0.057203201,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CBH"},{commonName:"Camden Road",modes: ["RailStation"],lat:51.54185123,lon:-0.139203113,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CMD"},{commonName:"Canada Water",modes: ["RailStation"],lat:51.49816841,lon:-0.050807121,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"ZCW"},{commonName:"Cannon Street",modes: ["RailStation"],lat:51.51136209,lon:-0.090250527,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"CST"},{commonName:"Canonbury",modes: ["RailStation"],lat:51.54818839,lon:-0.092574196,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CNN"},{commonName:"Carpenders Park",modes: ["RailStation"],lat:51.62818672,lon:-0.385829324,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CPK"},{commonName:"Carshalton",modes: ["RailStation"],lat:51.36842637,lon:-0.166398328,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CSH"},{commonName:"Carshalton Beeches",modes: ["RailStation"],lat:51.35738684,lon:-0.169496326,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CSB"},{commonName:"Castle Bar Park",modes: ["RailStation"],lat:51.52297367,lon:-0.331504076,line:"Great Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"CBP"},{commonName:"Caterham",modes: ["RailStation"],lat:51.28216282,lon:-0.078607299,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CAT"},{commonName:"Catford",modes: ["RailStation"],lat:51.44426491,lon:-0.026538499,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CTF"},{commonName:"Catford Bridge",modes: ["RailStation"],lat:51.44469463,lon:-0.024821876,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CFB"},{commonName:"Chadwell Heath",modes: ["RailStation"],lat:51.56804688,lon:0.128901112,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"CTH"},{commonName:"Chalfont & Latimer",modes: ["RailStation"],lat:51.66790748,lon:-0.561067777,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"CFO"},{commonName:"Charing Cross",modes: ["RailStation"],lat:51.50835863,lon:-0.124802938,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"CHX"},{commonName:"Charlton",modes: ["RailStation"],lat:51.48683499,lon:0.030941645,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CTN"},{commonName:"Cheam",modes: ["RailStation"],lat:51.35546024,lon:-0.214211284,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CHE"},{commonName:"Chelsfield",modes: ["RailStation"],lat:51.35626458,lon:0.10898412,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CLD"},{commonName:"Cheshunt",modes: ["RailStation"],lat:51.70287331,lon:-0.023887415,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"CHN"},{commonName:"Chessington North",modes: ["RailStation"],lat:51.36424344,lon:-0.300476129,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"CSN"},{commonName:"Chessington South",modes: ["RailStation"],lat:51.35670453,lon:-0.307089021,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"CSS"},{commonName:"Chingford",modes: ["RailStation"],lat:51.63325337,lon:0.009514326,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CHI"},{commonName:"Chipstead",modes: ["RailStation"],lat:51.30927498,lon:-0.169445869,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CHP"},{commonName:"Chislehurst",modes: ["RailStation"],lat:51.40559841,lon:0.057491821,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CIT"},{commonName:"Chiswick",modes: ["RailStation"],lat:51.48078149,lon:-0.267013322,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"CHK"},{commonName:"Chorleywood",modes: ["RailStation"],lat:51.65426593,lon:-0.518333927,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"CLW"},{commonName:"City Thameslink",modes: ["RailStation"],lat:51.51393507,lon:-0.103618449,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"CTK"},{commonName:"Clapham High Street",modes: ["RailStation"],lat:51.46546951,lon:-0.132464503,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CLP"},{commonName:"Clapham Junction",modes: ["RailStation"],lat:51.46436678,lon:-0.170315002,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"CLJ"},{commonName:"Clapton",modes: ["RailStation"],lat:51.56156909,lon:-0.057489458,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CPT"},{commonName:"Clock House",modes: ["RailStation"],lat:51.40854056,lon:-0.040702093,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CLK"},{commonName:"Coulsdon South",modes: ["RailStation"],lat:51.31580094,lon:-0.13790309,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CDS"},{commonName:"Coulsdon Town",modes: ["RailStation"],lat:51.32245295,lon:-0.134347057,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"CDN"},{commonName:"Crayford",modes: ["RailStation"],lat:51.44854676,lon:0.178502716,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CRY"},{commonName:"Crews Hill",modes: ["RailStation"],lat:51.68447461,lon:-0.106844101,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"CWH"},{commonName:"Cricklewood",modes: ["RailStation"],lat:51.55842267,lon:-0.212547934,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"CRI"},{commonName:"Crofton Park",modes: ["RailStation"],lat:51.45517929,lon:-0.036546582,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"CFT"},{commonName:"Crouch Hill",modes: ["RailStation"],lat:51.5713271,lon:-0.117133285,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CRH"},{commonName:"Crystal Palace",modes: ["RailStation"],lat:51.41817035,lon:-0.072607233,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"CYP"},{commonName:"Dagenham Dock",modes: ["RailStation"],lat:51.5262872,lon:0.145031014,line:"c2c",stopType:"RailStation",additionalProperties:[],naptanId:"DDK"},{commonName:"Dalston Junction",modes: ["RailStation"],lat:51.54609372,lon:-0.074994205,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"DLJ"},{commonName:"Dalston Kingsland",modes: ["RailStation"],lat:51.54866782,lon:-0.076226922,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"DLK"},{commonName:"Denmark Hill",modes: ["RailStation"],lat:51.46820064,lon:-0.09098787,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"DMK"},{commonName:"Deptford",modes: ["RailStation"],lat:51.47889008,lon:-0.02619632,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"DEP"},{commonName:"Drayton Green",modes: ["RailStation"],lat:51.51600468,lon:-0.32961126,line:"Great Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"DRG"},{commonName:"Drayton Park",modes: ["RailStation"],lat:51.55307831,lon:-0.1057702,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"DYP"},{commonName:"Ealing Broadway",modes: ["RailStation"],lat:51.51486197,lon:-0.302010381,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"EAL"},{commonName:"Earlsfield",modes: ["RailStation"],lat:51.44223881,lon:-0.187272689,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"EAD"},{commonName:"East Croydon",modes: ["RailStation"],lat:51.3757161,lon:-0.091863496,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"ECR"},{commonName:"East Dulwich",modes: ["RailStation"],lat:51.46162558,lon:-0.080436572,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"EDW"},{commonName:"Eden Park",modes: ["RailStation"],lat:51.3907961,lon:-0.026669716,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"EDN"},{commonName:"Edmonton Green",modes: ["RailStation"],lat:51.6251157,lon:-0.061639019,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"EDR"},{commonName:"Elephant & Castle",modes: ["RailStation"],lat:51.49584938,lon:-0.100738715,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"EPH"},{commonName:"Elmers End",modes: ["RailStation"],lat:51.39829111,lon:-0.049463832,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"ELE"},{commonName:"Elmstead Woods",modes: ["RailStation"],lat:51.41708063,lon:0.044229343,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"ESD"},{commonName:"Elstree & Borehamwood",modes: ["RailStation"],lat:51.65287558,lon:-0.279828619,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"ELS"},{commonName:"Eltham",modes: ["RailStation"],lat:51.45566222,lon:0.052329308,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"ELW"},{commonName:"Emerson Park",modes: ["RailStation"],lat:51.56911491,lon:0.220222934,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"EMP"},{commonName:"Enfield Chase",modes: ["RailStation"],lat:51.65272211,lon:-0.090704205,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"ENC"},{commonName:"Enfield Lock",modes: ["RailStation"],lat:51.67084612,lon:-0.02839107,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"ENL"},{commonName:"Enfield Town",modes: ["RailStation"],lat:51.65197007,lon:-0.079329922,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"ENF"},{commonName:"Epsom Downs",modes: ["RailStation"],lat:51.32365944,lon:-0.238970227,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"EPD"},{commonName:"Erith",modes: ["RailStation"],lat:51.48164768,lon:0.174261289,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"ERH"},{commonName:"Essex Road",modes: ["RailStation"],lat:51.54063331,lon:-0.096365526,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"EXR"},{commonName:"Euston",modes: ["RailStation"],lat:51.52866433,lon:-0.133296472,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"EUS"},{commonName:"Ewell East",modes: ["RailStation"],lat:51.34524388,lon:-0.241503001,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"EWE"},{commonName:"Ewell West",modes: ["RailStation"],lat:51.34999114,lon:-0.257089133,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"EWW"},{commonName:"Falconwood",modes: ["RailStation"],lat:51.4590858,lon:0.078509693,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"FCN"},{commonName:"Farringdon",modes: ["RailStation"],lat:51.52019569,lon:-0.104843062,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"ZFD"},{commonName:"Feltham",modes: ["RailStation"],lat:51.44787917,lon:-0.409824481,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"FEL"},{commonName:"Fenchurch Street",modes: ["RailStation"],lat:51.51156671,lon:-0.078554153,line:"c2c",stopType:"RailStation",additionalProperties:[],naptanId:"FST"},{commonName:"Finchley Road & Frognal",modes: ["RailStation"],lat:51.5501195,lon:-0.183651203,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"FNY"},{commonName:"Finsbury Park",modes: ["RailStation"],lat:51.56463545,lon:-0.105881486,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"FPK"},{commonName:"Forest Gate",modes: ["RailStation"],lat:51.54931612,lon:0.024189092,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"FOG"},{commonName:"Forest Hill",modes: ["RailStation"],lat:51.43930831,lon:-0.053328504,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"FOH"},{commonName:"Fulwell",modes: ["RailStation"],lat:51.43394257,lon:-0.349438525,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"FLW"},{commonName:"Gidea Park",modes: ["RailStation"],lat:51.58186575,lon:0.205976981,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"GDP"},{commonName:"Gipsy Hill",modes: ["RailStation"],lat:51.42446952,lon:-0.083835168,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"GIP"},{commonName:"Goodmayes",modes: ["RailStation"],lat:51.56618098,lon:0.111729654,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"GMY"},{commonName:"Gordon Hill",modes: ["RailStation"],lat:51.66350224,lon:-0.0944733,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"GDH"},{commonName:"Gospel Oak",modes: ["RailStation"],lat:51.55540529,lon:-0.151301033,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"GPO"},{commonName:"Grange Park",modes: ["RailStation"],lat:51.64262308,lon:-0.097314424,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"GPK"},{commonName:"Greenford",modes: ["RailStation"],lat:51.54198007,lon:-0.34587874,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"GFD"},{commonName:"Greenwich",modes: ["RailStation"],lat:51.47754766,lon:-0.014863084,line:"DLR",stopType:"RailStation",additionalProperties:[],naptanId:"GNW"},{commonName:"Grove Park",modes: ["RailStation"],lat:51.43043264,lon:0.022598502,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"GRP"},{commonName:"Gunnersbury",modes: ["RailStation"],lat:51.49186341,lon:-0.275164136,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"GUN"},{commonName:"Hackbridge",modes: ["RailStation"],lat:51.3778609,lon:-0.153879198,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"HCB"},{commonName:"Hackney Central",modes: ["RailStation"],lat:51.54725744,lon:-0.055589512,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HKC"},{commonName:"Hackney Downs",modes: ["RailStation"],lat:51.54907809,lon:-0.060185105,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HAC"},{commonName:"Hackney Wick",modes: ["RailStation"],lat:51.54355841,lon:-0.025259503,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HKW"},{commonName:"Hadley Wood",modes: ["RailStation"],lat:51.66840287,lon:-0.17658119,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"HDW"},{commonName:"Haggerston",modes: ["RailStation"],lat:51.53868473,lon:-0.075595258,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HGG"},{commonName:"Hampstead Heath",modes: ["RailStation"],lat:51.55519992,lon:-0.164566183,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HDH"},{commonName:"Hampton",modes: ["RailStation"],lat:51.41587955,lon:-0.372135254,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"HMP"},{commonName:"Hampton Court",modes: ["RailStation"],lat:51.40229388,lon:-0.342757152,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"HMC"},{commonName:"Hampton Wick",modes: ["RailStation"],lat:51.41464004,lon:-0.31310361,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"HMW"},{commonName:"Hanwell",modes: ["RailStation"],lat:51.51218596,lon:-0.338051884,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"HAN"},{commonName:"Harlesden",modes: ["RailStation"],lat:51.53625833,lon:-0.257495674,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"HDN"},{commonName:"Harold Wood",modes: ["RailStation"],lat:51.59320222,lon:0.234204073,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"HRO"},{commonName:"Harringay",modes: ["RailStation"],lat:51.57735791,lon:-0.105208253,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"HGY"},{commonName:"Harringay Green Lanes",modes: ["RailStation"],lat:51.57714589,lon:-0.098217392,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HRY"},{commonName:"Harrow & Wealdstone",modes: ["RailStation"],lat:51.59259463,lon:-0.334252685,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"HRW"},{commonName:"Harrow-on-the-Hill",modes: ["RailStation"],lat:51.57938812,lon:-0.337001517,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"HOH"},{commonName:"Hatch End",modes: ["RailStation"],lat:51.6098285,lon:-0.369178781,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HTE"},{commonName:"Haydons Road",modes: ["RailStation"],lat:51.42545732,lon:-0.188929359,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"HYR"},{commonName:"Hayes (Kent)",modes: ["RailStation"],lat:51.37573671,lon:0.010142652,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"HYS"},{commonName:"Hayes & Harlington",modes: ["RailStation"],lat:51.50304907,lon:-0.420641904,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"HAY"},{commonName:"Headstone Lane",modes: ["RailStation"],lat:51.60249963,lon:-0.356907514,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HDL"},{commonName:"Heathrow Terminal 4",modes: ["RailStation"],lat:51.45978043,lon:-0.44772959,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"HAF"},{commonName:"Heathrow Terminal 5",modes: ["RailStation"],lat:51.47002543,lon:-0.490647503,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"HWV"},{commonName:"Hendon",modes: ["RailStation"],lat:51.58007498,lon:-0.238630521,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"HEN"},{commonName:"Herne Hill",modes: ["RailStation"],lat:51.45399137,lon:-0.102562908,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"HNH"},{commonName:"Highams Park",modes: ["RailStation"],lat:51.60835599,lon:-0.000135286,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HIP"},{commonName:"Highbury & Islington",modes: ["RailStation"],lat:51.54649551,lon:-0.10408214,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"HHY"},{commonName:"Hither Green",modes: ["RailStation"],lat:51.45240172,lon:-0.000970912,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"HGR"},{commonName:"Homerton",modes: ["RailStation"],lat:51.54659545,lon:-0.038512347,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HMN"},{commonName:"Honor Oak Park",modes: ["RailStation"],lat:51.45064824,lon:-0.044153121,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HPA"},{commonName:"Hornsey",modes: ["RailStation"],lat:51.58647485,lon:-0.111815638,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"HRN"},{commonName:"Hounslow",modes: ["RailStation"],lat:51.46250482,lon:-0.361796256,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"HOU"},{commonName:"Hoxton",modes: ["RailStation"],lat:51.53139161,lon:-0.075585647,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"HOX"},{commonName:"Ilford",modes: ["RailStation"],lat:51.55914224,lon:0.068685191,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"IFD"},{commonName:"Imperial Wharf",modes: ["RailStation"],lat:51.47493893,lon:-0.182837505,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"IMW"},{commonName:"Isleworth",modes: ["RailStation"],lat:51.47503742,lon:-0.337328765,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"ISL"},{commonName:"Kenley",modes: ["RailStation"],lat:51.32460031,lon:-0.101219713,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"KLY"},{commonName:"Kensal Green",modes: ["RailStation"],lat:51.53052421,lon:-0.224713384,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"KNL"},{commonName:"Kensal Rise",modes: ["RailStation"],lat:51.53421506,lon:-0.220820979,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"KNR"},{commonName:"Kensington (Olympia)",modes: ["RailStation"],lat:51.4978797,lon:-0.210379242,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"KPA"},{commonName:"Kent House",modes: ["RailStation"],lat:51.41271766,lon:-0.045815553,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"KTH"},{commonName:"Kentish Town",modes: ["RailStation"],lat:51.55000952,lon:-0.140471264,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"KTN"},{commonName:"Kentish Town West",modes: ["RailStation"],lat:51.54654797,lon:-0.14675641,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"KTW"},{commonName:"Kenton",modes: ["RailStation"],lat:51.58149628,lon:-0.315216867,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"KNT"},{commonName:"Kew Bridge",modes: ["RailStation"],lat:51.49000462,lon:-0.288846495,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"KWB"},{commonName:"Kew Gardens",modes: ["RailStation"],lat:51.47678914,lon:-0.285381011,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"KWG"},{commonName:"Kidbrooke",modes: ["RailStation"],lat:51.46269019,lon:0.028300239,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"KDB"},{commonName:"Kilburn High Road",modes: ["RailStation"],lat:51.53726774,lon:-0.191113106,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"KBN"},{commonName:"Kings Cross",modes: ["RailStation"],lat:51.53079819,lon:-0.122756421,line:"Network Rail",stopType:"RailStation",additionalProperties:[],naptanId:"KGX"},{commonName:"Kingston",modes: ["RailStation"],lat:51.41264176,lon:-0.30114104,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"KNG"},{commonName:"Kingswood",modes: ["RailStation"],lat:51.29472314,lon:-0.211233226,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"KND"},{commonName:"Knockholt",modes: ["RailStation"],lat:51.34575194,lon:0.130831039,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"KCK"},{commonName:"Ladywell",modes: ["RailStation"],lat:51.45619214,lon:-0.019244401,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"LAD"},{commonName:"Lea Bridge",modes: ["RailStation"],lat:51.56663626,lon:-0.036683158,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"LEB"},{commonName:"Lee",modes: ["RailStation"],lat:51.44945852,lon:0.013364692,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"LEE"},{commonName:"Lewisham",modes: ["RailStation"],lat:51.46488071,lon:-0.012432701,line:"DLR",stopType:"RailStation",additionalProperties:[],naptanId:"LEW"},{commonName:"Leyton Midland Road",modes: ["RailStation"],lat:51.56936424,lon:-0.008066347,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"LEM"},{commonName:"Leytonstone High Road",modes: ["RailStation"],lat:51.56380734,lon:0.008254469,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"LER"},{commonName:"Limehouse",modes: ["RailStation"],lat:51.51231216,lon:-0.039380078,line:"DLR",stopType:"RailStation",additionalProperties:[],naptanId:"LHS"},{commonName:"Liverpool Street",modes: ["RailStation"],lat:51.51759826,lon:-0.082249622,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"LST"},{commonName:"London Bridge",modes: ["RailStation"],lat:51.50467435,lon:-0.086005598,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"LBG"},{commonName:"London Fields",modes: ["RailStation"],lat:51.54071884,lon:-0.057699686,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"LOF"},{commonName:"Loughborough Junction",modes: ["RailStation"],lat:51.4666789,lon:-0.102497342,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"LGJ"},{commonName:"Lower Sydenham",modes: ["RailStation"],lat:51.42484684,lon:-0.033330342,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"LSY"},{commonName:"Malden Manor",modes: ["RailStation"],lat:51.38460954,lon:-0.261120416,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"MAL"},{commonName:"Manor Park",modes: ["RailStation"],lat:51.55285435,lon:0.04572387,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"MNP"},{commonName:"Maryland",modes: ["RailStation"],lat:51.54566827,lon:0.005681654,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"MYL"},{commonName:"Marylebone",modes: ["RailStation"],lat:51.52239667,lon:-0.163492564,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"MYB"},{commonName:"Maze Hill",modes: ["RailStation"],lat:51.48301366,lon:0.003204897,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"MZH"},{commonName:"Mill Hill Broadway",modes: ["RailStation"],lat:51.61287113,lon:-0.249537068,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"MIL"},{commonName:"Mitcham Eastfields",modes: ["RailStation"],lat:51.40838391,lon:-0.154001719,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"MTC"},{commonName:"Mitcham Junction",modes: ["RailStation"],lat:51.39304257,lon:-0.157436644,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"MIJ"},{commonName:"Moorgate",modes: ["RailStation"],lat:51.51843714,lon:-0.089017688,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"MOG"},{commonName:"Morden South",modes: ["RailStation"],lat:51.3963077,lon:-0.200301562,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"MDS"},{commonName:"Mortlake",modes: ["RailStation"],lat:51.46816794,lon:-0.267203314,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"MTL"},{commonName:"Motspur Park",modes: ["RailStation"],lat:51.39531963,lon:-0.239439746,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"MOT"},{commonName:"Mottingham",modes: ["RailStation"],lat:51.43982498,lon:0.050324202,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"MTG"},{commonName:"New Barnet",modes: ["RailStation"],lat:51.64853677,lon:-0.172969714,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"NBA"},{commonName:"New Beckenham",modes: ["RailStation"],lat:51.41670555,lon:-0.035304949,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"NBC"},{commonName:"New Cross",modes: ["RailStation"],lat:51.47642942,lon:-0.032278812,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"NWX"},{commonName:"New Cross Gate",modes: ["RailStation"],lat:51.47526493,lon:-0.039529052,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"NXG"},{commonName:"New Eltham",modes: ["RailStation"],lat:51.43769066,lon:0.070444618,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"NEH"},{commonName:"New Malden",modes: ["RailStation"],lat:51.40355591,lon:-0.256218106,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"NEM"},{commonName:"New Southgate",modes: ["RailStation"],lat:51.61409367,lon:-0.143009776,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"NSG"},{commonName:"Norbiton",modes: ["RailStation"],lat:51.41190935,lon:-0.284199948,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"NBT"},{commonName:"Norbury",modes: ["RailStation"],lat:51.4111885,lon:-0.122799402,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"NRB"},{commonName:"North Dulwich",modes: ["RailStation"],lat:51.45448181,lon:-0.087918681,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"NDL"},{commonName:"North Sheen",modes: ["RailStation"],lat:51.46541961,lon:-0.286397467,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"NSH"},{commonName:"North Wembley",modes: ["RailStation"],lat:51.56239629,lon:-0.303948219,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"NWB"},{commonName:"Northolt Park",modes: ["RailStation"],lat:51.55761905,lon:-0.359434196,line:"Chiltern Railways",stopType:"RailStation",additionalProperties:[],naptanId:"NLT"},{commonName:"Northumberland Park",modes: ["RailStation"],lat:51.60201573,lon:-0.054132026,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"NUM"},{commonName:"Norwood Junction",modes: ["RailStation"],lat:51.39695432,lon:-0.075209857,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"NWD"},{commonName:"Nunhead",modes: ["RailStation"],lat:51.46657998,lon:-0.053679743,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"NHD"},{commonName:"Oakleigh Park",modes: ["RailStation"],lat:51.63767636,lon:-0.166194967,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"OKL"},{commonName:"Ockendon",modes: ["RailStation"],lat:51.52198965,lon:0.290483475,line:"c2c",stopType:"RailStation",additionalProperties:[],naptanId:"OCK"},{commonName:"Old Street",modes: ["RailStation"],lat:51.52558147,lon:-0.087622958,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"OLD"},{commonName:"Orpington",modes: ["RailStation"],lat:51.37352005,lon:0.089028901,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"ORP"},{commonName:"Paddington",modes: ["RailStation"],lat:51.51539379,lon:-0.175736752,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"PAD"},{commonName:"Palmers Green",modes: ["RailStation"],lat:51.61878675,lon:-0.1102725,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"PAL"},{commonName:"Peckham Rye",modes: ["RailStation"],lat:51.46951136,lon:-0.069983553,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"PMR"},{commonName:"Penge East",modes: ["RailStation"],lat:51.41997535,lon:-0.054495265,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"PNE"},{commonName:"Penge West",modes: ["RailStation"],lat:51.41806293,lon:-0.060645765,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"PNW"},{commonName:"Petts Wood",modes: ["RailStation"],lat:51.38859899,lon:0.07448003,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"PET"},{commonName:"Plumstead",modes: ["RailStation"],lat:51.48979242,lon:0.084299617,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"PLU"},{commonName:"Ponders End",modes: ["RailStation"],lat:51.64273069,lon:-0.034525105,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"PON"},{commonName:"Purfleet",modes: ["RailStation"],lat:51.48117301,lon:0.236774836,line:"c2c",stopType:"RailStation",additionalProperties:[],naptanId:"PFL"},{commonName:"Purley",modes: ["RailStation"],lat:51.33736355,lon:-0.113613518,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"PUR"},{commonName:"Purley Oaks",modes: ["RailStation"],lat:51.34698934,lon:-0.098815333,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"PUO"},{commonName:"Putney",modes: ["RailStation"],lat:51.46095253,lon:-0.216603374,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"PUT"},{commonName:"Queens Park",modes: ["RailStation"],lat:51.53431265,lon:-0.204798149,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"QPW"},{commonName:"Queens Road Peckham",modes: ["RailStation"],lat:51.47428471,lon:-0.057354979,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"QRP"},{commonName:"Queenstown Road",modes: ["RailStation"],lat:51.47495913,lon:-0.147355312,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"QRB"},{commonName:"Rainham",modes: ["RailStation"],lat:51.5167606179759,lon:0.190727815638525,line:"c2c",stopType:"RailStation",additionalProperties:[],naptanId:"RNM"},{commonName:"Ravensbourne",modes: ["RailStation"],lat:51.41387038,lon:-0.006937816,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"RVB"},{commonName:"Raynes Park",modes: ["RailStation"],lat:51.40937535,lon:-0.229912939,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"RAY"},{commonName:"Rectory Road",modes: ["RailStation"],lat:51.55876348,lon:-0.068385665,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"REC"},{commonName:"Reedham",modes: ["RailStation"],lat:51.33144171,lon:-0.123402624,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"RHM"},{commonName:"Richmond",modes: ["RailStation"],lat:51.46323289,lon:-0.301739134,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"RMD"},{commonName:"Rickmansworth",modes: ["RailStation"],lat:51.64032301,lon:-0.473684584,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"RIC"},{commonName:"Riddlesdown",modes: ["RailStation"],lat:51.33267483,lon:-0.099493667,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"RDD"},{commonName:"Romford",modes: ["RailStation"],lat:51.57464159,lon:0.183055272,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"RMF"},{commonName:"Rotherhithe",modes: ["RailStation"],lat:51.5015945,lon:-0.052966296,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"ROE"},{commonName:"Sanderstead",modes: ["RailStation"],lat:51.34824625,lon:-0.0937085,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SNR"},{commonName:"Selhurst",modes: ["RailStation"],lat:51.39218577,lon:-0.089899037,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SRS"},{commonName:"Seven Kings",modes: ["RailStation"],lat:51.56399335,lon:0.096319575,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"SVK"},{commonName:"Seven Sisters",modes: ["RailStation"],lat:51.58336216,lon:-0.072466823,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"SVS"},{commonName:"Shadwell",modes: ["RailStation"],lat:51.51130016,lon:-0.056919207,line:"DLR",stopType:"RailStation",additionalProperties:[],naptanId:"SDE"},{commonName:"Shenfield",modes: ["RailStation"],lat:51.6308731,lon:0.329952264,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"SNF"},{commonName:"Shepherds Bush",modes: ["RailStation"],lat:51.50453215,lon:-0.218519159,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"SPB"},{commonName:"Shoreditch High Street",modes: ["RailStation"],lat:51.52346682,lon:-0.077087425,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SDC"},{commonName:"Shortlands",modes: ["RailStation"],lat:51.40560237,lon:0.002767544,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SRT"},{commonName:"Sidcup",modes: ["RailStation"],lat:51.43439846,lon:0.103315359,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SID"},{commonName:"Silver Street",modes: ["RailStation"],lat:51.61524248,lon:-0.072589742,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SLV"},{commonName:"Slade Green",modes: ["RailStation"],lat:51.46774766,lon:0.190518388,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SGR"},{commonName:"South Acton",modes: ["RailStation"],lat:51.49968583,lon:-0.270215208,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SAT"},{commonName:"South Bermondsey",modes: ["RailStation"],lat:51.48767662,lon:-0.054754821,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SBM"},{commonName:"South Croydon",modes: ["RailStation"],lat:51.3627502,lon:-0.092517363,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SCY"},{commonName:"South Greenford",modes: ["RailStation"],lat:51.53402756,lon:-0.336737482,line:"Great Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"SGN"},{commonName:"South Hampstead",modes: ["RailStation"],lat:51.54147685,lon:-0.1783712,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SOH"},{commonName:"South Kenton",modes: ["RailStation"],lat:51.57104445,lon:-0.308142977,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"SOK"},{commonName:"South Merton",modes: ["RailStation"],lat:51.40324056,lon:-0.205550301,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"SMO"},{commonName:"South Ruislip",modes: ["RailStation"],lat:51.5568903,lon:-0.39911591,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"SRU"},{commonName:"South Tottenham",modes: ["RailStation"],lat:51.58040259,lon:-0.071855957,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"STO"},{commonName:"Southall",modes: ["RailStation"],lat:51.50595691,lon:-0.37871119,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"STL"},{commonName:"Southbury",modes: ["RailStation"],lat:51.64843373,lon:-0.052983311,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SBU"},{commonName:"St Helier",modes: ["RailStation"],lat:51.38991216,lon:-0.199014592,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"SIH"},{commonName:"St James Street",modes: ["RailStation"],lat:51.58060866,lon:-0.032804562,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SJS"},{commonName:"St Johns",modes: ["RailStation"],lat:51.46897529,lon:-0.023240662,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SAJ"},{commonName:"St Margarets",modes: ["RailStation"],lat:51.45520599,lon:-0.321324248,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"SMG"},{commonName:"St Mary Cray",modes: ["RailStation"],lat:51.39475941,lon:0.1072179,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SMY"},{commonName:"St Pancras",modes: ["RailStation"],lat:51.5305544,lon:-0.125505782,line:"Network Rail/Eurostar",stopType:"RailStation",additionalProperties:[],naptanId:"STP"},{commonName:"Stamford Hill",modes: ["RailStation"],lat:51.5744476,lon:-0.076668342,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SMH"},{commonName:"Stoke Newington",modes: ["RailStation"],lat:51.56463761,lon:-0.072335395,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SKW"},{commonName:"Stonebridge Park",modes: ["RailStation"],lat:51.54398655,lon:-0.275400442,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"SBP"},{commonName:"Stoneleigh",modes: ["RailStation"],lat:51.36336405,lon:-0.248709657,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"SNL"},{commonName:"Stratford",modes: ["RailStation"],lat:51.54169258,lon:-0.003751641,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"SRA"},{commonName:"Stratford International",modes: ["RailStation"],lat:51.54480853,lon:-0.008778434,line:"DLR",stopType:"RailStation",additionalProperties:[],naptanId:"SFA"},{commonName:"Strawberry Hill",modes: ["RailStation"],lat:51.43974783,lon:-0.339617731,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"STW"},{commonName:"Streatham",modes: ["RailStation"],lat:51.42584586,lon:-0.132325497,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"STE"},{commonName:"Streatham Common",modes: ["RailStation"],lat:51.41898467,lon:-0.135726165,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SRC"},{commonName:"Streatham Hill",modes: ["RailStation"],lat:51.43846037,lon:-0.127681481,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SRH"},{commonName:"Sudbury & Harrow Road",modes: ["RailStation"],lat:51.55449378,lon:-0.315926242,line:"Chiltern Railways",stopType:"RailStation",additionalProperties:[],naptanId:"SUD"},{commonName:"Sudbury Hill Harrow",modes: ["RailStation"],lat:51.55834227,lon:-0.335446693,line:"Chiltern Railways",stopType:"RailStation",additionalProperties:[],naptanId:"SDH"},{commonName:"Sundridge Park",modes: ["RailStation"],lat:51.4133938,lon:0.020365109,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SUP"},{commonName:"Surbiton",modes: ["RailStation"],lat:51.39259953,lon:-0.30438456,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"SUR"},{commonName:"Surrey Quays",modes: ["RailStation"],lat:51.49326686,lon:-0.047529988,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SQE"},{commonName:"Sutton",modes: ["RailStation"],lat:51.35950614,lon:-0.191302011,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"SUO"},{commonName:"Sutton Common",modes: ["RailStation"],lat:51.37555469,lon:-0.196919912,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"SUC"},{commonName:"Sydenham",modes: ["RailStation"],lat:51.42734125,lon:-0.055088671,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"SYD"},{commonName:"Sydenham Hill",modes: ["RailStation"],lat:51.43257589,lon:-0.080230208,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"SYH"},{commonName:"Syon Lane",modes: ["RailStation"],lat:51.48147469,lon:-0.326495035,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"SYL"},{commonName:"Tadworth",modes: ["RailStation"],lat:51.29162786,lon:-0.236008016,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"TAD"},{commonName:"Tattenham Corner",modes: ["RailStation"],lat:51.30918131,lon:-0.242566273,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"TAT"},{commonName:"Teddington",modes: ["RailStation"],lat:51.4244975,lon:-0.332705337,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"TED"},{commonName:"Thames Ditton",modes: ["RailStation"],lat:51.38861607,lon:-0.338292838,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"THD"},{commonName:"Theobalds Grove",modes: ["RailStation"],lat:51.69237259,lon:-0.034748134,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"TEO"},{commonName:"Thornton Heath",modes: ["RailStation"],lat:51.39848108,lon:-0.100433165,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"TTH"},{commonName:"Tolworth",modes: ["RailStation"],lat:51.37684332,lon:-0.279620115,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"TOL"},{commonName:"Tooting",modes: ["RailStation"],lat:51.41989663,lon:-0.161002472,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"TOO"},{commonName:"Tottenham Hale",modes: ["RailStation"],lat:51.58799778,lon:-0.060187823,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"TOM"},{commonName:"Tulse Hill",modes: ["RailStation"],lat:51.43979743,lon:-0.105122509,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"TUH"},{commonName:"Turkey Street",modes: ["RailStation"],lat:51.67265366,lon:-0.047229931,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"TUR"},{commonName:"Twickenham",modes: ["RailStation"],lat:51.45025095,lon:-0.328860226,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"TWI"},{commonName:"Upminster",modes: ["RailStation"],lat:51.55876336,lon:0.251400801,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"UPM"},{commonName:"Upper Holloway",modes: ["RailStation"],lat:51.5636233,lon:-0.129109364,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"UHL"},{commonName:"Upper Warlingham",modes: ["RailStation"],lat:51.30877225,lon:-0.077481662,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"UWL"},{commonName:"Vauxhall",modes: ["RailStation"],lat:51.4857358,lon:-0.123829953,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"VXH"},{commonName:"Victoria",modes: ["RailStation"],lat:51.49642395,lon:-0.143920706,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"VIC"},{commonName:"Waddon",modes: ["RailStation"],lat:51.36737926,lon:-0.117394077,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WDO"},{commonName:"Wallington",modes: ["RailStation"],lat:51.36033154,lon:-0.150863835,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WLT"},{commonName:"Waltham Cross",modes: ["RailStation"],lat:51.68525726,lon:-0.026564257,line:"Greater Anglia",stopType:"RailStation",additionalProperties:[],naptanId:"WLC"},{commonName:"Walthamstow Central",modes: ["RailStation"],lat:51.58301811,lon:-0.019940545,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WHC"},{commonName:"Walthamstow Queens Road",modes: ["RailStation"],lat:51.58154619,lon:-0.023843943,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WMW"},{commonName:"Wandsworth Common",modes: ["RailStation"],lat:51.4463656,lon:-0.163536981,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WSW"},{commonName:"Wandsworth Road",modes: ["RailStation"],lat:51.4702232,lon:-0.139037676,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WWR"},{commonName:"Wandsworth Town",modes: ["RailStation"],lat:51.46103408,lon:-0.187910038,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"WNT"},{commonName:"Wanstead Park",modes: ["RailStation"],lat:51.55177808,lon:0.026389943,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WNP"},{commonName:"Wapping",modes: ["RailStation"],lat:51.50434032,lon:-0.055860815,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WPE"},{commonName:"Waterloo",modes: ["RailStation"],lat:51.50314664,lon:-0.113259252,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WAT"},{commonName:"Waterloo East",modes: ["RailStation"],lat:51.50416861,lon:-0.109153638,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"WAE"},{commonName:"Watford High Street",modes: ["RailStation"],lat:51.6526537,lon:-0.391696729,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WFH"},{commonName:"Watford Junction",modes: ["RailStation"],lat:51.66388301,lon:-0.396171957,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WFJ"},{commonName:"Welling",modes: ["RailStation"],lat:51.46477709,lon:0.101775038,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"WLI"},{commonName:"Wembley Central",modes: ["RailStation"],lat:51.55186478,lon:-0.296392327,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WMB"},{commonName:"Wembley Stadium",modes: ["RailStation"],lat:51.55465457,lon:-0.286046447,line:"Chiltern Railways",stopType:"RailStation",additionalProperties:[],naptanId:"WCX"},{commonName:"West Brompton",modes: ["RailStation"],lat:51.48732891,lon:-0.195538812,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WBP"},{commonName:"West Croydon",modes: ["RailStation"],lat:51.37855217,lon:-0.102034293,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WCY"},{commonName:"West Drayton",modes: ["RailStation"],lat:51.51007122,lon:-0.472176097,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"WDT"},{commonName:"West Dulwich",modes: ["RailStation"],lat:51.44091182,lon:-0.090672676,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"WDU"},{commonName:"West Ealing",modes: ["RailStation"],lat:51.51362521,lon:-0.319782955,line:"TfL Rail",stopType:"RailStation",additionalProperties:[],naptanId:"WEA"},{commonName:"West Ham",modes: ["RailStation"],lat:51.52852552,lon:0.005317394,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WEH"},{commonName:"West Hampstead",modes: ["RailStation"],lat:51.54747433,lon:-0.191126586,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WHD"},{commonName:"West Hampstead Thameslink",modes: ["RailStation"],lat:51.54862912,lon:-0.19253752,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"WHP"},{commonName:"West Norwood",modes: ["RailStation"],lat:51.43124112,lon:-0.103189135,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WNW"},{commonName:"West Ruislip",modes: ["RailStation"],lat:51.56958787,lon:-0.437860146,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WRU"},{commonName:"West Sutton",modes: ["RailStation"],lat:51.36615014,lon:-0.204644548,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"WSU"},{commonName:"West Wickham",modes: ["RailStation"],lat:51.3812842,lon:-0.01457633,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"WWI"},{commonName:"Westcombe Park",modes: ["RailStation"],lat:51.4845089,lon:0.0177457,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"WCB"},{commonName:"White Hart Lane",modes: ["RailStation"],lat:51.60503477,lon:-0.070870327,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WHL"},{commonName:"Whitechapel",modes: ["RailStation"],lat:51.51958779,lon:-0.059420485,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"ZLW"},{commonName:"Whitton",modes: ["RailStation"],lat:51.44958819,lon:-0.357682061,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"WTN"},{commonName:"Whyteleafe",modes: ["RailStation"],lat:51.30992932,lon:-0.081135165,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WHY"},{commonName:"Whyteleafe South",modes: ["RailStation"],lat:51.3034898,lon:-0.076712515,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WHS"},{commonName:"Willesden Junction",modes: ["RailStation"],lat:51.53223396,lon:-0.243909143,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WIJ"},{commonName:"Wimbledon",modes: ["RailStation"],lat:51.42110784,lon:-0.206662836,line:"London Underground",stopType:"RailStation",additionalProperties:[],naptanId:"WIM"},{commonName:"Wimbledon Chase",modes: ["RailStation"],lat:51.40953093,lon:-0.21408977,line:"Thameslink",stopType:"RailStation",additionalProperties:[],naptanId:"WBO"},{commonName:"Winchmore Hill",modes: ["RailStation"],lat:51.63388686,lon:-0.100916933,line:"Great Northern",stopType:"RailStation",additionalProperties:[],naptanId:"WIH"},{commonName:"Wood Street",modes: ["RailStation"],lat:51.58666994,lon:-0.001953898,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WST"},{commonName:"Woodgrange Park",modes: ["RailStation"],lat:51.54905254,lon:0.044572496,line:"London Overground",stopType:"RailStation",additionalProperties:[],naptanId:"WGR"},{commonName:"Woodmansterne",modes: ["RailStation"],lat:51.31901858,lon:-0.154262129,line:"Southern",stopType:"RailStation",additionalProperties:[],naptanId:"WME"},{commonName:"Woolwich Arsenal",modes: ["RailStation"],lat:51.48990712,lon:0.069193906,line:"DLR",stopType:"RailStation",additionalProperties:[],naptanId:"WWA"},{commonName:"Woolwich Dockyard",modes: ["RailStation"],lat:51.49110779,lon:0.054612348,line:"Southeastern",stopType:"RailStation",additionalProperties:[],naptanId:"WWD"},{commonName:"Worcester Park",modes: ["RailStation"],lat:51.38110449,lon:-0.245575292,line:"South Western Railway",stopType:"RailStation",additionalProperties:[],naptanId:"WCP"}];
+
+var routeColour = [];
+		routeColour.push(
+		{"line":"bakerloo","color":"#ffffff","background":"#996633"},
+		{"line":"central","color":"#ffffff","background":"#CC3333"},
+		{"line":"circle","color":"#ffffff","background":"#FFCC00"},
+		{"line":"district","color":"#ffffff","background":"#006633"},
+		{"line":"hammersmith-city","color":"#ffffff","background":"#CC9999"},
+		{"line":"jubilee","color":"#ffffff","background":"#868F98"},
+		{"line":"metropolitan","color":"#ffffff","background":"#660066"},
+		{"line":"northern","color":"#ffffff","background":"#000000"},
+		{"line":"piccadilly","color":"#ffffff","background":"#000099"},
+		{"line":"victoria","color":"#ffffff","background":"#0099CC"},
+		{"line":"waterloo-city","color":"#ffffff","background":"#66CCCC"},
+		{"line":"dlr","color":"#ffffff","background":"#009999"},
+		{"line":"london-overground","color":"#ffffff","background":"#FF6600"},
+		{"line":"tram","color":"#ffffff","background":"#66CC00"},
+		{"line":"tfl-rail","color":"#ffffff","background":"#0019A8"},
+		{"line":"thames-river-services","color":"#ffffff","background":"#1c99c4"},
+		{"line":"woolwich-ferry","color":"#ffffff","background":"#1c99c4"}
+		);
+
+function refreshViewPoint(arr,arr2){
+    var bounds = map.getBounds();
+
+         var camShowCount = 0;
+		 var camHiddenCount = 0;
+		 var incShowCount = 0;
+		 var incHiddenCount = 0;
+                                   
+    for (var a = 0; a < arr.length; a++) {
+		                              
+        if(bounds.contains(arr[a].position)===true){
+			if (CamHide){
+			
+			}else{
+			camShowCount++;
+			}
+			arr[a].setVisible(true);
+		
+		
+		
+        }
+        else {
+            
+			camHiddenCount++;
+			arr[a].setVisible(false);
+        }
+	
+    }
+	/*if(arr2.length==0){setTimeout(refreshCounts, 4000);}*/
+	for (var a = 0; a < arr2.length; a++) {
+		                               
+        if(bounds.contains(arr2[a].position)===true){ 
+			if (IncHide){
+			
+			}else{
+			incShowCount++;
+			}
+			arr2[a].setVisible(true);
+		
+		
+		
+        }else {
+			incHiddenCount++;
+			arr2[a].setVisible(false);
+        }
+	    
+    }
+	$('#camCount').html(' '+camShowCount);
+	$('#incCount').html(' '+incShowCount);
+    if(arr.length!=0||arr2.length!=0){
+	/*console.log(camShowCount+'/'+arr.length+' Cams '+incShowCount+'/'+arr2.length+' Incidents within ViewPort');*/
+	}
+    refreshPassCount = 0;
+	
+}
+ function refreshCounts(){
+ refreshViewPoint(camsArray,incidentArray);
+ }
+
+function findObjectByKey(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][key] === value) {
+            return array[i];
+        }
+    }
+    return null;
+}
+
+
+function clearMap() {
+
+	if(markers != undefined){
+	    console.log(markers.length);
+	for (i=0;i<markers.length;i++) {
+    	map.removeLayer(markers[i]);
+		}
+	}
+	
+}
+
+function refreshCam(){
+	//console.log("Refresh triggered");
+	clearInterval(refreshInterval);
+	refreshInterval=self.setInterval(function(){
+		console.log("Refresh Camera");
+		if (document.getElementById('camURL')!= null){
+		var camURL = document.getElementById('camURL').innerText;
+		var camLink = document.getElementById('myImg');
+		camLink.src = camURL + '?i=' + Math.random().toString(36).substr(2, 10);
+		countdown(3);
+		refreshCam();
+		}
+	}, 179000);
+}
+
+function urldecode(str){return decodeURIComponent((str+'').replace(/%(?![\da-f]{2})/gi,function(){return'%25';}).replace(/\+/g,'%20'));}	
+
+function setOpacity(imageType, markerType){
+ console.log('Hide '+imageType+' : '+ markerType)
+ if(imageType=='cams'){
+	if(markerType===true){
+	resetMarkers(camsArray,'cams');
+	CamHide=true;
+	setTimeout(function(){refreshCounts()}, 500);
+	$('#cameras').attr('src', 'img/cams.png');
+	$('#cameras').css('opacity', 0.2);
+	$('#sCam').attr('title','Please wait..');
+	$('#sCam').removeAttr("href");
+	$('#sCam').removeAttr("onclick");
+	setTimeout(function(){$('#sCam').attr('title','Show JamCams')}, 10000);
+	setTimeout(function(){$('#sCam').attr('href','#')}, 10500);
+	setTimeout(function(){$('#sCam').attr('onclick', 'setOpacity(cams, false);return false')}, 11000);
+	setTimeout(function(){$('#cameras').css('opacity', 0.4)}, 11500);
+	}else{
+	showCams();
+	CamHide=false;
+	$('#cameras').attr('src', 'img/cams.png');
+	$('#cameras').css('opacity', 0.7);
+	$('#sCam').removeAttr("href");
+	$('#sCam').removeAttr("onclick");
+	$('#sCam').attr('title','Loading JamCams, Please wait..');
+	setTimeout(function(){$('#sCam').attr('title','Hide JamCams')}, 10000);
+	setTimeout(function(){$('#sCam').attr('href','#')}, 10500);
+	setTimeout(function(){$('#sCam').attr('onclick', 'setOpacity(cams, true);return false')}, 11000);
+	setTimeout(function(){$('#cameras').css('opacity', 1)}, 11500);
+	setTimeout(function(){refreshCounts()}, 500);
+	}
+ }else if(imageType=='incidents'){
+	if(markerType===true){
+	resetMarkers(incidentArray,'incidents');
+	IncHide=true;
+	setTimeout(refreshCounts, 2000);
+	$('#incidents').attr('src', 'img/incidents.png');
+	$('#incidents').css('opacity', 0.2);
+	$('#sInc').attr('title','Please wait..');
+	$('#sInc').removeAttr("href");
+	$('#sInc').removeAttr("onclick");
+	setTimeout(function(){$('#sInc').attr('title','Show Incidents')}, 10000);
+	setTimeout(function(){$('#sInc').attr('href','#')}, 10500);
+	setTimeout(function(){$('#sInc').attr('onclick', 'setOpacity(incidents, false);return false')}, 11000);
+	setTimeout(function(){$('#incidents').css('opacity', 0.4)}, 11500);
+	}else{
+	showIncidents();
+	IncHide=false;
+	$('#incidents').attr('src', 'img/incidents.png');
+	$('#incidents').css('opacity', 0.7);
+	$('#sInc').removeAttr("href");
+	$('#sInc').removeAttr("onclick");
+	$('#sInc').attr('title','Loading Incidents, Please wait..');
+	setTimeout(function(){$('#sInc').attr('title','Hide Incidents')}, 10000);
+	setTimeout(function(){$('#sInc').attr('href','#')}, 10500);
+	setTimeout(function(){$('#sInc').attr('onclick', 'setOpacity(incidents, true);return false')}, 11000);
+	setTimeout(function(){$('#incidents').css('opacity', 1)}, 11500);
+	setTimeout(function(){refreshCounts()}, 2000);
+	}
+ }else if(imageType=='traffic'){
+	if(markerType===true){
+	setTraffic(markerType);
+	/*IncHide=true;*/
+	/*setTimeout(refreshCounts, 2000);*/
+	$('#traffic').attr('src', 'img/traffic.png');
+	$('#traffic').css('opacity', 0.2);
+	$('#sTraffic').attr('title','Please wait..');
+	$('#sTraffic').removeAttr("href");
+	$('#sTraffic').removeAttr("onclick");
+	setTimeout(function(){$('#sTraffic').attr('title','Show Traffic')}, 10000);
+	setTimeout(function(){$('#sTraffic').attr('href','#')}, 10500);
+	setTimeout(function(){$('#sTraffic').attr('onclick', 'setOpacity(traffic, false);return false')}, 11000);
+	setTimeout(function(){$('#traffic').css('opacity', 0.4)}, 11500);
+	}else{
+	setTraffic(markerType);
+	/*IncHide=false;*/
+	$('#traffic').attr('src', 'img/traffic.png');
+	$('#traffic').css('opacity', 0.7);
+	$('#sTraffic').removeAttr("href");
+	$('#sTraffic').removeAttr("onclick");
+	$('#sTraffic').attr('title','Loading Traffic, Please wait..');
+	setTimeout(function(){$('#sTraffic').attr('title','Hide Traffic')}, 10000);
+	setTimeout(function(){$('#sTraffic').attr('href','#')}, 10500);
+	setTimeout(function(){$('#sTraffic').attr('onclick', 'setOpacity(traffic, true);return false')}, 11000);
+	setTimeout(function(){$('#traffic').css('opacity', 1)}, 11500);
+	/*setTimeout(function(){refreshCounts()}, 2000);*/
+	}
+ 
+ }
+ }
+ 
+
+function hideload() {
+		document.getElementById("loadmessage").style.visibility='hidden';
+		document.getElementById("loadmessage").style.display='none';
+		/*parent.document.getElementById("loadmessage").style.visibility='hidden';
+		parent.document.getElementById("loadmessage").style.display='none';
+				//console.log('Hide loading');*/
+	  }
+	  function imageLoaded() {
+		document.getElementById("loadmessage").style.visibility='hidden';
+		document.getElementById("loadmessage").style.display='none';
+		/*parent.document.getElementById("loadmessage").style.visibility='hidden';
+		parent.document.getElementById("loadmessage").style.display='none';*/
+
+			/*console.log('Hide loading');*/
+	  }
+	  
+	  function playPause(video){
+		if(video.paused)
+		video.play();
+		else
+		video.pause();
+	  }
+	  
+	  function formatDate(date) {
+		var d = new Date(date),
+			month = '' + (d.getMonth() + 1),
+			day = '' + d.getDate(),
+			year = d.getFullYear();
+
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+
+		return [year, month, day].join('-');
+		}
+	  
+	  function countdown(minutes) {
+		  if (minutes == 0){
+		  return;
+	  }else{
+		var seconds = 60;
+		var mins = minutes
+		var myTimer;
+		function tick() {
+        var counter = document.getElementById("timer");
+        var current_minutes = mins-1
+        seconds--;
+		if(counter){
+        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if( seconds > 0 ) {
+            myTimer = setTimeout(tick, 1000);
+        }else{
+            myTimer = setTimeout(function(){
+				if(mins > 1){
+				countdown(mins-1);              
+				}
+			},1000);
+        }
+		}
+		}
+		tick();
+	  }
+	  }
+	  
+	  function getCookie(c_name){var i,x,y,ARRcookies=document.cookie.split(";");for (i=0; i<ARRcookies.length; i++){x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);x=x.replace(/^\s+|\s+$/g,"");if (x==c_name){return unescape(y);}}}
+	  function getParameterByName(name,url){
+	  if(!url)url=window.location.href;name=name.replace(/[\[\]]/g,"\\$&");
+	  var regex=new RegExp("[?&]"+name+"(=([^&#]*)|&|#|$)"),results=regex.exec(url);
+	  if(!results)return null;if(!results[2])return'';
+	  return decodeURIComponent(results[2].replace(/\+/g," "));
+	  }
+
+function loadMap() {
+	//if(map != undefined)
+    //{
+     // map.remove();
+     // map = undefined
+      //document.getElementById('mapLayer').innerHTML = "";
+    //}
+    
+	//initializingMap();
+
+	//console.log("Loading Map:"+Date());
+	//if(markers != undefined){
+	//for (i=0;i<markers.length;i++) {
+	//	map.removeLayer(markers[i]);
+	//	}
+	//}
+	//if(cams != undefined){
+	//cams.clearLayers();
+	//}
+	//var markers = new Array();
+	//clearMap();
+	var marker;
+	
+	var cams = L.layerGroup();
+	var incidents = L.layerGroup();
+	var allMarkers = [];
+	var totCount=0;
+	var trueCount=0;
+	var offline;
+	
+	$("#btnload").on("click",function(){
+		type=$('#feedType').text();
+		if(type=='video'){$('#btnload').val('Load Video');}else{$('#btnload').val('Load Images');}
+	  if(type=='video'){type='image';}else{type='video';}
+		//$('#feedType').text('video');
+		$('#TypePlural').text('s');
+		setCams(type);
+		/*setIncidents(map);*/
+		});
+	
+	function setCams(type){
+		//type=$('#feedType').text();
+	  //if(type=='video'){type='image';}else{type='video';}
+		$('#feedType').text(type);
+	  cams.clearLayers();
+	  camsArray=[];
+	  console.log('Load JamCam ' + type + 's');
+	  var contentString;
+	  $('#btnload').val('Getting feeds..');
+	  type=$('#feedType').text();
+	  var consent = getCookie("cookieconsent_status");
+	  if (consent==="allow"){setCookie('tfljamcams',type,56);}else{setCookie('tfljamcams',type,-1);}
+	  $('#feedType').text(type);
+	  $('#TypePlural').text('s');
+	  var totCount=0;
+	  var trueCount=0;
+	$.ajax({
+		url: ('https://api.tfl.gov.uk/Place/Type/JamCam/?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1'),
+		dataType: "json",
+		//contentType: "application/json",
+		error: function() { 
+		setTimeout(setCams(type),60000);
+		console.log('Error retreiving cams data, trying again in 60 seconds');
+		},
+		success:function(data){
+		/*console.log(data);*/
+		$.each(data,function(key,data){
+			totCount=totCount+1;
+			/*console.log(data);*/
+			var lon = data.lon;
+			var lat = data.lat;
+			var commonName =  encodeURI(data.commonName);
+			var loc=encodeURI(data.commonName);
+			var url = data.url;
+			var imageUrl = data.imageUrl;
+			var camView=encodeURI(data.additionalProperties[3].value);
+			var isAvailable=data.additionalProperties[0].value;
+			type=$('#feedType').text();
+			//var type = 'video';
+			if(isAvailable=='true'){
+			offline = '';	
+			trueCount=trueCount+1
+			}else{
+			offline = ' reports offline';
+			}
+			if(type=='video'){
+			var imgLink=data.additionalProperties[2].value;
+			var poster=data.additionalProperties[1].value;
+			var contentString="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><small><em>Camera "+trueCount+" Refresh in <span id=\"timer\">3:00</span></em></small><br /><strong><a href=\"http://archive.tfljamcams.net/archive/"+urldecode(loc).replace(/\s+/g, "_").replace(/\//g, "_")+"\" title=\"Click here for Camera archives\">"+urldecode(loc)+"</a>&nbsp;<em><small></small></em></strong><small>"+offline+"</small></div>"+
+			"<div><small>View: "+urldecode(camView)+"<br /><em>Powered by TfL Open Data.<br /></em></small></div><div id='iframe'>"+
+			"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
+			"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading "+type+"</span></div>"+
+			"<span id=\"camURL\" style=\"display:none;\">"+imgLink+"</span>"+
+			"<video loop autoplay muted poster='"+poster+"' onclick='playPause(this);' onloadeddata='hideload()'>"+
+			"<source id='myImg' src='"+imgLink;
+			var contentString2="'></video></div></div>";
+			var overContentString="<div id='marker-over'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><strong>"+urldecode(loc)+"</strong><small>"+offline+"</small><br /><small><em>Camera "+trueCount+"</em></small></div></div>";
+			}else{
+			var imgLink=data.additionalProperties[1].value;
+			var contentString="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><small><em>Camera "+trueCount+" Refresh in <span id=\"timer\">3:00</span></em></small><br /><strong><a href=\"http://archive.tfljamcams.net/archive/"+urldecode(loc).replace(/\s+/g, "_").replace(/\//g, "_")+"\" title=\"Click here for Camera archives\">"+urldecode(loc)+"</a>&nbsp;<em><small></small></em></strong><small>"+offline+"</small></div>"+
+			"<div><small>View: "+urldecode(camView)+"<br /><em>Powered by TfL Open Data.<br /></em></small></div><div id='iframe'>"+
+			"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
+			"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading "+type+"</span></div>"+
+			"<span id=\"camURL\" style=\"display:none;\">"+imgLink+"</span>"+
+			"<img id='myImg' src='"+imgLink;
+			var contentString2="' onload='imageLoaded();' /></div></div>";
+			var overContentString="<div id='marker-over'><div><img align='left' src='img/roundel.gif' alt='JamCam'/><strong>"+urldecode(loc)+"</strong><small>"+offline+"</small><br /><small><em>Camera "+trueCount+"</em></small></div></div>";
+			}
+			/*if (map.getMapTypeId()== 'satellite'||map.getMapTypeId()=='hybrid') {
+			var image='img/cctv-sat.png';
+			}else{*/
+			var image='img/cctv-1.png';
+			/*}*/
+			
+			var popup = L.popup()
+                .setLatLng([lat, lon])
+                .setContent(contentString + '?i=' + Math.random().toString(36).substr(2, 5) + contentString2);
+            
+            var camIcon = L.Icon.extend({
+		        options: {
+			    /*shadowUrl: 'leaf-shadow.png',
+			    iconSize:     [38, 95],
+			    shadowSize:   [50, 64],*/
+			    iconAnchor:   [18, 22],
+			    /*shadowAnchor: [4, 62],*/
+			    popupAnchor:  [0, -22]
+		        }
+	        });
+                
+            var cctvIcon = new camIcon({iconUrl: image});
+            
+			marker = L.marker([lat, lon], {icon: cctvIcon}, {
+                clickable: true
+            }).bindPopup(popup, {closeButton: true, closeOnClick: true},{showOnMouseOver:true}).addTo(cams).on('click', function(e) {
+				countdown(0);
+				clearInterval(refreshInterval);
+				countdown(3);
+				/*refreshInterval=self.setInterval(function(){
+					console.log("Refresh Camera");
+					L.popup().setContent(contentString + '?i=' + Math.random().toString(36).substr(2, 10) + contentString2);
+					countdown(3);
+				}, 180000);*/
+				refreshCam();
+				});
+				
+				marker.getPopup().on('remove', function() {
+				//Your code here
+				//console.log("Close popup");
+				countdown(0);
+				clearInterval(refreshInterval);
+				});
+            
+            /*marker.on('mouseover', function(){marker.bindPopup(commonName, {'offset': L.point(0,-100)}).openPopup();});
+
+            marker.on('mouseout', function(){marker.closePopup();});*/
+            
+            camsArray.push(marker);
+            if(type=='video'){$('#btnload').val('Load '+totCount+' Images');}else{$('#btnload').val('Load '+totCount+' Videos');}
+            
+	
+		});
+		},
+		timeout: 10000,
+		});
+		//if(type=='video'){$('#btnload').val('Load Images');}else{$('#btnload').val('Load Videos');}
+		
+		}
+		
+		function setIncidents(){
+		incidents.clearLayers();
+		incidentsArray=[];
+		var newtoday=new Date();
+		var day = 60 * 60 * 24 * 1000;
+		var newtomorrow = new Date(newtoday.getTime() + day);
+		var currentHH=newtoday.getHours();
+		var event_totCount=0;var event_trueCount=0;
+		if(currentHH<6){console.log('Current Hour is 0'+currentHH+'. Show Incidents from yesterday!');
+		newtoday = new Date(newtoday.getTime() - day);
+		today = formatDate(newtoday);
+		tomorrow = formatDate(newtomorrow);
+		}else{
+		today = formatDate(newtoday);
+		tomorrow = formatDate(newtomorrow);
+		}
+		var TfLdisruptionString="https://api.tfl.gov.uk/Road/All/Disruption?startDate="+today+"&endDate="+tomorrow+"&app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
+		console.log('Load Incidents for '+TfLdisruptionString.substring(43, 82));
+		$.ajax({
+		url: (TfLdisruptionString),
+		dataType: "json",
+		//contentType: "application/json",
+		error: function() { 
+		setTimeout(setIncidents,60000);
+		console.log('Error retreiving incident data, trying again in 60 seconds');
+		},
+		success:function(data){
+		/*console.log(data);*/
+		$.each(data,function(key,data){
+			event_totCount=event_totCount+1;
+			var isActive=data.status;
+			if(isActive.indexOf('Active') == 0){
+			event_trueCount=event_trueCount+1;
+			var result=data.point.replace(/(^.*\[|\].*$)/g,'').split(',');
+			var lat=result[1];
+			var lon=result[0];
+			var location=encodeURI(data.location);
+			var comments=encodeURI(data.comments);
+			var currentUpdate=encodeURI(data.currentUpdate);
+			var currentUpdateDateTime=data.currentUpdateDateTime;
+			var windowContent="<div id='marker'><div><img align='left' src='img/roundel.gif' alt='Incidents'/><strong>"+urldecode(location)+"</strong><br /><br /><br />"+urldecode(comments)+"<br /><br /><small><em>"+isActive+" : "+urldecode(currentUpdate)+"<br />Last Updated: "+currentUpdateDateTime+"<br />Powered by TfL Open Data</em></small></div></div>";
+			var overContent="<div id='marker-over'><div><img align='left' src='img/roundel.gif' alt='Incidents'/><strong>"+urldecode(location)+"</strong><br /><br />"+isActive+" : "+urldecode(currentUpdate)+"<br /><small><em>Last Updated: "+currentUpdateDateTime+"</em></small></div></div>";
+			/**if (map.getMapTypeId()== 'satellite'||map.getMapTypeId()=='hybrid') {
+			if(data.category=='Works'){var image='img/roadworks-sat.png';}else{var image='img/exclamation-sat.png';}
+			}else{*/
+			if(data.category=='Works'){var image='img/roadworks-1.png';}else{var image='img/exclamation-1.png';}
+			/*}*/
+			var streets;
+			if(data.streets!==undefined){streets=data.streets;for(var j=0;j<streets.length;j++){if(streets[j].closure=='Full Closure'){var image='img/closure-1.png';}}}
+			
+			
+			var popup = L.popup()
+                .setLatLng([lat, lon])
+                .setContent(windowContent);
+            
+            var camIcon = L.Icon.extend({
+		        options: {
+			    /*shadowUrl: 'leaf-shadow.png',
+			    iconSize:     [38, 95],
+			    shadowSize:   [50, 64],*/
+			    iconAnchor:   [18, 22],
+			    /*shadowAnchor: [4, 62],*/
+			    popupAnchor:  [0, -22]
+		        }
+	        });
+                
+            var cctvIcon = new camIcon({iconUrl: image});
+            
+			marker = L.marker([lat, lon], {icon: cctvIcon}, {
+                clickable: true
+            }).bindPopup(popup, {showOnMouseOver:true}).addTo(incidents)
+            
+            /*marker.on('mouseover', function(){marker.bindPopup(commonName, {'offset': L.point(0,-100)}).openPopup();});
+
+            marker.on('mouseout', function(){marker.closePopup();});*/
+            
+            incidentsArray.push(marker);
+		}
+		});
+		},
+		timeout: 10000,
+		});
+	}
+	
+	function resetMarkers(arr,arrName){
+	  /*console.log(arrName+' : '+arr.length);*/
+	  for(var b=0;b<arr.length;b++){
+	  
+	  arr[b].setMap(null);
+	  
+	  }
+	  arr=[];
+	  /*console.log(arrName+' : '+arr.length);*/
+	  }
+	  
+	  
+	  
+	/* START LOCATION */
+
+
+function listLocalStops(myLocation) {
+	/*console.log(myLocation);*/
+if(myLocation!=null){
+route = $('#route').val();
+line = $('#line').val();
+$('#feedType').text('location');
+$('#btnload').val('Re-Load JamCams');
+$('#TypePlural').text('');
+if (route == null || route == ''||line == null || line == ''){
+disableBusZoom=true;
+//resetMarkers(busMarkersArray);
+console.log("Load local transport within 0.5km of "+myLocation);
+var newLocation = myLocation.toString().replace("(","").replace(")","").replace(" ","");
+newLocation = newLocation.replace('LatLng','');
+var TfLLocation = newLocation.split(',');
+/*console.log(TfLLocation[0]+' '+TfLLocation[1]);*/
+var consent = getCookie("cookieconsent_status");
+/*console.log("lat="+TfLLocation[0]+"&lon="+TfLLocation[1]);
+console.log("Load local bus/train stop markers");*/
+var TfLLocationString="https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanPublicBusCoachTram,NaptanMetroStation,NaptanRailStation,NaptanFerryPort&radius=500&modes=bus,dlr,tube&lat="+TfLLocation[0]+"&lon="+TfLLocation[1]+"&app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
+/*console.log(TfLLocationString);*/
+var stopCount=0;
+$.ajax({
+	url:TfLLocationString,dataType:"json",
+	error: function(){
+        console.log('Local Stops not updated! ');
+		if(iframe){
+		iframe.innerHTML = "<div id=\"content\" class=\"content\">Error retrieving data. Please try again!</div>";
+		hideload();
+		}
+		},
+	dataFilter: function(data) {
+		var data = JSON.parse(data);
+		/*console.log(data);*/
+		for (var z = 0; z < trainStations.length; z++){
+		/*console.log(trainStations[z]);*/
+		//var distanceInMetres = calcDistance(trainStations[z].lat,trainStations[z].lon,TfLLocation[0],TfLLocation[1]);
+		
+		var markerPosition1 = new L.LatLng(trainStations[z].lat,trainStations[z].lon);
+		var markerPosition2 = new L.LatLng(TfLLocation[0],TfLLocation[1]);
+		var distanceInMetres = (markerPosition1.distanceTo(markerPosition2)).toFixed(0);
+		
+		/*console.log(trainStations[z].commonName+":"+distanceInMetres);*/
+		if (distanceInMetres <= 500){
+		/* include station */
+		/*console.log("Include "+trainStations[z].commonName);*/
+		data.stopPoints.push(trainStations[z]);
+		}
+		}
+    return JSON.stringify(data);
+  },
+	success:function(data){
+		/*console.log(data);*/
+		/*console.log(trainStations.length);
+		console.log(data);*/
+    for(i in data.stopPoints){
+	
+		/*console.log(data.stopPoints[i].stopType);*/
+    if(data.stopPoints[i].stopLetter||data.stopPoints[i].stopType=="NaptanMetroStation"||data.stopPoints[i].stopType=="NaptanRailStation"||data.stopPoints[i].stopType=="NaptanFerryPort"||data.stopPoints[i].stopType=="RailStation"){
+		stopCount=stopCount+1
+    var Naptan_Atco=data.stopPoints[i].naptanId;
+	/*console.log("Stop "+i);*/
+    var latlng=new L.LatLng(data.stopPoints[i].lat,data.stopPoints[i].lon);
+	
+    var Stop_Name=data.stopPoints[i].commonName;
+    var newStation=Stop_Name;	
+    var StopLetter = data.stopPoints[i].stopLetter;
+    if(StopLetter===undefined){StopLetter="";}else{StopLetter=" "+data.stopPoints[i].stopLetter;}
+    var image,title,roundel;
+		if(data.stopPoints[i].stopType=="NaptanMetroStation"){
+			if(data.stopPoints[i].modes.includes("dlr")){
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/dlr_52.png";
+			}else if(data.stopPoints[i].modes.includes("tram")){
+			image = "img/tram_stops.png";
+			title="Station";
+			roundel="img/tram_52.png";
+			}else if(data.stopPoints[i].modes.includes("tube")){
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/underground_52.png";
+			}
+			}else if(data.stopPoints[i].stopType=="NaptanRailStation"){
+			if(data.stopPoints[i].modes.includes("tflrail")){
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/tflrail_52.png";
+			}else if(data.stopPoints[i].modes.includes("overground")){
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/overground_52.png";
+			}/*else if(data.stopPoints[i].modes.includes("national-rail")){
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/rail_52.png";
+			}*/
+			}else if(data.stopPoints[i].stopType=="NaptanFerryPort"){
+			newStation=Stop_Name.replace(" Pier","");
+			image = "img/river_pier.png";
+			title="Pier";
+			roundel="img/river_52.png";
+			}else if(data.stopPoints[i].modes.includes("cable-car")){
+			image = "img/bus_stops.png";
+			title="Station";
+			roundel="img/London_AirLine_Roundel_52.png";
+			}else if(data.stopPoints[i].modes.includes("RailStation")){
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/rail_52.png";
+			}else{
+			image = "img/bus_stops.png";
+			title="Bus Stop";
+			roundel="img/London-Buses-roundel-logo52.png";
+			}
+		var stopTowards = ""
+		if(data.stopPoints[i].additionalProperties[1]){
+			if(data.stopPoints[i].additionalProperties[1].key=="Towards"){
+				/*console.log(data.stopPoints[i].additionalProperties[1].key+" "+data.stopPoints[i].additionalProperties[1].value);*/
+			if(data.stopPoints[i].additionalProperties[1].value===undefined){stopTowards="";}else{stopTowards="<br />Towards "+data.stopPoints[i].additionalProperties[1].value+"<br />";}
+			}
+		}
+		if(title!=="Bus Stop"){stopTowards="";}
+		var time = new Date();
+		var newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);/* + ":" + ("0" + time.getSeconds()).slice(-2);*/
+		var contentString3 = "<div id=\"marker-over\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"</em><br />"+stopTowards+"</div><div><br />Click to load live departures</div></div>";
+		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br />"+stopTowards+"<small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span><br />Powered By TfL Open Data</small></em><br /></div><div id='iframe' style='overflow-y:scroll;'></div>"+
+		"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
+		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data</span></div></div>";
+		
+		var displayTfLMarker;
+		
+		if(data.stopPoints[i].modes.includes("national-rail")){
+		displayTfLMarker = false;
+		}
+		if(data.stopPoints[i].modes.includes("tflrail")||data.stopPoints[i].modes.includes("london-overground")||data.stopPoints[i].modes.includes("bus")||data.stopPoints[i].modes.includes("RailStation")){
+		displayTfLMarker = true;
+		}
+		
+		
+		busMarkersArray.push(marker);
+		var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+		var popup = L.popup()
+                .setLatLng(latlng)
+                .setContent(contentString4);
+            
+            var camIcon = L.Icon.extend({
+		        options: {
+			    /*shadowUrl: 'leaf-shadow.png',
+			    iconSize:     [38, 95],
+			    shadowSize:   [50, 64],*/
+			    iconAnchor:   [18, 22],
+			    /*shadowAnchor: [4, 62],*/
+			    popupAnchor:  [0, -22]
+		        }
+	        });
+                
+            var stopIcon = new camIcon({iconUrl: image});
+            
+		
+				
+				
+            
+
+
+	
+			marker = L.marker(latlng, {icon: stopIcon, title: Naptan_Atco}, {
+                clickable: true
+            }).bindPopup(popup, {closeButton: true, closeOnClick: true},{showOnMouseOver:true}).addTo(cams).on('click', function(e) { 
+				/*console.log(e);                  
+		   console.log("Marker clicked: "+ e.target.options.title);*/ 
+		   clearInterval(refreshInterval);
+		   
+		   var getlocalBRTrains = function(){
+			trainsArray = [];
+			var naptanId = e.target.options.title;
+			getStationString = "nationalrail/getStation.php?station="+naptanId;
+			console.log(getStationString);
+			$.ajax({
+			url:getStationString,dataType:"json",
+			error: function(){
+			console.log("Trains not updated! ");
+			iframe.innerHTML = "<div id=\"content\" class=\"content\">Error retrieving data. Please try again!</div>";
+			hideload();
+			},
+			success:function(data){
+			iframe.innerHTML  = "";
+			/*console.log(data);*/
+			if(data.GetStationBoardResult.trainServices===undefined){
+			/*for(i in data.GetStationBoardResult.nrccMessages[i]){*/
+			
+			if(data.GetStationBoardResult.nrccMessages===undefined){
+			if(iframe){
+			iframe.innerHTML  = "<div id=\"content\" class=\"content\">No Departures within 30 mins</div>";
+			iframe.innerHTML  += "<div><br /><img src=\"img/NRE_Powered_logo.png\" size=\"50%\" alt=\"Powered by National Rail Enquiries\" /></div>";
+			contentString4 += "</div></div>";
+			hideload();
+			}
+			}else{
+			var stationMessage = data.GetStationBoardResult.nrccMessages.message._;
+			if(iframe){
+			iframe.innerHTML  = "<div id=\"content\" class=\"content\">"+stationMessage+"</div>";
+			iframe.innerHTML  += "<div><br /><img src=\"img/NRE_Powered_logo.png\" size=\"50%\" alt=\"Powered by National Rail Enquiries\" /></div>";
+			contentString4 += "</div></div>";
+			hideload();
+			}
+			/*}*/
+			}
+			}else{
+			
+			/*console.log(data);*/
+			for(i in data.GetStationBoardResult.trainServices.service){
+				/*var newStation;
+				newStation=stnName;*/
+				var newline = data.GetStationBoardResult.trainServices.service[i].operator;
+				var towards = data.GetStationBoardResult.trainServices.service[i].destination.location.locationName;
+				trainsArray.push({
+				id: data.GetStationBoardResult.trainServices.service[i].rsid,
+				vehicleId: data.GetStationBoardResult.trainServices.service[i].vehicleId,
+				towards: towards,
+				timeToStation: data.GetStationBoardResult.trainServices.service[i].std,
+				estimatedTime: " ("+data.GetStationBoardResult.trainServices.service[i].etd+")",
+				lineId: data.GetStationBoardResult.trainServices.service[i].operatorCode,
+				platformName: data.GetStationBoardResult.trainServices.service[i].platform ? "Plat."+data.GetStationBoardResult.trainServices.service[i].platform+" to " : ""
+				
+				});	
+			}
+			trainsArray.sort(function(a,b) {
+			var x = a.timeToStation;
+			var y = b.timeToStation;
+			return x < y ? -1 : x > y ? 1 : 0;
+			});
+			if(iframe){
+			iframe.innerHTML = "";
+			if(trainsArray.length==0){
+			iframe.innerHTML  = "<div id=\"content\" class=\"content\">No Departures within 30 mins</div>";	
+			iframe.innerHTML  += "<div><br /><img src=\"img/NRE_Powered_logo.png\" size=\"50%\" alt=\"Powered by National Rail Enquiries\" /></div>";
+			contentString4 += "</div></div>";
+			}else{
+			for (var k = 0; k < trainsArray.length; k++) {
+			var colour = [];
+			colour = findObjectByKey(routeColour, 'line', trainsArray[k].lineId);
+			if(colour==null){
+			colour = [];
+			colour={"color":"#ffffff","background":"red"};
+			};
+			var dueContent;
+			/*if(trainsArray[k].timeToStation==0){
+			dueContent = "Due</div></div><div style=\"clear: both;\"></div>";
+			}else if(trainsArray[k].timeToStation<2){
+			dueContent = trainsArray[k].timeToStation+trainsArray[k].estimatedTime+"</div></div><div style=\"clear: both;\"></div>";
+			}else{*/
+			dueContent = trainsArray[k].timeToStation+trainsArray[k].estimatedTime+"</div></div><div style=\"clear: both;\"></div>";
+			/*}*/
+	
+			iframe.innerHTML  += "<div id=\"content\" class=\"content\"><div id=\"route\" class=\"route\" style=\"color:"+colour.color+";background-color:"+colour.background+";\">"+trainsArray[k].lineId.toUpperCase()+"</div><div id=\"towards\" class=\"towards\">"+trainsArray[k].platformName+""+trainsArray[k].towards+ "</div><div id=\"due\" class=\"due\">"+dueContent;
+			}
+			iframe.innerHTML  += "<div><br /><img src=\"img/NRE_Powered_logo.png\" size=\"50%\" alt=\"Powered by National Rail Enquiries\" /></div>";
+			contentString4 += "</div></div>";
+			}
+			hideload();
+			}
+			}
+			} /*End Check*/
+			}); //END AJAX	
+	}
+		   
+		   var getLocalStation = function(){
+		   var line = document.getElementById("route");
+	stopsArray = [];
+	var naptanId = e.target.options.title;
+	
+	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
+	/*console.log(stationString);*/
+	$.ajax({
+	url:stationString,dataType:"json",
+	error: function(){
+        console.log("Stop not updated! ");
+		
+		},
+	success:function(data){
+	/*console.log(data);*/
+		
+    for(i in data){
+		var newStation=data[i].stationName;
+		var newline = data[i].lineId;
+		/*console.log(newStation + ' ' + station);
+		console.log(newline + ' ' + line);*/
+		/*if(newStation==station){ // && data[i].lineId==line){*/
+			
+		/*if(stopsArray.includes(data[i].vehicleId)){
+		
+		}else{*/
+		var duplicate;
+		if(newline.indexOf("dlr") > 0||newline.indexOf("tfl-rail")>0){
+		duplicate = false;
+		/*duplicate = stopsArray.some(function(o){return o["id"] === data[i].id;})*/
+		}else{
+		duplicate = stopsArray.some(function(o){return o["id"] === data[i].id;})
+		}
+		if(duplicate){
+			/*Do not push duplicate vehicleId*/
+		}else{
+			var towards;
+			if(newline=="dlr"){
+				towards = data[i].destinationName.replace(" DLR Station","");
+			}else if(newline=="tfl-rail"||newline=="london-overground"){
+			towards = data[i].destinationName.replace(" Rail Station","");
+			}else if(data[i].destinationName=="tram"){
+			towards = data[i].destinationName.replace(" Tram Stop","");
+			}else if(data[i].destinationName===undefined){
+				towards = "Check Destination!"
+			}else{
+				towards = data[i].destinationName.replace(" Underground Station","");
+			}
+			if(towards.indexOf(",")>1){
+			towards=towards.substr(0,towards.indexOf(','));
+			}
+			stopsArray.push({
+			id: data[i].id,
+			vehicleId: data[i].vehicleId,
+			towards: towards,
+			timeToStation: Math.round(data[i].timeToStation/60),
+			lineId: data[i].lineId,
+			platformName: data[i].platformName,
+			stopType: data[i].stopType,
+			stationName: data[i].stationName	
+			});
+		/*}*/
+		}
+		/*}*/	
+			/*content.innerHTML += "<br />" + data[i].towards + " " + Math.round(data[i].timeToStation/60) + " mins";*/
+			
+		}
+
+	stopsArray.sort(function(a,b) {
+    var x = a.timeToStation;
+    var y = b.timeToStation;
+    return x < y ? -1 : x > y ? 1 : 0;
+	});
+	/*console.log(stopsArray);*/
+	if(iframe){
+	iframe.innerHTML = "";
+	if(stopsArray.length==0){
+	iframe.innerHTML  = "<div id=\"content\" class=\"content\">No Departures within 30 mins</div>";	
+	}else{
+	for (var k = 0; k < stopsArray.length; k++) {
+	var colour = [];
+	colour = findObjectByKey(routeColour, 'line', stopsArray[k].lineId);
+	if(colour==null){
+		colour = [];
+		colour={"color":"#ffffff","background":"red"};
+		};
+	var dueContent;
+	if(stopsArray[k].timeToStation==0){
+		dueContent = "Due</div></div><div style=\"clear: both;\"></div>";
+		}else if(stopsArray[k].timeToStation<2){
+		dueContent = stopsArray[k].timeToStation +" min</div></div><div style=\"clear: both;\"></div>";
+		}else{
+			dueContent = stopsArray[k].timeToStation +" mins</div></div><div style=\"clear: both;\"></div>";
+			}
+	iframe.innerHTML  += "<div id=\"content\" class=\"content\"><div id=\"route\" class=\"route\" style=\"color:"+colour.color+";background-color:"+colour.background+";\">"+stopsArray[k].lineId.toUpperCase()+"</div><div id=\"towards\" class=\"towards\"> to " +stopsArray[k].towards+ " </div><div id=\"due\" class=\"due\">"+dueContent;
+	
+	}
+	contentString4 += "</div></div>";
+	
+	}
+	hideload();
+	}
+	}
+	
+	});
+
+}
+/*console.log(e.target.title+" : "+e.target.title.length);*/
+if(e.target.options.title.length==3){
+getlocalBRTrains();
+		    
+		   //iframe.innerHTML = contentString4;
+           
+		   
+		   clearInterval(refreshInterval);
+		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
+	       refreshInterval=self.setInterval(function(){
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
+		   console.log("Refresh "+e.target.options.title+" Arrivals at "+newTime);
+		   getlocalBRTrains();
+		   countdown(2);
+	       }, 120000);
+}else{
+getLocalStation();
+
+
+		   
+           //iframe.innerHTML = contentString4;
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
+		   clearInterval(refreshInterval);
+		   countdown(2);
+	       refreshInterval=self.setInterval(function(){
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
+		   console.log("Refresh "+e.target.options.title+" Arrivals at "+newTime);
+		   getLocalStation();
+		   countdown(2);
+	       }, 120000);
+		 }  
+
+        
+        marker.getPopup().on('remove', function() {
+				//Your code here
+				//console.log("Close popup");
+				countdown(0);
+				clearInterval(refreshInterval);
+				
+				});
+				
+    })
+
+
+
+} /*End Marker Loop */
+	/* END STOP LOOP */
+}
+	/*}*/
+	}
+/* END DOWNLOAD FUNCTION */
+});
+
+/* END IF ROUTE NOT EMPTY */
+}else{
+if (route == null || route == ''){
+if(local_location==true){
+//resetMarkers(busMarkersArray);
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(function(position){
+/*loc_markers[0].setMap(null);*/
+loc_markers = [];
+var pos=new L.LatLng(position.coords.latitude,position.coords.longitude);
+myLocation=pos;
+listLocalStops(myLocation);
+/*var marker=new google.maps.Marker({position:pos,draggable:true,animation:google.maps.Animation.DROP,map:map,label: ''});
+map.setCenter(pos);
+loc_markers.push(marker);*/
+});
+}
+}
+}
+}
+};
+/* END DOWNLOAD */
+/*, 11500);*/
+}
+	
+	/* END LOCATION */
+	
+	/* START BUSES */
+	
+	 
+$("#route").change(function () {
+route = $('#route').val();
+var consent = getCookie("cookieconsent_status");
+if (consent=="allow"){setCookie('bus_route',route,56);}else{setCookie('bus_route',route,-1);}
+resetMarkers(busMarkersArray);
+/*console.log("Click : "+disableBusZoom);*/
+if(route != ''){
+/*if(disableBusZoom==false || disableBusZoom==null){
+if(local_location!==true){
+}
+}*/
+setOpacity(incidents, true);
+setOpacity(cams, true);
+$('#btnload').val('Load Cams');
+$('#feedType').text('Bus Stop');
+$('#btnload').val('Re-Load JamCams');
+$('#TypePlural').text('s');
+var bounds = new L.LatLngBounds();
+console.log("Load route "+route+" bus stop markers");
+var TfLBusesString="https://api.tfl.gov.uk/line/"+route+"/stoppoints?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
+var stopCount=0;
+$.ajax({
+	url:TfLBusesString,dataType:"json",
+	error: function(){
+        console.log('Bus Route not updated! ');
+		
+		},
+	success:function(data){
+    $.each(data,function(key,data){
+		/*console.log(data);*/
+    
+    if(data.stopLetter||data.stopType=="NaptanMetroStation"||data.stopType=="NaptanRailStation"){
+		stopCount=stopCount+1
+    var Naptan_Atco=data.naptanId;
+
+    var latlng=new L.LatLng(data.lat,data.lon);
+	
+    var Stop_Name=data.commonName;
+	var lineId=data.lineId;
+	var image,title,roundel;
+	var showRailMarker = true;
+    var newStation;
+		if(Stop_Name.indexOf("DLR Station")>0){
+			newStation = Stop_Name.replace(" DLR Station","");
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/dlr_52.png";
+			}else if(Stop_Name.indexOf("Underground Station")>0){
+			newStation=Stop_Name.replace(" Underground Station","");
+			image = "img/train_stops.png";
+			title="Station";
+			roundel="img/underground_52.png";
+			}else if(Stop_Name.indexOf("Tram Stop")>0){
+			newStation=Stop_Name.replace(" Tram Stop","");
+			image = "img/tram_stops.png";
+			title="Tram Stop";
+			roundel="img/tramlink_52.png";
+			}else if(Stop_Name.indexOf("Rail Station")>0){
+			if(data.modes.includes("overground")){
+			roundel="img/overground_52.png";
+			}else if(data.modes.includes("tflrail")){
+			roundel="img/tflrail_52.png";
+			}else{
+			roundel="img/rail_52.png";
+			showRailMarker = false;
+			}
+			newStation = Stop_Name.replace(" Rail Station","");
+			image = "img/train_stops.png";
+			title="Station";
+			}else{
+			newStation=Stop_Name;
+			image = "img/bus_stops.png";
+			title="Bus Stop";
+			roundel="img/London-Buses-roundel-logo52.png";
+			}
+    var StopLetter;
+	if(data.stopLetter===undefined){StopLetter="";}else{StopLetter=" "+data.stopLetter;}
+	var stopTowards;
+    if(data.additionalProperties[1]===undefined){stopTowards="";}else{stopTowards="<br />Towards "+data.additionalProperties[1].value+"<br />";}
+	if(title!=="Bus Stop"){stopTowards="";}
+	/*console.log(Stop_Name+" : "+stopTowards);*/
+		var time = new Date();
+		var newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);/* + ":" + ("0" + time.getSeconds()).slice(-2);*/
+		var contentString3 = "<div id=\"marker-over\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"</em><br />"+stopTowards+"</div><div><br />Click to load live departures</div></div>";
+		var contentString4 = "<div id=\"marker\"><div><img align='left' src='"+roundel+"' alt='"+title+"'/><strong>"+newStation+"</strong><br /><em>"+title+StopLetter+"<br />"+stopTowards+"<small>Retrieved at <span id=\"retrievedTime\">"+newTime+"</span> - Refresh in <span id=\"timer\">2:00</span><br />Powered By TfL Open Data</small></em><br /></div><div id='iframe'></div>"+
+		"<div id='loadmessage' class='stoploadmessage'><img src='/img/loading.gif' alt='Loading'>"+
+		"<span style='background-color:rgba(0, 0, 0, 0.6);color:rgba(255,255,255, 0.6);z-index:9999;'>&nbsp;Loading data</span></div></div>";
+ 					
+		var marker = new google.maps.Marker({
+		position: latlng, 
+		map: map,
+		title: Naptan_Atco,
+		icon: image,
+		visible: showRailMarker
+		});
+		
+		busMarkersArray.push(marker);
+		if (route !== null || route !== ''){
+		/*if(disableBusZoom==false){*/
+		if(local_location!==true){
+		bounds.extend(latlng);
+		/*}*/
+		}
+		}
+		var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+		
+	
+	google.maps.event.addListener(marker,'click', (function(marker,contentString4,infoWindow){                     
+           return function() {
+		   
+		   clearInterval(refreshInterval);
+		   /*console.log(marker.title);*/
+		   var getStation = function(){
+		   var line = document.getElementById("route");
+	stopsArray = [];
+	var naptanId = marker.title;
+	
+	var stationString = "https://api.tfl.gov.uk/StopPoint/"+naptanId+"/Arrivals?app_id=c3def22f&app_key=15409804fca08bb07753590bfc4291d1";
+	/*console.log(stationString);*/
+	$.ajax({
+	url:stationString,dataType:"json",
+	error: function(){
+        console.log("Stop not updated! ");
+		if(iframe){
+		iframe.innerHTML = "<div id=\"content\" class=\"content\">Error retrieving data. Please try again!</div>";
+		hideload();
+		}
+		},
+	success:function(data){
+	/*console.log(data);*/	
+		
+    for(i in data){
+		var newStation;
+		if(data[i].stationName.indexOf("DLR")>1){
+			newStation = data[i].stationName.replace(" DLR Station","");
+			}else if(data[i].stationName.indexOf("Rail")>1){
+			newStation = data[i].stationName.replace(" Rail Station","");
+			}else if(data[i].stationName.indexOf("Tram")>1){
+			newStation = data[i].stationName.replace(" Tram Stop","");
+			}else{
+			newStation=data[i].stationName.replace(" Underground Station","");
+			}	
+		var newline = data[i].lineId;
+		/*console.log(newStation + ' ' + station);
+		console.log(newline + ' ' + line);*/
+		/*if(newStation==station){ // && data[i].lineId==line){*/
+			
+		/*if(stopsArray.includes(data[i].vehicleId)){
+		
+		}else{*/
+		var duplicate;
+		if(route.toLowerCase()=="dlr"||route.toLowerCase()=="tfl-rail"){
+		duplicate = false;
+		/*duplicate = stopsArray.some(function(o){return o["id"] === data[i].id;})*/
+		}else{
+		duplicate = stopsArray.some(function(o){return o["id"] === data[i].id;})
+		}
+		if(duplicate){
+			/*Do not push duplicate vehicleId*/
+		}else{
+			var towards;
+			if(newline=="dlr"){
+				towards = data[i].destinationName.replace(" DLR Station","");
+			}else if(newline=="tfl-rail"||newline=="london-overground"||newline=="overground"){
+			towards = data[i].destinationName.replace(" Rail Station","");
+			}else if(data[i].destinationName=="tram"){
+			towards = data[i].destinationName.replace(" Tram Stop","");
+			}else if(data[i].destinationName===undefined){
+				towards = "Check Destination!"
+			}else{
+				towards = data[i].destinationName.replace(" Underground Station","");
+			}
+			if(towards.indexOf(",")>1){
+			towards=towards.substr(0,towards.indexOf(','));
+			}
+			stopsArray.push({
+			id: data[i].id,
+			vehicleId: data[i].vehicleId,
+			towards: towards,
+			timeToStation: Math.round(data[i].timeToStation/60),
+			lineId: data[i].lineId,
+			platformName: data[i].platformName,
+			stopType: data[i].stopType,
+			stationName: data[i].stationName	
+			});
+		/*}*/
+		}
+		/*}*/	
+			/*content.innerHTML += "<br />" + data[i].towards + " " + Math.round(data[i].timeToStation/60) + " mins";*/
+			
+		}
+	
+	stopsArray.sort(function(a,b) {
+    var x = a.timeToStation;
+    var y = b.timeToStation;
+    return x < y ? -1 : x > y ? 1 : 0;
+	});
+	/*console.log(stopsArray);*/
+	if(iframe){
+	iframe.innerHTML = "";
+	if(stopsArray.length==0){
+	iframe.innerHTML  = "<div id=\"content\" class=\"content\">No Departures within 30 mins</div>";	
+	}else{
+	for (var k = 0; k < stopsArray.length; k++) {
+	var colour = [];
+	colour = findObjectByKey(routeColour, 'line', stopsArray[k].lineId);
+	if(colour==null){
+		colour = [];
+		colour={"color":"#ffffff","background":"red"};
+		};
+	var dueContent;
+	if(stopsArray[k].timeToStation==0){
+		dueContent = "Due</div></div><div style=\"clear: both;\"></div>";
+		}else if(stopsArray[k].timeToStation<2){
+		dueContent = stopsArray[k].timeToStation +" min</div></div><div style=\"clear: both;\"></div>";
+		}else{
+			dueContent = stopsArray[k].timeToStation +" mins</div></div><div style=\"clear: both;\"></div>";
+			}
+	/*content.innerHTML += "<br />" + stopsArray[k].lineId + " " +stopsArray[k].towards + " "*/
+	iframe.innerHTML  += "<div id=\"content\" class=\"content\"><div id=\"route\" class=\"route\" style=\"color:"+colour.color+";background-color:"+colour.background+";\">"+stopsArray[k].lineId.toUpperCase()+"</div><div id=\"towards\" class=\"towards\"> to " +stopsArray[k].towards+ " </div><div id=\"due\" class=\"due\">"+dueContent;
+	
+	}
+	contentString4 += "</div></div>";
+	
+	}
+	hideload();
+	}
+	}
+	
+	});
+
+}
+getStation();
+
+		    if (currentInfoWindow != null) {
+        	currentInfoWindow.close();
+    	    } 
+           infoWindow.setContent(contentString4);
+           infoWindow.open(map,marker);
+		   currentInfoWindow = infoWindow; 
+		   
+		   clearInterval(refreshInterval);
+		   countdown(2);
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
+	       refreshInterval=self.setInterval(function(){
+		   time = new Date();
+		   newTime = ("0" + time.getHours()).slice(-2) + ":" + ("0" + time.getMinutes()).slice(-2);
+		   retrievedTime.innerHTML = newTime;
+		   console.log("Refresh "+marker.title+" Arrivals at "+newTime);
+		   getStation();
+		   countdown(2);
+	       }, 120000);
+		   
+        };
+    })(marker,contentString4,infoWindow));
+	google.maps.event.addListener(map,"click",function(e){infoWindow.close(map,marker);clearInterval(refreshInterval);});
+}
+	/* END STOP LOOP */
+   });
+   
+   /*if(disableBusZoom==false){*/
+   if(local_location!==true){
+   /* This is needed to set the zoom after fitbounds,*/ 
+	google.maps.event.addListener(map, 'zoom_changed', function() {
+    zoomChangeBoundsListener = 
+        google.maps.event.addListener(map, 'bounds_changed', function(event) {
+            if (this.getZoom() > 15 && this.initialZoom == true) {
+                /* Change max/min zoom here*/
+                this.setZoom(15);
+                this.initialZoom = false;
+            }
+        google.maps.event.removeListener(zoomChangeBoundsListener);
+    });
+});
+if (route != null || route != ''){
+map.initialZoom = true;
+/* map.fitBounds(bounds);*/
+   
+    map.fitBounds(bounds);
+	map.setCenter(bounds.getCenter());
+	}
+	}
+	/*}*/
+	}
+/* END DOWNLOAD FUNCTION */
+});
+/* END IF ROUTE NOT EMPTY */
+}else{
+if (route == null || route == ''){
+if(local_location==true){
+resetMarkers(busMarkersArray);
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(function(position){
+/*loc_markers[0].setMap(null);*/
+loc_markers = [];
+var pos=new L.LatLng(position.coords.latitude,position.coords.longitude);
+myLocation=pos;
+listLocalStops(myLocation);
+/*var marker=new google.maps.Marker({position:pos,draggable:true,animation:google.maps.Animation.DROP,map:map,label: ''});
+map.setCenter(pos);
+loc_markers.push(marker);*/
+});
+}
+}
+}
+}
+});
+/* END BUSES */
+
+var busOptions = {
+		data: [{icon:"/img/buses.png", route:"1"}, {icon:"/img/buses.png", route:"2"}, {icon:"/img/buses.png", route:"3"}, {icon:"/img/buses.png", route:"4"}, {icon:"/img/buses.png", route:"5"}, {icon:"/img/buses.png", route:"6"}, {icon:"/img/buses.png", route:"7"}, {icon:"/img/buses.png", route:"8"}, {icon:"/img/buses.png", route:"9"}, {icon:"/img/buses.png", route:"11"}, {icon:"/img/buses.png", route:"12"}, {icon:"/img/buses.png", route:"13"}, {icon:"/img/buses.png", route:"14"}, {icon:"/img/buses.png", route:"15"}, {icon:"/img/buses.png", route:"16"}, {icon:"/img/buses.png", route:"17"}, {icon:"/img/buses.png", route:"18"}, {icon:"/img/buses.png", route:"19"}, {icon:"/img/buses.png", route:"20"}, {icon:"/img/buses.png", route:"21"}, {icon:"/img/buses.png", route:"22"}, {icon:"/img/buses.png", route:"23"}, {icon:"/img/buses.png", route:"24"}, {icon:"/img/buses.png", route:"25"}, {icon:"/img/buses.png", route:"26"}, {icon:"/img/buses.png", route:"27"}, {icon:"/img/buses.png", route:"28"}, {icon:"/img/buses.png", route:"29"}, {icon:"/img/buses.png", route:"30"}, {icon:"/img/buses.png", route:"31"}, {icon:"/img/buses.png", route:"32"}, {icon:"/img/buses.png", route:"33"}, {icon:"/img/buses.png", route:"34"}, {icon:"/img/buses.png", route:"35"}, {icon:"/img/buses.png", route:"36"}, {icon:"/img/buses.png", route:"37"}, {icon:"/img/buses.png", route:"38"}, {icon:"/img/buses.png", route:"39"}, {icon:"/img/buses.png", route:"40"}, {icon:"/img/buses.png", route:"41"}, {icon:"/img/buses.png", route:"42"}, {icon:"/img/buses.png", route:"43"}, {icon:"/img/buses.png", route:"44"}, {icon:"/img/buses.png", route:"45"}, {icon:"/img/buses.png", route:"46"}, {icon:"/img/buses.png", route:"47"}, {icon:"/img/buses.png", route:"48"}, {icon:"/img/buses.png", route:"49"}, {icon:"/img/buses.png", route:"50"}, {icon:"/img/buses.png", route:"51"}, {icon:"/img/buses.png", route:"52"}, {icon:"/img/buses.png", route:"53"}, {icon:"/img/buses.png", route:"54"}, {icon:"/img/buses.png", route:"55"}, {icon:"/img/buses.png", route:"56"}, {icon:"/img/buses.png", route:"57"}, {icon:"/img/buses.png", route:"58"}, {icon:"/img/buses.png", route:"59"}, {icon:"/img/buses.png", route:"60"}, {icon:"/img/buses.png", route:"61"}, {icon:"/img/buses.png", route:"62"}, {icon:"/img/buses.png", route:"63"}, {icon:"/img/buses.png", route:"64"}, {icon:"/img/buses.png", route:"65"}, {icon:"/img/buses.png", route:"66"}, {icon:"/img/buses.png", route:"67"}, {icon:"/img/buses.png", route:"68"}, {icon:"/img/buses.png", route:"69"}, {icon:"/img/buses.png", route:"70"}, {icon:"/img/buses.png", route:"71"}, {icon:"/img/buses.png", route:"72"}, {icon:"/img/buses.png", route:"73"}, {icon:"/img/buses.png", route:"74"}, {icon:"/img/buses.png", route:"75"}, {icon:"/img/buses.png", route:"76"}, {icon:"/img/buses.png", route:"77"}, {icon:"/img/buses.png", route:"78"}, {icon:"/img/buses.png", route:"79"}, {icon:"/img/buses.png", route:"80"}, {icon:"/img/buses.png", route:"81"}, {icon:"/img/buses.png", route:"83"}, {icon:"/img/buses.png", route:"85"}, {icon:"/img/buses.png", route:"86"}, {icon:"/img/buses.png", route:"87"}, {icon:"/img/buses.png", route:"88"}, {icon:"/img/buses.png", route:"89"}, {icon:"/img/buses.png", route:"90"}, {icon:"/img/buses.png", route:"91"}, {icon:"/img/buses.png", route:"92"}, {icon:"/img/buses.png", route:"93"}, {icon:"/img/buses.png", route:"94"}, {icon:"/img/buses.png", route:"95"}, {icon:"/img/buses.png", route:"96"}, {icon:"/img/buses.png", route:"97"}, {icon:"/img/buses.png", route:"98"}, {icon:"/img/buses.png", route:"99"}, {icon:"/img/buses.png", route:"100"}, {icon:"/img/buses.png", route:"101"}, {icon:"/img/buses.png", route:"102"}, {icon:"/img/buses.png", route:"103"}, {icon:"/img/buses.png", route:"104"}, {icon:"/img/buses.png", route:"105"}, {icon:"/img/buses.png", route:"106"}, {icon:"/img/buses.png", route:"107"}, {icon:"/img/buses.png", route:"108"}, {icon:"/img/buses.png", route:"109"}, {icon:"/img/buses.png", route:"110"}, {icon:"/img/buses.png", route:"111"}, {icon:"/img/buses.png", route:"112"}, {icon:"/img/buses.png", route:"113"}, {icon:"/img/buses.png", route:"114"}, {icon:"/img/buses.png", route:"115"}, {icon:"/img/buses.png", route:"116"}, {icon:"/img/buses.png", route:"117"}, {icon:"/img/buses.png", route:"118"}, {icon:"/img/buses.png", route:"119"}, {icon:"/img/buses.png", route:"120"}, {icon:"/img/buses.png", route:"121"}, {icon:"/img/buses.png", route:"122"}, {icon:"/img/buses.png", route:"123"}, {icon:"/img/buses.png", route:"124"}, {icon:"/img/buses.png", route:"125"}, {icon:"/img/buses.png", route:"126"}, {icon:"/img/buses.png", route:"127"}, {icon:"/img/buses.png", route:"128"}, {icon:"/img/buses.png", route:"129"}, {icon:"/img/buses.png", route:"130"}, {icon:"/img/buses.png", route:"131"}, {icon:"/img/buses.png", route:"132"}, {icon:"/img/buses.png", route:"133"}, {icon:"/img/buses.png", route:"134"}, {icon:"/img/buses.png", route:"135"}, {icon:"/img/buses.png", route:"136"}, {icon:"/img/buses.png", route:"137"}, {icon:"/img/buses.png", route:"138"}, {icon:"/img/buses.png", route:"139"}, {icon:"/img/buses.png", route:"140"}, {icon:"/img/buses.png", route:"141"}, {icon:"/img/buses.png", route:"142"}, {icon:"/img/buses.png", route:"143"}, {icon:"/img/buses.png", route:"144"}, {icon:"/img/buses.png", route:"145"}, {icon:"/img/buses.png", route:"146"}, {icon:"/img/buses.png", route:"147"}, {icon:"/img/buses.png", route:"148"}, {icon:"/img/buses.png", route:"149"}, {icon:"/img/buses.png", route:"150"}, {icon:"/img/buses.png", route:"151"}, {icon:"/img/buses.png", route:"152"}, {icon:"/img/buses.png", route:"153"}, {icon:"/img/buses.png", route:"154"}, {icon:"/img/buses.png", route:"155"}, {icon:"/img/buses.png", route:"156"}, {icon:"/img/buses.png", route:"157"}, {icon:"/img/buses.png", route:"158"}, {icon:"/img/buses.png", route:"159"}, {icon:"/img/buses.png", route:"160"}, {icon:"/img/buses.png", route:"161"}, {icon:"/img/buses.png", route:"162"}, {icon:"/img/buses.png", route:"163"}, {icon:"/img/buses.png", route:"164"}, {icon:"/img/buses.png", route:"165"}, {icon:"/img/buses.png", route:"166"}, {icon:"/img/buses.png", route:"167"}, {icon:"/img/buses.png", route:"168"}, {icon:"/img/buses.png", route:"169"}, {icon:"/img/buses.png", route:"170"}, {icon:"/img/buses.png", route:"171"}, {icon:"/img/buses.png", route:"172"}, {icon:"/img/buses.png", route:"173"}, {icon:"/img/buses.png", route:"174"}, {icon:"/img/buses.png", route:"175"}, {icon:"/img/buses.png", route:"176"}, {icon:"/img/buses.png", route:"177"}, {icon:"/img/buses.png", route:"178"}, {icon:"/img/buses.png", route:"179"}, {icon:"/img/buses.png", route:"180"}, {icon:"/img/buses.png", route:"181"}, {icon:"/img/buses.png", route:"182"}, {icon:"/img/buses.png", route:"183"}, {icon:"/img/buses.png", route:"184"}, {icon:"/img/buses.png", route:"185"}, {icon:"/img/buses.png", route:"186"}, {icon:"/img/buses.png", route:"187"}, {icon:"/img/buses.png", route:"188"}, {icon:"/img/buses.png", route:"189"}, {icon:"/img/buses.png", route:"190"}, {icon:"/img/buses.png", route:"191"}, {icon:"/img/buses.png", route:"192"}, {icon:"/img/buses.png", route:"193"}, {icon:"/img/buses.png", route:"194"}, {icon:"/img/buses.png", route:"195"}, {icon:"/img/buses.png", route:"196"}, {icon:"/img/buses.png", route:"197"}, {icon:"/img/buses.png", route:"198"}, {icon:"/img/buses.png", route:"199"}, {icon:"/img/buses.png", route:"200"}, {icon:"/img/buses.png", route:"201"}, {icon:"/img/buses.png", route:"202"}, {icon:"/img/buses.png", route:"203"}, {icon:"/img/buses.png", route:"204"}, {icon:"/img/buses.png", route:"205"}, {icon:"/img/buses.png", route:"206"}, {icon:"/img/buses.png", route:"207"}, {icon:"/img/buses.png", route:"208"}, {icon:"/img/buses.png", route:"209"}, {icon:"/img/buses.png", route:"210"}, {icon:"/img/buses.png", route:"211"}, {icon:"/img/buses.png", route:"212"}, {icon:"/img/buses.png", route:"213"}, {icon:"/img/buses.png", route:"214"}, {icon:"/img/buses.png", route:"215"}, {icon:"/img/buses.png", route:"216"}, {icon:"/img/buses.png", route:"217"}, {icon:"/img/buses.png", route:"219"}, {icon:"/img/buses.png", route:"220"}, {icon:"/img/buses.png", route:"221"}, {icon:"/img/buses.png", route:"222"}, {icon:"/img/buses.png", route:"223"}, {icon:"/img/buses.png", route:"224"}, {icon:"/img/buses.png", route:"225"}, {icon:"/img/buses.png", route:"226"}, {icon:"/img/buses.png", route:"227"}, {icon:"/img/buses.png", route:"228"}, {icon:"/img/buses.png", route:"229"}, {icon:"/img/buses.png", route:"230"}, {icon:"/img/buses.png", route:"231"}, {icon:"/img/buses.png", route:"232"}, {icon:"/img/buses.png", route:"233"}, {icon:"/img/buses.png", route:"234"}, {icon:"/img/buses.png", route:"235"}, {icon:"/img/buses.png", route:"236"}, {icon:"/img/buses.png", route:"237"}, {icon:"/img/buses.png", route:"238"}, {icon:"/img/buses.png", route:"240"}, {icon:"/img/buses.png", route:"241"}, {icon:"/img/buses.png", route:"242"}, {icon:"/img/buses.png", route:"243"}, {icon:"/img/buses.png", route:"244"}, {icon:"/img/buses.png", route:"245"}, {icon:"/img/buses.png", route:"246"}, {icon:"/img/buses.png", route:"247"}, {icon:"/img/buses.png", route:"248"}, {icon:"/img/buses.png", route:"249"}, {icon:"/img/buses.png", route:"250"}, {icon:"/img/buses.png", route:"251"}, {icon:"/img/buses.png", route:"252"}, {icon:"/img/buses.png", route:"253"}, {icon:"/img/buses.png", route:"254"}, {icon:"/img/buses.png", route:"255"}, {icon:"/img/buses.png", route:"256"}, {icon:"/img/buses.png", route:"257"}, {icon:"/img/buses.png", route:"258"}, {icon:"/img/buses.png", route:"259"}, {icon:"/img/buses.png", route:"260"}, {icon:"/img/buses.png", route:"261"}, {icon:"/img/buses.png", route:"262"}, {icon:"/img/buses.png", route:"263"}, {icon:"/img/buses.png", route:"264"}, {icon:"/img/buses.png", route:"265"}, {icon:"/img/buses.png", route:"266"}, {icon:"/img/buses.png", route:"267"}, {icon:"/img/buses.png", route:"268"}, {icon:"/img/buses.png", route:"269"}, {icon:"/img/buses.png", route:"270"}, {icon:"/img/buses.png", route:"271"}, {icon:"/img/buses.png", route:"272"}, {icon:"/img/buses.png", route:"273"}, {icon:"/img/buses.png", route:"274"}, {icon:"/img/buses.png", route:"275"}, {icon:"/img/buses.png", route:"276"}, {icon:"/img/buses.png", route:"277"}, {icon:"/img/buses.png", route:"279"}, {icon:"/img/buses.png", route:"280"}, {icon:"/img/buses.png", route:"281"}, {icon:"/img/buses.png", route:"282"}, {icon:"/img/buses.png", route:"283"}, {icon:"/img/buses.png", route:"284"}, {icon:"/img/buses.png", route:"285"}, {icon:"/img/buses.png", route:"286"}, {icon:"/img/buses.png", route:"287"}, {icon:"/img/buses.png", route:"288"}, {icon:"/img/buses.png", route:"289"}, {icon:"/img/buses.png", route:"290"}, {icon:"/img/buses.png", route:"291"}, {icon:"/img/buses.png", route:"292"}, {icon:"/img/buses.png", route:"293"}, {icon:"/img/buses.png", route:"294"}, {icon:"/img/buses.png", route:"295"}, {icon:"/img/buses.png", route:"296"}, {icon:"/img/buses.png", route:"297"}, {icon:"/img/buses.png", route:"298"}, {icon:"/img/buses.png", route:"299"}, {icon:"/img/buses.png", route:"300"}, {icon:"/img/buses.png", route:"302"}, {icon:"/img/buses.png", route:"303"}, {icon:"/img/buses.png", route:"305"}, {icon:"/img/buses.png", route:"307"}, {icon:"/img/buses.png", route:"308"}, {icon:"/img/buses.png", route:"309"}, {icon:"/img/buses.png", route:"312"}, {icon:"/img/buses.png", route:"313"}, {icon:"/img/buses.png", route:"314"}, {icon:"/img/buses.png", route:"315"}, {icon:"/img/buses.png", route:"316"}, {icon:"/img/buses.png", route:"317"}, {icon:"/img/buses.png", route:"318"}, {icon:"/img/buses.png", route:"319"}, {icon:"/img/buses.png", route:"320"}, {icon:"/img/buses.png", route:"321"}, {icon:"/img/buses.png", route:"322"}, {icon:"/img/buses.png", route:"323"}, {icon:"/img/buses.png", route:"324"}, {icon:"/img/buses.png", route:"325"}, {icon:"/img/buses.png", route:"326"}, {icon:"/img/buses.png", route:"327"}, {icon:"/img/buses.png", route:"328"}, {icon:"/img/buses.png", route:"329"}, {icon:"/img/buses.png", route:"330"}, {icon:"/img/buses.png", route:"331"}, {icon:"/img/buses.png", route:"332"}, {icon:"/img/buses.png", route:"333"}, {icon:"/img/buses.png", route:"336"}, {icon:"/img/buses.png", route:"337"}, {icon:"/img/buses.png", route:"339"}, {icon:"/img/buses.png", route:"340"}, {icon:"/img/buses.png", route:"341"}, {icon:"/img/buses.png", route:"343"}, {icon:"/img/buses.png", route:"344"}, {icon:"/img/buses.png", route:"345"}, {icon:"/img/buses.png", route:"346"}, {icon:"/img/buses.png", route:"347"}, {icon:"/img/buses.png", route:"349"}, {icon:"/img/buses.png", route:"350"}, {icon:"/img/buses.png", route:"352"}, {icon:"/img/buses.png", route:"353"}, {icon:"/img/buses.png", route:"354"}, {icon:"/img/buses.png", route:"355"}, {icon:"/img/buses.png", route:"356"}, {icon:"/img/buses.png", route:"357"}, {icon:"/img/buses.png", route:"358"}, {icon:"/img/buses.png", route:"359"}, {icon:"/img/buses.png", route:"360"}, {icon:"/img/buses.png", route:"362"}, {icon:"/img/buses.png", route:"363"}, {icon:"/img/buses.png", route:"364"}, {icon:"/img/buses.png", route:"365"}, {icon:"/img/buses.png", route:"366"}, {icon:"/img/buses.png", route:"367"}, {icon:"/img/buses.png", route:"368"}, {icon:"/img/buses.png", route:"370"}, {icon:"/img/buses.png", route:"371"}, {icon:"/img/buses.png", route:"372"}, {icon:"/img/buses.png", route:"375"}, {icon:"/img/buses.png", route:"376"}, {icon:"/img/buses.png", route:"377"}, {icon:"/img/buses.png", route:"379"}, {icon:"/img/buses.png", route:"380"}, {icon:"/img/buses.png", route:"381"}, {icon:"/img/buses.png", route:"382"}, {icon:"/img/buses.png", route:"383"}, {icon:"/img/buses.png", route:"384"}, {icon:"/img/buses.png", route:"385"}, {icon:"/img/buses.png", route:"386"}, {icon:"/img/buses.png", route:"388"}, {icon:"/img/buses.png", route:"389"}, {icon:"/img/buses.png", route:"390"}, {icon:"/img/buses.png", route:"391"}, {icon:"/img/buses.png", route:"393"}, {icon:"/img/buses.png", route:"394"}, {icon:"/img/buses.png", route:"395"}, {icon:"/img/buses.png", route:"396"}, {icon:"/img/buses.png", route:"397"}, {icon:"/img/buses.png", route:"398"}, {icon:"/img/buses.png", route:"399"}, {icon:"/img/buses.png", route:"401"}, {icon:"/img/buses.png", route:"403"}, {icon:"/img/buses.png", route:"404"}, {icon:"/img/buses.png", route:"405"}, {icon:"/img/buses.png", route:"406"}, {icon:"/img/buses.png", route:"407"}, {icon:"/img/buses.png", route:"410"}, {icon:"/img/buses.png", route:"411"}, {icon:"/img/buses.png", route:"412"}, {icon:"/img/buses.png", route:"413"}, {icon:"/img/buses.png", route:"414"}, {icon:"/img/buses.png", route:"415"}, {icon:"/img/buses.png", route:"417"}, {icon:"/img/buses.png", route:"418"}, {icon:"/img/buses.png", route:"419"}, {icon:"/img/buses.png", route:"422"}, {icon:"/img/buses.png", route:"423"}, {icon:"/img/buses.png", route:"424"}, {icon:"/img/buses.png", route:"425"}, {icon:"/img/buses.png", route:"427"}, {icon:"/img/buses.png", route:"428"}, {icon:"/img/buses.png", route:"430"}, {icon:"/img/buses.png", route:"432"}, {icon:"/img/buses.png", route:"433"}, {icon:"/img/buses.png", route:"434"}, {icon:"/img/buses.png", route:"436"}, {icon:"/img/buses.png", route:"440"}, {icon:"/img/buses.png", route:"444"}, {icon:"/img/buses.png", route:"450"}, {icon:"/img/buses.png", route:"452"}, {icon:"/img/buses.png", route:"453"}, {icon:"/img/buses.png", route:"455"}, {icon:"/img/buses.png", route:"460"}, {icon:"/img/buses.png", route:"462"}, {icon:"/img/buses.png", route:"463"}, {icon:"/img/buses.png", route:"464"}, {icon:"/img/buses.png", route:"465"}, {icon:"/img/buses.png", route:"466"}, {icon:"/img/buses.png", route:"467"}, {icon:"/img/buses.png", route:"468"}, {icon:"/img/buses.png", route:"469"}, {icon:"/img/buses.png", route:"470"}, {icon:"/img/buses.png", route:"472"}, {icon:"/img/buses.png", route:"473"}, {icon:"/img/buses.png", route:"474"}, {icon:"/img/buses.png", route:"476"}, {icon:"/img/buses.png", route:"481"}, {icon:"/img/buses.png", route:"482"}, {icon:"/img/buses.png", route:"483"}, {icon:"/img/buses.png", route:"484"}, {icon:"/img/buses.png", route:"485"}, {icon:"/img/buses.png", route:"486"}, {icon:"/img/buses.png", route:"487"}, {icon:"/img/buses.png", route:"488"}, {icon:"/img/buses.png", route:"490"}, {icon:"/img/buses.png", route:"491"}, {icon:"/img/buses.png", route:"492"}, {icon:"/img/buses.png", route:"493"}, {icon:"/img/buses.png", route:"496"}, {icon:"/img/buses.png", route:"498"}, {icon:"/img/buses.png", route:"499"}, {icon:"/img/buses.png", route:"507"}, {icon:"/img/buses.png", route:"508"}, {icon:"/img/buses.png", route:"521"}, {icon:"/img/buses.png", route:"530"}, {icon:"/img/buses.png", route:"549"}, {icon:"/img/buses.png", route:"559"}, {icon:"/img/buses.png", route:"570"}, {icon:"/img/buses.png", route:"601"}, {icon:"/img/buses.png", route:"602"}, {icon:"/img/buses.png", route:"603"}, {icon:"/img/buses.png", route:"605"}, {icon:"/img/buses.png", route:"606"}, {icon:"/img/buses.png", route:"607"}, {icon:"/img/buses.png", route:"608"}, {icon:"/img/buses.png", route:"609"}, {icon:"/img/buses.png", route:"611"}, {icon:"/img/buses.png", route:"612"}, {icon:"/img/buses.png", route:"613"}, {icon:"/img/buses.png", route:"616"}, {icon:"/img/buses.png", route:"617"}, {icon:"/img/buses.png", route:"621"}, {icon:"/img/buses.png", route:"624"}, {icon:"/img/buses.png", route:"625"}, {icon:"/img/buses.png", route:"626"}, {icon:"/img/buses.png", route:"627"}, {icon:"/img/buses.png", route:"628"}, {icon:"/img/buses.png", route:"629"}, {icon:"/img/buses.png", route:"631"}, {icon:"/img/buses.png", route:"632"}, {icon:"/img/buses.png", route:"633"}, {icon:"/img/buses.png", route:"634"}, {icon:"/img/buses.png", route:"635"}, {icon:"/img/buses.png", route:"638"}, {icon:"/img/buses.png", route:"639"}, {icon:"/img/buses.png", route:"640"}, {icon:"/img/buses.png", route:"642"}, {icon:"/img/buses.png", route:"643"}, {icon:"/img/buses.png", route:"646"}, {icon:"/img/buses.png", route:"648"}, {icon:"/img/buses.png", route:"649"}, {icon:"/img/buses.png", route:"650"}, {icon:"/img/buses.png", route:"651"}, {icon:"/img/buses.png", route:"652"}, {icon:"/img/buses.png", route:"653"}, {icon:"/img/buses.png", route:"654"}, {icon:"/img/buses.png", route:"655"}, {icon:"/img/buses.png", route:"656"}, {icon:"/img/buses.png", route:"657"}, {icon:"/img/buses.png", route:"658"}, {icon:"/img/buses.png", route:"660"}, {icon:"/img/buses.png", route:"661"}, {icon:"/img/buses.png", route:"662"}, {icon:"/img/buses.png", route:"663"}, {icon:"/img/buses.png", route:"664"}, {icon:"/img/buses.png", route:"665"}, {icon:"/img/buses.png", route:"667"}, {icon:"/img/buses.png", route:"669"}, {icon:"/img/buses.png", route:"670"}, {icon:"/img/buses.png", route:"671"}, {icon:"/img/buses.png", route:"672"}, {icon:"/img/buses.png", route:"673"}, {icon:"/img/buses.png", route:"674"}, {icon:"/img/buses.png", route:"675"}, {icon:"/img/buses.png", route:"677"}, {icon:"/img/buses.png", route:"678"}, {icon:"/img/buses.png", route:"679"}, {icon:"/img/buses.png", route:"681"}, {icon:"/img/buses.png", route:"683"}, {icon:"/img/buses.png", route:"684"}, {icon:"/img/buses.png", route:"685"}, {icon:"/img/buses.png", route:"686"}, {icon:"/img/buses.png", route:"687"}, {icon:"/img/buses.png", route:"688"}, {icon:"/img/buses.png", route:"689"}, {icon:"/img/buses.png", route:"690"}, {icon:"/img/buses.png", route:"692"}, {icon:"/img/buses.png", route:"696"}, {icon:"/img/buses.png", route:"697"}, {icon:"/img/buses.png", route:"698"}, {icon:"/img/buses.png", route:"699"}, {icon:"/img/buses.png", route:"965"}, {icon:"/img/buses.png", route:"969"}, {icon:"/img/buses.png", route:"23A"}, {icon:"/img/buses.png", route:"256D"}, {icon:"/img/buses.png", route:"2X"}, {icon:"/img/buses.png", route:"36X"}, {icon:"/img/buses.png", route:"A10"}, {icon:"/img/buses.png", route:"B11"}, {icon:"/img/buses.png", route:"B12"}, {icon:"/img/buses.png", route:"B13"}, {icon:"/img/buses.png", route:"B14"}, {icon:"/img/buses.png", route:"B15"}, {icon:"/img/buses.png", route:"B16"}, {icon:"/img/buses.png", route:"C1"}, {icon:"/img/buses.png", route:"C2"}, {icon:"/img/buses.png", route:"C3"}, {icon:"/img/buses.png", route:"C10"}, {icon:"/img/buses.png", route:"C11"}, {icon:"/img/buses.png", route:"D3"}, {icon:"/img/buses.png", route:"D6"}, {icon:"/img/buses.png", route:"D7"}, {icon:"/img/buses.png", route:"D8"}, {icon:"/img/buses.png", route:"E1"}, {icon:"/img/buses.png", route:"E2"}, {icon:"/img/buses.png", route:"E3"}, {icon:"/img/buses.png", route:"E5"}, {icon:"/img/buses.png", route:"E6"}, {icon:"/img/buses.png", route:"E7"}, {icon:"/img/buses.png", route:"E8"}, {icon:"/img/buses.png", route:"E9"}, {icon:"/img/buses.png", route:"E10"}, {icon:"/img/buses.png", route:"E11"}, {icon:"/img/buses.png", route:"EL1"}, {icon:"/img/buses.png", route:"EL2"}, {icon:"/img/buses.png", route:"EL3"}, {icon:"/img/buses.png", route:"G1"}, {icon:"/img/buses.png", route:"H2"}, {icon:"/img/buses.png", route:"H3"}, {icon:"/img/buses.png", route:"H9"}, {icon:"/img/buses.png", route:"H10"}, {icon:"/img/buses.png", route:"H11"}, {icon:"/img/buses.png", route:"H12"}, {icon:"/img/buses.png", route:"H13"}, {icon:"/img/buses.png", route:"H14"}, {icon:"/img/buses.png", route:"H17"}, {icon:"/img/buses.png", route:"H18"}, {icon:"/img/buses.png", route:"H19"}, {icon:"/img/buses.png", route:"H20"}, {icon:"/img/buses.png", route:"H22"}, {icon:"/img/buses.png", route:"H25"}, {icon:"/img/buses.png", route:"H26"}, {icon:"/img/buses.png", route:"H28"}, {icon:"/img/buses.png", route:"H32"}, {icon:"/img/buses.png", route:"H37"}, {icon:"/img/buses.png", route:"H91"}, {icon:"/img/buses.png", route:"H98"}, {icon:"/img/buses.png", route:"K1"}, {icon:"/img/buses.png", route:"K2"}, {icon:"/img/buses.png", route:"K3"}, {icon:"/img/buses.png", route:"K4"}, {icon:"/img/buses.png", route:"K5"}, {icon:"/img/buses.png", route:"N1"}, {icon:"/img/buses.png", route:"N2"}, {icon:"/img/buses.png", route:"N3"}, {icon:"/img/buses.png", route:"N5"}, {icon:"/img/buses.png", route:"N7"}, {icon:"/img/buses.png", route:"N8"}, {icon:"/img/buses.png", route:"N9"}, {icon:"/img/buses.png", route:"N11"}, {icon:"/img/buses.png", route:"N15"}, {icon:"/img/buses.png", route:"N16"}, {icon:"/img/buses.png", route:"N18"}, {icon:"/img/buses.png", route:"N19"}, {icon:"/img/buses.png", route:"N20"}, {icon:"/img/buses.png", route:"N21"}, {icon:"/img/buses.png", route:"N22"}, {icon:"/img/buses.png", route:"N26"}, {icon:"/img/buses.png", route:"N28"}, {icon:"/img/buses.png", route:"N29"}, {icon:"/img/buses.png", route:"N31"}, {icon:"/img/buses.png", route:"N38"}, {icon:"/img/buses.png", route:"N41"}, {icon:"/img/buses.png", route:"N44"}, {icon:"/img/buses.png", route:"N55"}, {icon:"/img/buses.png", route:"N63"}, {icon:"/img/buses.png", route:"N68"}, {icon:"/img/buses.png", route:"N73"}, {icon:"/img/buses.png", route:"N74"}, {icon:"/img/buses.png", route:"N83"}, {icon:"/img/buses.png", route:"N86"}, {icon:"/img/buses.png", route:"N87"}, {icon:"/img/buses.png", route:"N89"}, {icon:"/img/buses.png", route:"N91"}, {icon:"/img/buses.png", route:"N97"}, {icon:"/img/buses.png", route:"N98"}, {icon:"/img/buses.png", route:"N109"}, {icon:"/img/buses.png", route:"N113"}, {icon:"/img/buses.png", route:"N133"}, {icon:"/img/buses.png", route:"N136"}, {icon:"/img/buses.png", route:"N137"}, {icon:"/img/buses.png", route:"N155"}, {icon:"/img/buses.png", route:"N171"}, {icon:"/img/buses.png", route:"N199"}, {icon:"/img/buses.png", route:"N205"}, {icon:"/img/buses.png", route:"N207"}, {icon:"/img/buses.png", route:"N253"}, {icon:"/img/buses.png", route:"N277"}, {icon:"/img/buses.png", route:"N279"}, {icon:"/img/buses.png", route:"N343"}, {icon:"/img/buses.png", route:"N381"}, {icon:"/img/buses.png", route:"N550"}, {icon:"/img/buses.png", route:"N551"}, {icon:"/img/buses.png", route:"P4"}, {icon:"/img/buses.png", route:"P5"}, {icon:"/img/buses.png", route:"P12"}, {icon:"/img/buses.png", route:"P13"}, {icon:"/img/buses.png", route:"R1"}, {icon:"/img/buses.png", route:"R2"}, {icon:"/img/buses.png", route:"R3"}, {icon:"/img/buses.png", route:"R4"}, {icon:"/img/buses.png", route:"R5"}, {icon:"/img/buses.png", route:"R6"}, {icon:"/img/buses.png", route:"R7"}, {icon:"/img/buses.png", route:"R8"}, {icon:"/img/buses.png", route:"R9"}, {icon:"/img/buses.png", route:"R10"}, {icon:"/img/buses.png", route:"R11"}, {icon:"/img/buses.png", route:"R68"}, {icon:"/img/buses.png", route:"R70"}, {icon:"/img/buses.png", route:"RB1"}, {icon:"/img/buses.png", route:"RB1X"}, {icon:"/img/buses.png", route:"RB2"}, {icon:"/img/buses.png", route:"RB3"}, {icon:"/img/buses.png", route:"RB4"}, {icon:"/img/buses.png", route:"RB5"}, {icon:"/img/buses.png", route:"RB6"}, {icon:"/img/buses.png", route:"RB6A"}, {icon:"/img/buses.png", route:"RBX"}, {icon:"/img/buses.png", route:"RT1"}, {icon:"/img/buses.png", route:"RT3"}, {icon:"/img/buses.png", route:"RT5"}, {icon:"/img/buses.png", route:"RT7"}, {icon:"/img/buses.png", route:"RT8"}, {icon:"/img/buses.png", route:"RT10"}, {icon:"/img/buses.png", route:"RT11"}, {icon:"/img/buses.png", route:"RT12"}, {icon:"/img/buses.png", route:"RV1"}, {icon:"/img/buses.png", route:"S1"}, {icon:"/img/buses.png", route:"S3"}, {icon:"/img/buses.png", route:"S4"}, {icon:"/img/buses.png", route:"T1"}, {icon:"/img/buses.png", route:"T2"}, {icon:"/img/buses.png", route:"T3"}, {icon:"/img/buses.png", route:"T4"}, {icon:"/img/buses.png", route:"U1"}, {icon:"/img/buses.png", route:"U2"}, {icon:"/img/buses.png", route:"U3"}, {icon:"/img/buses.png", route:"U4"}, {icon:"/img/buses.png", route:"U5"}, {icon:"/img/buses.png", route:"U7"}, {icon:"/img/buses.png", route:"U9"}, {icon:"/img/buses.png", route:"U10"}, {icon:"/img/buses.png", route:"UL1"}, {icon:"/img/buses.png", route:"UL2"}, {icon:"/img/buses.png", route:"UL3"}, {icon:"/img/buses.png", route:"UL4"}, {icon:"/img/buses.png", route:"UL5"}, {icon:"/img/buses.png", route:"UL6"}, {icon:"/img/buses.png", route:"UL7"}, {icon:"/img/buses.png", route:"UL8"}, {icon:"/img/buses.png", route:"UL9"}, {icon:"/img/buses.png", route:"UL10"}, {icon:"/img/buses.png", route:"UL11"}, {icon:"/img/buses.png", route:"UL12"}, {icon:"/img/buses.png", route:"UL13"}, {icon:"/img/buses.png", route:"UL14"}, {icon:"/img/buses.png", route:"UL15"}, {icon:"/img/buses.png", route:"UL16"}, {icon:"/img/buses.png", route:"UL17"}, {icon:"/img/buses.png", route:"UL18"}, {icon:"/img/buses.png", route:"UL19"}, {icon:"/img/buses.png", route:"UL20"}, {icon:"/img/buses.png", route:"UL21"}, {icon:"/img/buses.png", route:"UL22"}, {icon:"/img/buses.png", route:"UL23"}, {icon:"/img/buses.png", route:"UL24"}, {icon:"/img/buses.png", route:"UL25"}, {icon:"/img/buses.png", route:"UL26"}, {icon:"/img/buses.png", route:"UL27"}, {icon:"/img/buses.png", route:"UL28"}, {icon:"/img/buses.png", route:"UL29"}, {icon:"/img/buses.png", route:"UL30"}, {icon:"/img/buses.png", route:"UL31"}, {icon:"/img/buses.png", route:"UL32"}, {icon:"/img/buses.png", route:"UL33"}, {icon:"/img/buses.png", route:"UL34"}, {icon:"/img/buses.png", route:"UL35"}, {icon:"/img/buses.png", route:"UL37"}, {icon:"/img/buses.png", route:"UL39"}, {icon:"/img/buses.png", route:"UL40"}, {icon:"/img/buses.png", route:"UL41"}, {icon:"/img/buses.png", route:"UL42"}, {icon:"/img/buses.png", route:"UL43"}, {icon:"/img/buses.png", route:"UL44"}, {icon:"/img/buses.png", route:"UL46"}, {icon:"/img/buses.png", route:"UL47"}, {icon:"/img/buses.png", route:"UL48"}, {icon:"/img/buses.png", route:"UL49"}, {icon:"/img/buses.png", route:"UL50"}, {icon:"/img/buses.png", route:"UL51"}, {icon:"/img/buses.png", route:"UL52"}, {icon:"/img/buses.png", route:"UL53"}, {icon:"/img/buses.png", route:"UL55"}, {icon:"/img/buses.png", route:"UL56"}, {icon:"/img/buses.png", route:"UL57"}, {icon:"/img/buses.png", route:"UL58"}, {icon:"/img/buses.png", route:"UL61"}, {icon:"/img/buses.png", route:"UL62"}, {icon:"/img/buses.png", route:"W3"}, {icon:"/img/buses.png", route:"W4"}, {icon:"/img/buses.png", route:"W5"}, {icon:"/img/buses.png", route:"W6"}, {icon:"/img/buses.png", route:"W7"}, {icon:"/img/buses.png", route:"W8"}, {icon:"/img/buses.png", route:"W9"}, {icon:"/img/buses.png", route:"W10"}, {icon:"/img/buses.png", route:"W11"}, {icon:"/img/buses.png", route:"W12"}, {icon:"/img/buses.png", route:"W13"}, {icon:"/img/buses.png", route:"W14"}, {icon:"/img/buses.png", route:"W15"}, {icon:"/img/buses.png", route:"W16"}, {icon:"/img/buses.png", route:"W19"}, {icon:"/img/buses.png", route:"X26"}, {icon:"/img/buses.png", route:"X68"}, {icon:"/img/buses.png", route:"Y7"}, {icon:"/img/buses.png", route:"Y18"}, {icon:"/img/buses.png", route:"Y23"}, {icon:"/img/buses.png", route:"Y27"}, {icon:"/img/buses.png", route:"Y28"}, {icon:"/img/buses.png", route:"Y31"}, {icon:"/img/buses.png", route:"Y36"}, {icon:"/img/buses.png", route:"Y52"}, {icon:"/img/buses.png", route:"Y70"}, {icon:"/img/buses.png", route:"Y94"}, {icon:"/img/buses.png", route:"Y148"}, {icon:"/img/buses.png", route:"Y228"}, {icon:"/img/buses.png", route:"Y295"}, {icon:"/img/buses.png", route:"Y316"}, {icon:"/img/buses.png", route:"Y328"}, {icon:"/img/buses.png", route:"Y452"}, {icon:"/img/buses.png", route:"Y18N"}],
+		getValue: "route",
+		requestDelay: 500,
+		template: {
+		type: "iconLeft",
+		fields: {
+			iconSrc: "icon"
+		}
+		},
+		list: {
+		/*onChooseEvent: function() {
+		document.getElementById("eac-container-route").style.display='none';
+		$("#route").change();
+		},*/
+		hideAnimation: {
+			type: "slide", /*normal|slide|fade*/
+			time: 400,
+			callback: function() {}
+		},
+		showAnimation: {
+			type: "slide", /*normal|slide|fade*/
+			time: 400,
+			callback: function() {}
+		},
+		maxNumberOfElements: 10,
+		match: {
+			enabled: true
+		}
+		}
+		};
+
+		$("#route").easyAutocomplete(busOptions);
+
+	
+	/*L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.').addTo(cams),
+	L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.').addTo(cities),
+	L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.').addTo(cities),
+	L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.').addTo(cities);*/
+
+	if(map==null) {
+	var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+		mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib2xkbWFuYnJvb2siLCJhIjoiY2syZjdnN291MDkwbDNucGEwenk5Z3JvcyJ9.mkPJs0gYGgzQnfKDtnLvZw';
+
+	var //grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+		streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+		//,
+		//traffic  =  L.tileLayer(mbUrl, {id: 'mapbox.mapbox-traffic-v1',   attribution: mbAttr});
+		
+		var traffic = L.esri.dynamicMapLayer({
+			url: "https://utility.arcgis.com/usrsvcs/appservices/yJHraJGI73mhIV7k/rest/services/World/Traffic/MapServer", 
+			opacity: 0.5,
+			useCors: false
+			//,features: 
+		}); //.addTo(map);
+		
+		//console.log("Loading Map : "+Date());
+		map = L.map('map', {
+		center: [51.501049, -0.051842],
+		zoom: 12,
+		zoomControl: false,
+		layers: [streets, traffic, cams, incidents]
+		});
+		
+		//var myLayer = L.mapbox.featureLayer().addTo(map);
+		
+		//new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+		
+		var latlng = localStorage.getItem('latlng');
+		var zoom = localStorage.getItem('zoom');
+		
+		if (zoom=="" || latlng==""){
+			latlng = new L.LatLng(51.505, -0.09);
+			localStorage.setItem('zoom',12);
+			localStorage.setItem('latlng',[51.501049, -0.051842]);
+			}
+			/*
+			else{
+		
+			//map.panTo();
+			map.panTo(map.unproject(latlng),{animate: true});
+			map.setZoom(zoom);
+		}*/
+		
+	var baseLayers = {
+		"Streets": streets
+		//,"Grayscale": grayscale
+		//,"Traffic": traffic
+	};
+
+	var overlays = {
+		"Traffic": traffic
+		,"Cams": cams
+		,"Incidents": incidents
+	};
+
+	L.control.layers(baseLayers, overlays).addTo(map);
+	 
+	}
+	 
+	else{
+		var zoom = localStorage.getItem('zoom');
+		var latlng = localStorage.getItem('latlng');
+		map.setView(latlng,zoom);
+		//map.setZoom(zoom);
+		console.log("Map reload : "+Date());
+	}
+	
+	map.on('click', function(e) {
+		var loc = map.getCenter().lat+","+map.getCenter().lng;
+		localStorage.setItem('latlng',loc);
+		
+	});
+	
+	map.on('dragend', function(e) {
+		//console.log("Drag Event -> "+map.getCenter());
+		var loc = map.getCenter().lat+","+map.getCenter().lng;
+		localStorage.setItem('latlng',loc);
+		//console.log(loc);
+		
+	});
+	
+	map.on('zoomend', function() {
+	
+    var zoom = map.getZoom();
+    localStorage.setItem('zoom',zoom);
+    var loc = map.getCenter().lat+","+map.getCenter().lng;
+	localStorage.setItem('latlng',loc);
+	});
+	 
+	map.on('popupopen', function(e) {
+	var loc = map.getCenter().lat+","+map.getCenter().lng;
+	localStorage.setItem('latlng',loc);
+    var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+    px.y -= e.popup._container.clientHeight/2 // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+    map.panTo(map.unproject(px),{animate: true}); // pan to new center  
+    });
+    
+    var pos = localStorage.getItem('latlng');
+    var zoom = localStorage.getItem('zoom');
+    //console.log(pos);
+	//console.log(zoom);
+	var newLat = getParameterByName('lat');
+	var newLng = getParameterByName('lng');
+	var newZoom = getParameterByName('zoom');
+	if(newZoom==null){newZoom=18;}
+	console.log("NewLat:"+newLat);
+	console.log("NewLng:"+newLng);
+	if(newLat!=null&&newLng!=null){
+		pos = newLat + "," + newLng;
+		var loc = pos.split(',');
+        var z = newZoom;
+        localStorage.setItem('latlng',pos);
+        localStorage.setItem('zoom',z);
+        map.setView(loc, z, {animation: true});
+			
+	}else if (pos && zoom) {
+		//if(pos.indexOf(LatLng)=0){
+		//var loc = pos;	
+		//}else{
+        var loc = pos.split(',');
+		//}
+        var z = parseInt(zoom);
+        map.setView(loc, z, {animation: true});
+        //return false;
+    }else{
+		pos = "51.501049,-0.051842";
+		var loc = pos.split(',');
+        var z = 12;
+        localStorage.setItem('latlng',pos);
+        localStorage.setItem('zoom',z);
+        map.setView(loc, z, {animation: true});
+	}
+	
+	
+	/* GEOLOCATE */
+	
+	var geolocate = document.getElementById('geolocate');
+	if(geolocate){
+		if (!navigator.geolocation) {
+		alert('Geolocation is not available');
+		/*geolocate.innerHTML = 'Geolocation is not available';*/
+		} else {
+		geolocate.onclick = function (e) {
+		if(local_location==true){
+			geolocate.setAttribute('class', 'fa fa-crosshairs');
+			local_location=false;
+			map.removeLayer(marker);
+			$(allMarkers[0]._icon).hide();
+			for(var b=0;b<busMarkersArray.length;b++){
+			//busMarkersArray[b].setMap(null);
+			$(busMarkersArray[b]._icon).hide();
+			}
+			return false;
+		}else{
+			local_location=true;
+		geolocate.setAttribute('class', 'fa fa-crosshairs fa-spin');
+		for(var b=0;b<busMarkersArray.length;b++){
+			//busMarkersArray[b].setMap(null);
+			$(busMarkersArray[b]._icon).show();
+			}
+        e.preventDefault();
+        e.stopPropagation();
+        map.locate();
+		}
+		};
+		}
+	}
+		
+	var gosecure = document.getElementById('gosecure');
+	if(gosecure){
+		gosecure.onclick = function (e) {
+        window.location.href="https://www.tfljamcams.net/indexOSM.html";
+        //window.open("https://www.tfljamcams.net/indexOSM.html","_self")
+		};
+	}
+
+// Once we've got a position, zoom and center the map
+// on it, and add a single marker.
+	map.on('locationfound', function(e) {
+		
+    map.fitBounds(e.bounds);
+    console.log('Location: '+e.latlng.lat+','+e.latlng.lng);
+    myLocation = new L.LatLng(e.latlng.lat, e.latlng.lng);
+    var markerIcon = L.icon({
+    iconUrl: 'util/red-pushpin.png',
+	});
+	
+    var marker = new L.Marker(new L.LatLng(e.latlng.lat, e.latlng.lng), {icon: markerIcon });
+		marker.bindPopup('Your Location: latlng: '+e.latlng.lat+','+e.latlng.lng);
+		allMarkers = [];
+		map.addLayer(marker);
+		allMarkers.push(marker);
+listLocalStops(myLocation);
+    /*myLayer.setGeoJSON({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [e.latlng.lng, e.latlng.lat]
+        },
+        properties: {
+            'title': 'Here I am!',
+            'marker-color': '#ff8888',
+            'marker-symbol': 'star'
+        }
+    });*/
+			
+
+    // And hide the geolocation button
+    /*geolocate.parentNode.removeChild(geolocate);
+    document.getElementById('GEO').style.display = "none";*/
+
+	});
+// If the user chooses not to allow their location
+// to be shared, display an error message.
+map.on('locationerror', function() {
+    geolocate.innerHTML = 'NA';
+    geolocate.setAttribute('class', 'fa fa-times');
+    geolocate.setAttribute('onclick', null);
+    document.getElementById("geolocate").onclick = null;
+});
+	
+	//setTimeout(loadMap,15000);
+	setCams('video');
+	setIncidents();
+	setTimeout(setIncidents,300000);
+	
+}
+	
+$(document).ready(function () {
+	loadMap();
+	var type=getParameterByName('type');if (type==null||type==''){type=getCookie('tfljamcams');if (type==null||type==''){type='video';}}else if(type=='image'){type='image';}else{type='video';}
+	 
+	  $('#feedType').text(type);
+	  $('#TypePlural').text('s');
+	  //type=$('#feedType').text();
+		//if(type=='video'){$('#btnload').val('Load Images');}else{$('#btnload').val('Load Videos');}
+	
+	
+	
+	 
+	var floatingPanel=document.getElementById('floating-panel');
+		
+});	
+
+
+	
+</script>
+<script>
+	var links=document.getElementsByTagName('a');
+	for(var i=0,len=links.length;i<len;i++){links[i].target='_blank';}
+	</script>
+	<div id="update">A new version is available!&nbsp;&nbsp;<a id="getnew" class="pointer">REFRESH</a><br /><br /><a id="dismiss_update" class="pointer">DISMISS</a></div>
+<script>
+  let newWorker;
+  function showUpdateBar() {
+    let updateSW = document.getElementById('update');
+    updateSW.className = 'show';
+  }
+  function hideUpdateBar() {
+    let updateSW = document.getElementById('update');
+    updateSW.className = 'hide';
+  }
+  /* The click event on the pop up notification*/
+  document.getElementById('getnew').addEventListener('click', function(){
+    newWorker.postMessage({ action: 'skipWaiting' });
+	hideUpdateBar();
+  });
+  document.getElementById('dismiss_update').addEventListener('click', function(){
+	hideUpdateBar();
+  });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      reg.addEventListener('updatefound', () => {
+        /* A wild service worker has appeared in reg.installing!*/
+        newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          /* Has network.state changed? */
+          switch (newWorker.state) {
+            case 'installed':
+              if (navigator.serviceWorker.controller) {
+                /* new update available */
+                showUpdateBar();
+				
+              }
+              /* No update available */
+			  console.log("Service Worker Registered for",  reg.scope);
+              break;
+          }
+        });
+      });
+    }).catch(function(err){console.log("Service Worker Not Registered. error is: ",err)});
+    let refreshing;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (refreshing) return;
+      console.log("Reloading updated Service Worker..");
+	  window.location.reload();
+      refreshing = true;
+    });
+  }
+
+/*if('serviceWorker'in navigator){
+navigator.serviceWorker.register('/sw.js').then(function(reg){console.log("Service Worker Registered for",  reg.scope);}).catch(function(err){console.log("Service Worker Not Registered. error is: ",err)});
+}*/
+</script>
+</body>
+</html>
